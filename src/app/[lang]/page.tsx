@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Logo from '@/components/Logo';
+import Reveal from '@/components/Reveal';
 import { dict, isLocale } from '@/lib/i18n';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -20,7 +21,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
         <h2>{t.catsTitle}</h2>
-        <div className="cats">{t.cats.map((c) => <div className="cat" key={c}>{c}</div>)}</div>
+        <div className="cats">{t.cats.map((c, i) => <Reveal key={c} delay={i * 70}><div className="cat">{c}</div></Reveal>)}</div>
         <p className="note">{t.note}</p>
       </div>
       <footer className="foot">© HX 3D — {t.footer}</footer>
