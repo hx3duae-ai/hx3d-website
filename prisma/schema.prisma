@@ -1,0 +1,76 @@
+// Phase 2: core identity, RBAC, sessions, audit. Shopify stays the source of truth for
+// products/orders/payments (Phase 4); HX DB stores supporting data only.
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  phone        String?
+  passwordHash String
+  role         Role      @default(CUSTOMER)
+  locale       String    @default("ar")
+  disabledAt   DateTime?
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+  addresses    Address[]
+  auditLogs    AuditLog[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique   // SHA-256 of the cookie token; raw token never stored
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([userId])
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName  String
+  phone     String
+  emirate   String
+  area      String
+  street    String
+  building  String
+  apartment String?
+  kind      String  @default("home")
+  mapUrl    String?
+  notes     String?
+  @@index([userId])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String?
+  entityId  String?
+  meta      Json?
+  createdAt DateTime @default(now())
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
+
+model WebhookEvent {          // idempotency for Shopify webhooks (Phase 4)
+  id         String   @id      // X-Shopify-Webhook-Id
+  topic      String
+  receivedAt DateTime @default(now())
+}
