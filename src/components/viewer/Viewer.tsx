@@ -5,6 +5,7 @@ import { loadModel, ModelError } from '@/lib/viewer/load';
 import { ACCEPT, MAX_IMAGE_BYTES, MAX_MODEL_BYTES, detectFormat, type ModelFormat } from '@/lib/viewer/formats';
 import { DEFAULT_PRINTER, PRINTERS } from '@/lib/viewer/printers';
 import type { VStrings } from '@/lib/viewer/strings';
+import Link from 'next/link';
 
 type Item = { id: number; file: File; kind: 'model' | 'image'; format?: ModelFormat; status: 'queued' | 'reading' | 'ready' | 'error'; progress: number; error?: string; url?: string };
 type Info = { name: string; format: string; bytes: number; meshes: number; tris: number; verts: number };
@@ -13,7 +14,7 @@ const SWATCHES = ['#ffffff', '#1a1a1a', '#e86ab3', '#e53935', '#fb8c00', '#fdd83
 const fmtBytes = (n: number) => (n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : (n / 1024).toFixed(0) + ' KB');
 const num = (n: number) => n.toLocaleString('en-US');
 
-export default function Viewer({ t }: { t: VStrings }) {
+export default function Viewer({ t, lang }: { t: VStrings; lang: 'ar' | 'en' }) {
   const host = useRef<HTMLDivElement>(null); const eng = useRef<ViewerEngine | null>(null); const nextId = useRef(1);
   const [items, setItems] = useState<Item[]>([]); const [active, setActive] = useState<number | null>(null);
   const [info, setInfo] = useState<Info | null>(null); const [parts, setParts] = useState<Part[]>([]); const [meas, setMeas] = useState<Meas>(null);
@@ -160,10 +161,10 @@ export default function Viewer({ t }: { t: VStrings }) {
 
       {img && (
         <section className="pn img"><h3>{t.imgTitle}</h3><img src={img.url} alt={img.file.name} />
-          <button type="button" disabled>{t.convert}</button><p className="er2">{t.convertOff}</p><p className="nt">{t.imgNote}</p></section>
+          <Link className="btn-link" href={`/${lang}/custom-order`}>{t.convert}</Link><p className="er2">{t.convertOff}</p><p className="nt">{t.imgNote}</p></section>
       )}
 
-      <div className="acts">{[t.save, t.order, t.review].map((l) => <button key={l} type="button" disabled title={t.soon}>{l}</button>)}<small>{t.soon}</small></div>
+      <div className="acts"><Link className="btn-link" href={`/${lang}/account`}>{t.save}</Link><Link className="btn-link" href={`/${lang}/custom-order`}>{t.order}</Link><Link className="btn-link" href={`/${lang}/custom-order`}>{t.review}</Link><small>{t.soon}</small></div>
     </div>
   );
 }

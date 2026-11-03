@@ -14,7 +14,7 @@ export default async function ViewerPage({ params }: { params: Promise<{ lang: s
       <nav className="nav"><Link className="brandbar" href={`/${lang}`}><Logo /><span className="handle">{SITE_HANDLE}</span></Link>
         <Link className="lang" href={`/${lang === 'ar' ? 'en' : 'ar'}/viewer`}>{lang === 'ar' ? 'English' : 'العربية'}</Link></nav>
       <h1 style={{ margin: '8px 0' }}>{t.title}</h1><p className="lead">{t.lead}</p>
-      <ViewerLoader t={t} />
+      <ViewerLoader t={t} lang={lang} />
     </div>
   );
 }

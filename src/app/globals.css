@@ -175,3 +175,12 @@ button.lang { font: inherit; cursor: pointer; background: none; color: var(--mut
 .sev.error { color: #ff8a80; } .sev.warning { color: #f2c14e; } .cnt { color: var(--muted); font-size: 13px; margin-inline-start: auto; }
 .plain { margin: 0; padding-inline-start: 18px; color: var(--ink); font-size: 14px; } .plain.muted { color: var(--muted); }
 .vw .drop input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+/* ---------- Shop & custom order ---------- */
+.steps { display: grid; gap: 18px; } .steps h2 { margin: 0 0 6px; font-size: 17px; }
+.steps .btn { display: inline-block; margin-top: 8px; }
+.cat { display: block; }
+a.cat:hover { color: var(--ink); }
+.page .empty { margin: 0; }
+.btn-link { display: inline-block; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); color: var(--ink); font: inherit; }
+.btn-link:hover { border-color: var(--pink); }
