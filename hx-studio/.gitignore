@@ -1,0 +1,6 @@
+data/projects/
+data/tmp/
+data/inventory.json
+__pycache__/
+.pytest_cache/
+*.pyc

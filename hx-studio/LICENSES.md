@@ -1,0 +1,30 @@
+# Third-party licences (checked)
+
+HX 3D AI Studio's own code: see repository root. Dependencies were inspected from their installed metadata / licence files.
+
+| Component | Used for | Licence | Compatible with a closed commercial product? |
+|---|---|---|---|
+| trimesh 5.2 | mesh I/O, sections, repair | MIT | yes |
+| manifold3d 3.5 | robust booleans / extrusion | Apache-2.0 | yes |
+| build123d 0.13 (OpenCascade) | STEP B-rep | Apache-2.0 (OCCT: LGPL-2.1 w/ exception, dynamically linked) | yes (keep notices) |
+| shapely 2.2 | 2-D geometry | BSD-3 | yes |
+| OpenCV (headless) | contour tracing | Apache-2.0 | yes |
+| scikit-learn, numpy, scipy | colour clustering, maths | BSD-3 | yes |
+| Pillow (+libraqm) | Arabic text shaping/raster | MIT-CMU (raqm: MIT) | yes |
+| lib3mf 2.5 | independent 3MF re-read check | BSD-2 | yes |
+| reportlab | PDF | BSD | yes |
+| FastAPI / uvicorn / httpx / pytest | server, tests | MIT / BSD | yes |
+| three.js r187 + OrbitControls (vendored in `web/vendor`) | 3-D preview | MIT | yes |
+| Amiri font (`fonts/`) | Arabic text | SIL OFL 1.1 | yes (font may not be sold alone) |
+| DejaVu Sans Bold (`fonts/`) | Latin text | Bitstream Vera / DejaVu free licence | yes |
+
+## Projects inspected but NOT integrated
+| Project | Licence | Decision |
+|---|---|---|
+| OzAILabs/Claude-To-Print | MIT | installed as Claude Code skills (`.claude/skills/`), not linked into this app |
+| Neroued/ChromaPrint3D | Apache-2.0 | C++/CMake colour-printing engine; not integrated (separate build); possible future backend |
+| rtwfroody/ditherforge | MIT | Go/Wails app; not integrated; possible future backend |
+| dbdnjstjr32-oss/image-to-3d-studio | **no licence file found** | NOT integrated: without a licence the code is all-rights-reserved. Ask the author for a licence before any use. Its model weights have their own licences (see its docs). |
+
+Cherry MX dimensions, 19.05 mm pitch and Cherry-style stabilizer spacings are industry-published de-facto standards, not code.
+Bambu Studio / Bambu Lab are trademarks of their owners; no Bambu code is used. The 3MF layout follows the public 3MF core spec plus Bambu's metadata convention as observed in files exported by Bambu Studio; this is **unverified against Bambu Studio itself**.
