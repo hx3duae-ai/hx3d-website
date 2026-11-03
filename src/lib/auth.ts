@@ -1,16 +1,15 @@
 import 'server-only';
 import { createHash, randomBytes } from 'node:crypto';
-import argon2 from 'argon2';
 import { cookies } from 'next/headers';
 import { prisma } from './db';
 import { hasRole, type Role } from './rbac';
+import { hashPassword, verifyPassword } from './password';
+export { hashPassword, verifyPassword };
 
 const COOKIE = 'hx_session';
 const TTL_MS = 1000 * 60 * 60 * 24 * 14;
 const sha = (t: string) => createHash('sha256').update(t).digest('hex');
 
-export const hashPassword = (p: string) => argon2.hash(p, { type: argon2.argon2id });
-export const verifyPassword = (hash: string, p: string) => argon2.verify(hash, p);
 
 export async function createSession(userId: string) {
   const token = randomBytes(32).toString('base64url');

@@ -4,6 +4,7 @@ import Logo from '@/components/Logo';
 import Reveal from '@/components/Reveal';
 import { SITE_HANDLE } from '@/lib/site';
 import { dict, isLocale } from '@/lib/i18n';
+import { A } from '@/lib/auth-strings';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params; if (!isLocale(lang)) notFound();
@@ -11,7 +12,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <>
       <div className="wrap">
-        <nav className="nav"><span className="brandbar"><Logo /><span className="handle">{SITE_HANDLE}</span></span><Link className="lang" href={`/${other}`}>{t.switch}</Link></nav>
+        <nav className="nav"><span className="brandbar"><Logo /><span className="handle">{SITE_HANDLE}</span></span><span className="navlinks"><Link className="lang" href={`/${lang}/account`}>{A[lang].navAccount}</Link><Link className="lang" href={`/${other}`}>{t.switch}</Link></span></nav>
         <section className="hero">
           <Logo size="lg" />
           <h1>{t.tagline}</h1>
