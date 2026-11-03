@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Logo from '@/components/Logo';
 import Reveal from '@/components/Reveal';
+import { SITE_HANDLE } from '@/lib/site';
 import { dict, isLocale } from '@/lib/i18n';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -10,7 +11,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <>
       <div className="wrap">
-        <nav className="nav"><Logo /><Link className="lang" href={`/${other}`}>{t.switch}</Link></nav>
+        <nav className="nav"><span className="brandbar"><Logo /><span className="handle">{SITE_HANDLE}</span></span><Link className="lang" href={`/${other}`}>{t.switch}</Link></nav>
         <section className="hero">
           <Logo size="lg" />
           <h1>{t.tagline}</h1>
@@ -24,7 +25,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="cats">{t.cats.map((c, i) => <Reveal key={c} delay={i * 70}><div className="cat">{c}</div></Reveal>)}</div>
         <p className="note">{t.note}</p>
       </div>
-      <footer className="foot">© HX 3D — {t.footer}</footer>
+      <footer className="foot">© {SITE_HANDLE} — {t.footer}</footer>
     </>
   );
 }

@@ -82,3 +82,4 @@ body::after { /* drifting pink glow */
 .rv.in { opacity: 1; transform: none; }
 .note { animation: pulse-border 3s ease-in-out infinite; }
 @keyframes pulse-border { 50% { border-color: rgba(232,106,179,.35); } }
+.brandbar{display:inline-flex;align-items:center;gap:12px}.handle{color:var(--muted);font-size:14px;letter-spacing:.04em;direction:ltr}
