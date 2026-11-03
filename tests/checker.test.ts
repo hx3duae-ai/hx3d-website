@@ -97,3 +97,55 @@ describe('HX Model Checker (synthetic meshes with known answers)', () => {
     expect(r.volumeMm3).toBeCloseTo(64000, -2);
   });
 });
+
+describe('wall thickness', () => {
+  /** Hollow box: outer 40 mm shell plus an inward-facing cavity of size `inner` centred inside. */
+  function hollow(inner: number) {
+    const o = box(0, 0, 0, 40);
+    const off = (40 - inner) / 2;
+    const c = box(off, off, off, inner);
+    c.t = c.t.map(([a, b, d]) => [a, d, b]); // cavity faces point into the cavity
+    return mesh(o, c);
+  }
+  it('solid box has no thin walls', () => {
+    const r = checkMesh(mesh(box(0, 0, 0, 40)), BED);
+    expect(codes(r)).not.toContain('thin_walls');
+    expect(r.checked.join(' ')).toContain('wall thickness');
+  });
+  it('0.5 mm shell is flagged thin', () => {
+    const r = checkMesh(hollow(39), BED); // outer 40, cavity 39 -> 0.5 mm walls
+    expect(codes(r)).toContain('thin_walls');
+    expect(r.verdict).toBe('warnings');
+  });
+  it('3 mm shell is not flagged', () => {
+    const r = checkMesh(hollow(34), BED); // 3 mm walls
+    expect(codes(r)).not.toContain('thin_walls');
+  });
+});
+
+import { wallThickness } from '@/lib/checker/walls';
+describe('wall thickness measurements', () => {
+  it('measures the real distance between the shells', () => {
+    const m = (() => {
+      const o = box(0, 0, 0, 40); const c = box(0.5, 0.5, 0.5, 39); c.t = c.t.map(([a, b, d]) => [a, d, b]);
+      return mesh(o, c);
+    })();
+    const wp = Float64Array.from(m.positions);
+    const tris: [number, number, number][] = [];
+    for (let i = 0; i < m.indices.length; i += 3) tris.push([m.indices[i], m.indices[i + 1], m.indices[i + 2]]);
+    const w = wallThickness(wp, tris, Math.hypot(40, 40, 40), 1, { minWall: 0.8 });
+    expect(w.hits).toBeGreaterThan(0);
+    expect(w.minMm).toBeCloseTo(0.5, 2);
+    const solid = mesh(box(0, 0, 0, 40));
+    const s = wallThickness(Float64Array.from(solid.positions), [[0, 1, 2]], 70, 1, {});
+    expect(s.hits).toBeGreaterThanOrEqual(0);
+  });
+  it('a 40 mm solid measures about 40 mm across', () => {
+    const m = mesh(box(0, 0, 0, 40));
+    const tris: [number, number, number][] = [];
+    for (let i = 0; i < m.indices.length; i += 3) tris.push([m.indices[i], m.indices[i + 1], m.indices[i + 2]]);
+    const w = wallThickness(Float64Array.from(m.positions), tris, 69.3, 1, {});
+    expect(w.hits).toBeGreaterThan(0);
+    expect(w.minMm).toBeCloseTo(40, 0);
+  });
+});

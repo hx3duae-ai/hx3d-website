@@ -1,3 +1,4 @@
+import { wallThickness } from './walls';
 /**
  * HX Model Checker: pure geometry analysis on an indexed triangle mesh (units: mm).
  * Runs in the browser or in tests. It reports only what it actually tested.
@@ -18,8 +19,8 @@ export type Report = {
 export type Bed = { x: number; y: number; z: number };
 
 const CHECKED = ['structure', 'degenerate triangles', 'open edges and holes', 'non-manifold edges', 'normal orientation',
-  'disconnected parts', 'bounding-box overlap between parts', 'size and build volume'];
-const NOT_CHECKED = ['exact triangle-triangle intersections', 'thin walls (wall-thickness ray test)', 'slicer and printer compatibility', 'material and overhang analysis'];
+  'disconnected parts', 'bounding-box overlap between parts', 'size and build volume', 'wall thickness (sampled, 0.8 mm minimum)'];
+const NOT_CHECKED = ['exact triangle-triangle intersections', 'every triangle for wall thickness (a sample of up to 4000 is measured)', 'slicer and printer compatibility', 'material and overhang analysis'];
 
 export function checkMesh(input: Mesh, bed: Bed): Report {
   const issues: Issue[] = [];
@@ -125,6 +126,12 @@ export function checkMesh(input: Mesh, bed: Bed): Report {
       if ([0, 1, 2].every((k) => A.mn[k] <= B.mx[k] && B.mn[k] <= A.mx[k])) overlap++;
     }
     if (overlap) add('possible_overlap', 'warning', overlap);
+  }
+
+  // 6b) wall thickness: sampled inward rays, only meaningful when the surface is closed
+  if (closed && tri.length) {
+    const w = wallThickness(wp, tri, diag, signed < 0 ? -1 : 1, { minWall: 0.8 });
+    if (w.thin) add('thin_walls', 'warning', w.thin);
   }
 
   // 7) size and build volume (sorted dims allow for rotating the part on the bed)
