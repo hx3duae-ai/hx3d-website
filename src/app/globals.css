@@ -193,3 +193,6 @@ a.cat:hover { color: var(--ink); }
 .band:hover .band-track { animation-play-state: paused; }
 @keyframes band-move { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .band-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } .band-track span:nth-child(n+3) { display: none; } }
+.faq { padding: 14px 18px; margin-bottom: 10px; } .faq summary { cursor: pointer; font-weight: 700; } .faq p { margin: 8px 0 0; }
+.warn { color: #ffcc80; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 8px 0 0; }

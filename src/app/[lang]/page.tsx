@@ -5,6 +5,7 @@ import Reveal from '@/components/Reveal';
 import { SITE_HANDLE } from '@/lib/site';
 import { dict, isLocale } from '@/lib/i18n';
 import { A } from '@/lib/auth-strings';
+import { PAGES } from '@/lib/pages';
 import { CATEGORY_SLUGS } from '@/lib/categories';
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
@@ -32,6 +33,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <div className="cats">{t.cats.map((c, i) => <Reveal key={c} delay={i * 70}><Link className="cat" href={`/${lang}/shop/${CATEGORY_SLUGS[i]}`}>{c}</Link></Reveal>)}</div>
         <p className="note">{t.note}</p>
       </div>
+      <nav className="foot-links" aria-label="footer">
+        {(['about', 'contact', 'faq', 'tracking', 'cart', 'privacy', 'returns'] as const).map((k) => (
+          <Link key={k} className="lang" href={`/${lang}/${k}`}>{PAGES[lang][k].title}</Link>
+        ))}
+      </nav>
       <footer className="foot">© {SITE_HANDLE} — {t.footer}</footer>
     </>
   );
