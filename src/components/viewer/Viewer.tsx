@@ -6,6 +6,10 @@ import { ACCEPT, MAX_IMAGE_BYTES, MAX_MODEL_BYTES, detectFormat, type ModelForma
 import { DEFAULT_PRINTER, PRINTERS } from '@/lib/viewer/printers';
 import type { VStrings } from '@/lib/viewer/strings';
 import Link from 'next/link';
+import * as THREE from 'three';
+import StudioPanel from '@/components/studio/StudioPanel';
+import { geometryFromRoot, asRoot } from '@/lib/studio/edit';
+import { ST } from '@/lib/studio/strings';
 
 type Item = { id: number; file: File; kind: 'model' | 'image'; format?: ModelFormat; status: 'queued' | 'reading' | 'ready' | 'error'; progress: number; error?: string; url?: string };
 type Info = { name: string; format: string; bytes: number; meshes: number; tris: number; verts: number };
@@ -22,6 +26,9 @@ export default function Viewer({ t, lang }: { t: VStrings; lang: 'ar' | 'en' }) 
   const [opt, setOpt] = useState({ wire: false, grid: true, bed: true, bounds: false, rotate: true });
   const [bg, setBg] = useState('#0b0b0f'); const [color, setColor] = useState<string | null>(null);
   const [off, setOff] = useState({ x: 0, z: 0, r: 0 }); const [img, setImg] = useState<Item | null>(null);
+  const [geom, setGeom] = useState<THREE.BufferGeometry | null>(null);
+  const hist = useRef<THREE.BufferGeometry[][]>([]); const [canUndo, setCanUndo] = useState(false);
+  const curFmt = useRef<ModelFormat>('stl');
 
   useEffect(() => {
     try { const e = new ViewerEngine(host.current!); e.setPrinter(DEFAULT_PRINTER); e.onInteract = () => setOpt((o) => ({ ...o, rotate: false })); eng.current = e; return () => { e.dispose(); eng.current = null; }; }
@@ -41,6 +48,7 @@ export default function Viewer({ t, lang }: { t: VStrings; lang: 'ar' | 'en' }) 
       const ps = eng.current!.setModel(m); eng.current!.setAutoRotate(true);
       setParts(ps); setColor(null); setOff({ x: 0, z: 0, r: 0 }); setOpt((o) => ({ ...o, rotate: true }));
       setInfo({ name: it.file.name, format: it.format!.toUpperCase(), bytes: it.file.size, meshes: m.meshes, tris: m.triangles, verts: m.vertices }); refresh();
+      setGeom(geometryFromRoot(m.root)); hist.current = []; setCanUndo(false); curFmt.current = it.format!;
       patch(it.id, { status: 'ready' });
     } catch (e) {
       const code = e instanceof ModelError ? (e.code === 'too-many-triangles' ? 'tri' : e.code === 'points-only' ? 'points' : e.code === 'parse' ? 'corrupt' : e.code) : 'corrupt';
@@ -65,6 +73,20 @@ export default function Viewer({ t, lang }: { t: VStrings; lang: 'ar' | 'en' }) 
       if (it.kind === 'image' || eng.current?.hasModel() === false || files.length === 1) await show(it);
     }
   };
+  /** Replace the model with new geometry (after a cut, shape or undo). Keeps history for undo. */
+  const applyGeoms = (gs: THREE.BufferGeometry[], pushHistory = true) => {
+    const e = eng.current; if (!e || !geom) return;
+    if (pushHistory) { hist.current.push([geom]); if (hist.current.length > 15) hist.current.shift(); setCanUndo(true); }
+    const root = asRoot(gs);
+    const merged = geometryFromRoot(root);
+    const ps = e.setModel({ root, format: curFmt.current, triangles: 0, vertices: 0, meshes: gs.length });
+    e.setAutoRotate(false); setOpt((o) => ({ ...o, rotate: false }));
+    setParts(ps); setGeom(merged); setColor(null);
+    setInfo((i) => (i ? { ...i, meshes: gs.length, tris: (merged.index?.count ?? 0) / 3, verts: merged.getAttribute('position').count } : i));
+    refresh();
+  };
+  const undo = () => { const prev = hist.current.pop(); if (!prev) return; setCanUndo(hist.current.length > 0); applyGeoms(prev, false); };
+
   const remove = (id: number) => { setItems((a) => a.filter((i) => i.id !== id)); if (active === id) { eng.current?.clearModel(); setInfo(null); setParts([]); setActive(null); refresh(); } if (img?.id === id) setImg(null); };
 
   const view = (v: ViewName) => { eng.current?.setAutoRotate(false); setOpt((o) => ({ ...o, rotate: false })); eng.current?.setView(v); };
@@ -157,6 +179,10 @@ export default function Viewer({ t, lang }: { t: VStrings; lang: 'ar' | 'en' }) 
           </>) : <p className="nt">{t.na}</p>}
           <p className="nt">{t.partsNote}</p>
         </section>
+      </div>
+
+      <div className="panels studio-row">
+        <StudioPanel t={ST[lang]} engine={eng.current} geom={geom} onApply={(gs) => applyGeoms(gs)} onUndo={undo} canUndo={canUndo} />
       </div>
 
       {img && (

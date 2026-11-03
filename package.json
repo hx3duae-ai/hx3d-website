@@ -20,6 +20,7 @@
     "react-dom": "^19.3.1",
     "server-only": "^0.0.1",
     "three": "^0.170.0",
+    "three-bvh-csg": "^0.0.16",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.170.0",
+    "jsdom": "^25.0.1",
     "prisma": "^6.19.3",
     "tsx": "^4.23.15",
     "typescript": "5.9",
