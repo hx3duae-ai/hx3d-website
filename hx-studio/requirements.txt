@@ -16,3 +16,4 @@ pillow
 reportlab
 pytest
 httpx
+networkx

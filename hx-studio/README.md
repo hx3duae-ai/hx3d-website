@@ -7,6 +7,9 @@ Black `#050505` / pink `#FF66B2` / white UI, English + Arabic (RTL), responsive.
 > are reported as `needs_backend` (see **Status** page / `GET /api/capabilities`) — never faked.
 > Nothing is test-printed, and Bambu Studio itself is not available in the build environment: 3MF files are validated by re-reading with lib3mf.
 
+## Easiest: double-click `start.bat` (Windows) or run `./start.sh` (macOS/Linux)
+It installs what it needs and opens http://localhost:8420. Online hosting: `Dockerfile` + `../render.yaml`.
+
 ## Install & run
 ```bash
 cd hx-studio
