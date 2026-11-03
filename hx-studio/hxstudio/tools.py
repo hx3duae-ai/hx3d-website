@@ -110,8 +110,12 @@ def sketch_to_3d(image, width_mm=None, height_mm=None, thickness=5.0, threshold=
     geo = unary_union(textgeo.mask_to_polygons(m, 1.0, eps_px=1.2)); geo = affinity.scale(geo, sx, sy, origin=(0, 0))
     x0, y0, x1, y1 = geo.bounds; geo = affinity.translate(geo, -(x0 + x1) / 2, -(y0 + y1) / 2)
     part = Part("sketch_solid", extrude(geo, 0, thickness), "#cccccc", "sketch")
+    mm_px = (sx + sy) / 2; fine = {}
+    for need in (0.4, 0.8):     # nozzle width / two perimeters: strokes thinner than this vanish or print badly
+        er = cv2.erode(m, np.ones((max(1, int(round(need / mm_px))),) * 2, np.uint8)); fine[f"{need}mm"] = round(100 * (1 - er.sum() / max(m.sum(), 1)), 1)
     return [part], {"size_mm": [round(x1 - x0, 2), round(y1 - y0, 2), thickness], "scale_mm_per_px": [round(sx, 4), round(sy, 4)],
                     "dimensions_source": "user-provided" if (width_mm or height_mm) else "ASSUMED 0.2 mm/px - enter real width/height",
+                    "thin_stroke_area_pct": fine, "thin_stroke_warning": (f"{fine['0.8mm']}% of the drawing is in strokes thinner than 0.8 mm (2 perimeters): enlarge the model, or fine details may print poorly" if fine["0.8mm"] > 5 else None),
                     "kind": "extruded outline of the sketch; interior lines are filled unless they form closed loops (holes)",
                     "not_inferable": ["depth/profile of the object (only a flat extrusion is made)", "dimension annotations in the drawing are NOT read - enter measurements manually"], "notes": []}
 

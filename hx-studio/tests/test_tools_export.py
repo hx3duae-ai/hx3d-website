@@ -71,3 +71,19 @@ def test_export_failed_qc_blocks(tmp_path):
 def test_toy_robot_joints_verified(tmp_path):
     parts, info, qc = R.build("toy_robot", {"_workdir": str(tmp_path), "step": 20.0}, {})
     assert qc["passed"] and len(info["joint_sweep"]) == 5 and all(s["min_gap_mm"] >= 0.25 for s in info["joint_sweep"])
+
+
+def test_arabic_font_library_all_usable_and_licensed():
+    from pathlib import Path
+    from hxstudio import textgeo
+    from hxstudio.meshutil import extrude
+    fs = [f for f in textgeo.list_fonts() if f["id"] != "auto"]
+    assert len(fs) >= 14
+    for f in fs:
+        g = textgeo.text_polygons("فاطمة", 20, f["id"]); assert extrude(g, 0, 2).is_volume, f["id"]
+    assert len(list((Path(textgeo.FONTS) / "arabic" / "licenses").glob("OFL-*.txt"))) >= 12
+
+
+def test_calligraphy_image_trace_warns_about_thin_strokes(img):
+    parts, info = T.sketch_to_3d(img, width_mm=20, thickness=2)
+    assert parts[0].mesh.is_volume and "thin_stroke_area_pct" in info

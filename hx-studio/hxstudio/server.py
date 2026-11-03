@@ -65,6 +65,12 @@ def summarize(c):
 
 
 # ------------------------------------------------------------------ meta
+@app.get("/api/fonts")
+def fonts():
+    from . import textgeo
+    return textgeo.list_fonts()
+
+
 @app.get("/api/capabilities")
 def caps(): return {"brand": BRAND, "printers": PRINTERS, "materials": MATERIALS, "capabilities": backends.capabilities(), "version": "0.1.0"}
 

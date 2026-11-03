@@ -26,5 +26,7 @@ HX 3D AI Studio's own code: see repository root. Dependencies were inspected fro
 | rtwfroody/ditherforge | MIT | Go/Wails app; not integrated; possible future backend |
 | dbdnjstjr32-oss/image-to-3d-studio | **no licence file found** | NOT integrated: without a licence the code is all-rights-reserved. Ask the author for a licence before any use. Its model weights have their own licences (see its docs). |
 
+Arabic calligraphic fonts in `fonts/arabic/` (Aref Ruqaa, Katibeh, Rakkas, Mirza, Lateef, Harmattan, Scheherazade New, Reem Kufi, Lalezar, Jomhuria, El Messiri, Noto Nastaliq Urdu, Blaka): all SIL OFL 1.1 (verified in each font file; licence texts in `fonts/arabic/licenses/`).
+
 Cherry MX dimensions, 19.05 mm pitch and Cherry-style stabilizer spacings are industry-published de-facto standards, not code.
 Bambu Studio / Bambu Lab are trademarks of their owners; no Bambu code is used. The 3MF layout follows the public 3MF core spec plus Bambu's metadata convention as observed in files exported by Bambu Studio; this is **unverified against Bambu Studio itself**.

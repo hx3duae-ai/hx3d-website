@@ -12,6 +12,32 @@ from .config import FONTS
 
 ARABIC = re.compile(r"[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]")
 FONT_FILES = {"amiri": "Amiri-Regular.ttf", "amiri-bold": "Amiri-Bold.ttf", "sans-bold": "DejaVuSans-Bold.ttf"}
+# Open-licence (SIL OFL 1.1, verified from each font's embedded licence field) Arabic display/calligraphic faces.
+# NOTE: none is a true hand-composed Diwani/Thuluth calligraphy; they approximate the style. Use image tools for bespoke artwork.
+ARABIC_FONTS = {
+    "aref-ruqaa": ("arabic/ArefRuqaa-Regular.ttf", "Aref Ruqaa", "عارف رقعة", "ruqah"),
+    "aref-ruqaa-bold": ("arabic/ArefRuqaa-Bold.ttf", "Aref Ruqaa Bold", "عارف رقعة عريض", "ruqah"),
+    "katibeh": ("arabic/Katibeh-Regular.ttf", "Katibeh", "كاتبة", "naskh/thuluth-like display"),
+    "rakkas": ("arabic/Rakkas-Regular.ttf", "Rakkas", "رقّاص", "stacked display (closest to composed calligraphy)"),
+    "mirza": ("arabic/Mirza-Regular.ttf", "Mirza", "ميرزا", "naskh/nastaliq-like"),
+    "lateef": ("arabic/Lateef-Regular.ttf", "Lateef", "لطيف", "nastaliq-influenced naskh"),
+    "harmattan": ("arabic/Harmattan-Regular.ttf", "Harmattan", "حرمتان", "clean naskh"),
+    "scheherazade": ("arabic/ScheherazadeNew-Regular.ttf", "Scheherazade New", "شهرزاد", "traditional naskh"),
+    "reem-kufi": ("arabic/ReemKufi.ttf", "Reem Kufi", "ريم كوفي", "kufi"),
+    "lalezar": ("arabic/Lalezar-Regular.ttf", "Lalezar", "لاله زار", "heavy display"),
+    "jomhuria": ("arabic/Jomhuria-Regular.ttf", "Jomhuria", "جمهورية", "heavy condensed display"),
+    "el-messiri": ("arabic/ElMessiri.ttf", "El Messiri", "المسيري", "modern geometric"),
+    "nastaliq": ("arabic/NotoNastaliqUrdu.ttf", "Noto Nastaliq Urdu", "نستعليق", "nastaliq (tall: use larger height)"),
+    "blaka": ("arabic/Blaka-Regular.ttf", "Blaka", "بلاكا", "ultra-bold display"),
+}
+FONT_FILES.update({k: v[0] for k, v in ARABIC_FONTS.items()})
+
+
+def list_fonts():
+    out = [{"id": "auto", "en": "Auto", "ar": "تلقائي", "style": "Amiri for Arabic, DejaVu Bold for Latin"}]
+    out += [{"id": "amiri", "en": "Amiri", "ar": "الأميري", "style": "classical naskh"}, {"id": "amiri-bold", "en": "Amiri Bold", "ar": "الأميري عريض", "style": "classical naskh"}]
+    out += [{"id": k, "en": v[1], "ar": v[2], "style": v[3]} for k, v in ARABIC_FONTS.items()]
+    return out
 
 
 def is_arabic(s: str) -> bool:
@@ -20,7 +46,7 @@ def is_arabic(s: str) -> bool:
 
 def font_path(name: str | None, text: str, custom: str | None = None) -> str:
     if custom and Path(custom).exists(): return custom
-    if name in FONT_FILES: return str(FONTS / FONT_FILES[name])
+    if name in FONT_FILES: return str(FONTS / FONT_FILES[name])   # "auto"/unknown falls through
     return str(FONTS / ("Amiri-Bold.ttf" if is_arabic(text) else "DejaVuSans-Bold.ttf"))
 
 
