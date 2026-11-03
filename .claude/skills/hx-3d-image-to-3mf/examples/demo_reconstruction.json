@@ -1,0 +1,7 @@
+{
+  "exact_reconstruction_claimed": false,
+  "confidence": "demo only: synthetic test image, simplified blocky stand-in",
+  "observed": ["orange torso and head", "two black eyes on the head front", "white arms", "grey legs"],
+  "inferred": ["depth of every part (single front view)", "back of head and torso are plain", "hands/feet shapes", "joint placement"],
+  "unknown": ["real proportions in depth", "any marking on the back", "material/finish"]
+}
