@@ -54,3 +54,29 @@ key pitch 19.05 mm · every switch window measured = 14.0 × 14.0 mm · stabiliz
 ## Architecture
 `hxstudio/` — `registry.py` (tool → parts/QC; projects are stored as `{tool, params}` + uploads and regenerated deterministically), `solids.py` (one feature list → manifold mesh **and** build123d STEP), `keyboard.py`, `keycap.py`, `tools.py`, `split.py`, `motion.py`, `doctor.py`, `optimizer.py`, `colors.py`, `business.py`, `export.py`, `backends.py` (pluggable AI backends + capability report), `server.py` (FastAPI + job progress), `web/` (vanilla JS + vendored three.js). Add a new AI model: implement a function in `backends.py`, advertise it in `capabilities()`, call it from a tool in `registry.py`.
 Licences: [LICENSES.md](LICENSES.md).
+
+---
+## Creative Studio (video + images) — added on top of everything above
+Open **Creative** in the top bar (`#/media`). Everything below runs **locally, free, with no credits or subscriptions**; nothing is stamped with a watermark.
+
+| Page | What really happens |
+|---|---|
+| **AI Video Studio** | script / images / HX 3D project → editable **storyboard** (scenes, narration, duration, camera, transition, icon + visual suggestion) → **MP4** (H.264 + AAC, `faststart`) at 9:16 · 16:9 · 1:1 · 4:5, draft 540p/15fps or **final 1080p/30fps** (≈13 s to render a 17 s 1080×1920 video on a 4-core CPU). Also writes `.srt`, thumbnail and `manifest.json`. |
+| **VOX · HX 3D template** | 1080×1920, white graph paper, black text, **yellow marker highlight** wiping in behind titles, pink `#FF66B2` accents, flat 2-D icons (24), stat numbers, bullets, bar charts, smooth top-down pan, elements appear one by one, synthesised SFX (pop/click/marker/whoosh/ding — **no music**), HX 3D wordmark (or your logo PNG, aspect preserved). |
+| **Image → video** | each image = Ken-Burns scene (zoom/pan), captions, transitions (crossfade / slide / wipe). |
+| **3D → video** | turntable of any HX project using its real geometry and filament colours (own rasteriser; Blender not required). |
+| **Narration + sync** | scene length = narration length + padding; subtitles split proportionally; mixed with SFX into one track. Providers: **HX Emirati Voice Studio** (via `HX_EMIRATI_VOICE_URL`/`_CMD`; its real API is unknown here — contract in `media/voice.py`), Piper, espeak-ng, or none. **No Emirati voice exists in this build**; with no provider the video is silent with captions and durations are *estimated* (warning shown). |
+| **AI Image Studio** | brand compositor: Instagram post/square/story, YouTube thumbnail, product-white, ad; headline/sub/price/CTA; **your product image is placed unchanged (uniform scale only; test asserts pixel equality)**; or a render of an HX project. Plus the **Smart Prompt Engine** (template-based: style, lighting, background, composition, camera, movement + negative prompt + shot plan). |
+| **Engines & hardware** | detects CPU/RAM/disk/GPU, assigns a tier (cpu / gpu_low / gpu_mid / gpu_high), lists engines + open models with disk/VRAM/RAM needs and licence notes, blocks incompatible installs. |
+| **Gallery** | all videos/images, in-browser playback, side-by-side compare, edit & re-render (storyboard reloaded), delete. |
+
+### What it is NOT (said plainly)
+* It is a **procedural animation/montage engine**: it cannot invent footage, people or photoreal scenes. Text-to-video/image-to-video *AI* needs a GPU model (Wan 2.2, LTX-Video, CogVideoX, SVD…): the machine used to build this has **no GPU**, so those engines are listed as `needs_backend` and were **not run**. The ComfyUI client (`/api/media/comfy/run`) is tested only against a protocol stub, not a real ComfyUI.
+* **Nothing is downloaded automatically.** `/api/media/models/{id}/install` needs `{"approve":true,"confirm_disk_gb":N}` **and** a compatible machine, and even then only returns the command (this build does not fetch weights). Licences in the catalogue are *unverified recollections* — model hubs were unreachable from the build environment; read each model card.
+* **Adobe Firefly, Google Flow, Google Vids: link-out only.** No unofficial API, no assumption of a free API; each shows an "open official site" button. 
+* MoviePy and Blender are not used (FFmpeg is called directly; MoviePy would add a dependency without capability). Blender is only *detected*.
+* `HX EMIRATI VOICE STUDIO` is not part of this repository; only a documented integration point exists.
+
+### Tests added (22, all passing)
+valid H.264+AAC at the right size/fps/duration (ffprobe + full decode), VOX look (paper/yellow/pink pixel checks), SRT ordering, narration never longer than its scene, audio mix, Ken-Burns actually moves, 3D turntable rotates, `verify_video` rejects bad files, product pixels preserved, prompt engine, honest engine/voice/model status, install approval gate, path-traversal blocked, render job → download → gallery → delete, and a browser E2E (`tests/e2e_media.js`).
+Licences: FFmpeg (external process; this build links GPL x264 — do not redistribute the binary with the app without checking), Pillow/OpenCV/NumPy (permissive), icons and SFX are generated in code (no third-party assets).

@@ -260,6 +260,10 @@ async def doctor_api(mesh: UploadFile = File(...), repair: bool = Form(False), r
     finally: f.unlink(missing_ok=True)
 
 
+from . import media_api
+media_api._server.update(job=job, get_build=get_build)
+app.include_router(media_api.router)
+
 web = ROOT / "web"
 app.mount("/fonts", StaticFiles(directory=str(ROOT / "fonts")), name="fonts")
 if web.exists():

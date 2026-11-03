@@ -1,11 +1,12 @@
 import * as THREE from "three";
 import { OrbitControls } from "/web/vendor/OrbitControls.js";
+import { mediaRoute, mediaCards } from "/web/media.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
 let lang = localStorage.getItem("hx_lang") || "en";
 const T = {
-  nav_tools: ["Tools", "الأدوات"], nav_projects: ["Projects", "المشاريع"], nav_business: ["Business", "الأعمال"], nav_status: ["Status", "الحالة"],
+  nav_tools: ["Tools", "الأدوات"], nav_projects: ["Projects", "المشاريع"], nav_media: ["Creative", "الإبداع"], nav_business: ["Business", "الأعمال"], nav_status: ["Status", "الحالة"],
   foot: ["HX 3D AI Studio · Bambu Lab P2S + AMS · estimates are not slicer values · nothing is test-printed until you print it", "HX 3D AI Studio · طابعة Bambu Lab P2S مع AMS · الأرقام تقديرية وليست من برنامج التقطيع · لا شيء مُختبَر بالطباعة قبل أن تطبعه"],
   tools_h: ["All tools", "جميع الأدوات"], tools_p: ["Every card is a working tool. Cards marked 'needs backend' tell you exactly what to configure.", "كل بطاقة أداة تعمل فعلًا. البطاقات المعلّمة «تحتاج خدمة» توضّح ما يجب إعداده."],
   generate: ["Generate", "إنشاء"], export: ["Validate & export", "فحص وتصدير"], download_zip: ["Download all (.zip)", "تنزيل الكل (.zip)"], open: ["Open", "فتح"], del: ["Delete", "حذف"],
@@ -116,6 +117,7 @@ async function home() {
   const caps = await api("/api/capabilities"); const C = caps.capabilities;
   const status = (id) => { const m = { image_to_3d: C.image_to_3d.local.status, toy_robot: C.toy_designer.local_template.status, text_to_3d: C.text_to_3d.text_plates.status }; return m[id] || "ready"; };
   view.innerHTML = `<h1>HX 3D AI Studio</h1><p class="lead">${tr("tools_p")}</p><div class="grid">${TOOLS.map((t) => `<a class="card" href="#/tool/${t.id}"><div class="ic">${t.ic}</div><h3>${L(t.n)}</h3><p>${L(t.p)}</p><span class="badge ${status(t.id) === "ready" ? "ready" : "needs"}">${status(t.id) === "ready" ? tr("ready") : tr("needs")}</span></a>`).join("")}
+  ${mediaCards({ lang: () => lang }).map(([ic, href, n, p]) => `<a class="card" href="${href}"><div class="ic">${ic}</div><h3>${n}</h3><p>${p}</p><span class="badge ready">${tr("ready")}</span></a>`).join("")}
   <a class="card" href="#/business"><div class="ic">💼</div><h3>${lang === "ar" ? "أدوات الأعمال" : "Business tools"}</h3><p>${lang === "ar" ? "حاسبة التكلفة والتسعير والمخزون وعروض الأسعار" : "Cost calculator, pricing, filament inventory, quotes"}</p><span class="badge ready">${tr("ready")}</span></a></div>`;
 }
 
@@ -245,7 +247,7 @@ async function statusPage() {
 // ---------------------------------------------------------------- router + i18n
 async function route() {
   const h = location.hash || "#/"; document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr"; $("#lang").textContent = lang === "ar" ? "English" : "العربية"; $("[data-i=foot]").textContent = tr("foot"); setNav();
-  try { if (h === "#/") await home(); else if (h.startsWith("#/tool/")) await toolPage(h.split("/")[2]); else if (h === "#/projects") await projectsPage(); else if (h.startsWith("#/project/")) await projectPage(h.split("/")[2]); else if (h === "#/business") await businessPage(); else if (h === "#/status") await statusPage(); }
+  try { if (h === "#/") await home(); else if (h.startsWith("#/tool/")) await toolPage(h.split("/")[2]); else if (h === "#/projects") await projectsPage(); else if (h.startsWith("#/project/")) await projectPage(h.split("/")[2]); else if (h === "#/business") await businessPage(); else if (h === "#/status") await statusPage(); else if (h.startsWith("#/media")) await mediaRoute(h, { lang: () => lang, view }); }
   catch (e) { view.innerHTML = `<p class="err">${e.message}</p>`; }
 }
 $("#lang").onclick = () => { lang = lang === "ar" ? "en" : "ar"; localStorage.setItem("hx_lang", lang); route(); };
