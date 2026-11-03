@@ -141,3 +141,19 @@ html[dir=rtl] .pn dd { text-align: right; }
 .addr li:last-child { border-bottom: 0; }
 .addr form { margin: 4px 0 0; }
 button.lang { font: inherit; cursor: pointer; background: none; color: var(--muted); }
+
+/* ---------- Admin ---------- */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.kpi { display: grid; gap: 6px; } .kpi span { color: var(--muted); font-size: 13px; } .kpi b { font: 900 28px var(--body); font-variant-numeric: tabular-nums; }
+.kpi.muted b { color: var(--muted); font-size: 18px; font-weight: 600; }
+.warn { color: #ffcc80; } .empty { color: var(--muted); margin: 8px 0 0; }
+.search { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 12px; }
+.search input { flex: 1 1 200px; min-width: 0; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.search .btn { cursor: pointer; font: inherit; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+.tablewrap table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px; }
+.tablewrap th, .tablewrap td { text-align: start; padding: 10px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tablewrap th { color: var(--muted); font-weight: 600; background: var(--bg); }
+.tablewrap td { font-variant-numeric: tabular-nums; }
+.navlinks { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
