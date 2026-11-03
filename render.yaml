@@ -1,0 +1,12 @@
+# Render.com blueprint (UNTESTED here: no Docker in the build environment). Deploys hx-studio as a web service from this repo.
+services:
+  - type: web
+    name: hx3d-ai-studio
+    runtime: docker
+    rootDir: hx-studio
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/capabilities
+    plan: free
+    envVars:
+      - key: PORT
+        value: "8420"
