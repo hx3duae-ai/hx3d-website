@@ -12,6 +12,7 @@ export const dict = {
     cats: ['هدايا', 'ديكور المنزل', 'استخدام شخصي', 'أطفال', 'طباعة 3D مخصصة', 'الخط العربي', 'منتجات مخصصة'],
     note: 'المتجر قيد الإعداد: لم يتم ربط Shopify بعد، ولا تُعرض أي منتجات حتى يكتمل الربط.',
     footer: 'جميع الحقوق محفوظة',
+    band: 'طباعة ثلاثية الأبعاد في الإمارات',
   },
   en: {
     brand: 'HX 3D', tagline: 'Turn Your Ideas Into 3D',
@@ -21,5 +22,6 @@ export const dict = {
     cats: ['Gifts', 'Home Décor', 'Personal Use', 'Kids', 'Custom 3D Printing', 'Arabic Calligraphy', 'Personalized Products'],
     note: 'The store is being set up: Shopify is not connected yet, so no products are shown until the connection succeeds.',
     footer: 'All rights reserved',
+    band: '3D Printing in the UAE',
   },
 } as const;

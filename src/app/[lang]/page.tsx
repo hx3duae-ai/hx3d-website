@@ -23,6 +23,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <Link className="btn ghost" href={`/${lang}/viewer`}>{t.create}</Link>
           </div>
         </section>
+        <div className="band" aria-label={t.band}>
+          <div className="band-track">
+            {Array.from({ length: 6 }, (_, i) => <span key={i}>{t.band}<i aria-hidden="true">✦</i></span>)}
+          </div>
+        </div>
         <h2>{t.catsTitle}</h2>
         <div className="cats">{t.cats.map((c, i) => <Reveal key={c} delay={i * 70}><Link className="cat" href={`/${lang}/shop/${CATEGORY_SLUGS[i]}`}>{c}</Link></Reveal>)}</div>
         <p className="note">{t.note}</p>
