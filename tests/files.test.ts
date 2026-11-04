@@ -84,3 +84,10 @@ run('download links (real database)', () => {
     expect(await db.downloadEvent.count({ where: { link: { tokenHash: hashToken(token) } } })).toBe(2);
   });
 });
+
+describe('keyword with punctuation', () => {
+  it('matches a hyphenated keyword typed with or without the hyphen', () => {
+    expect(matchKeywords('ممكن test-guide من فضلك', ['test-guide'])).toEqual(['test-guide']);
+    expect(matchKeywords('test guide please', ['test-guide'])).toEqual(['test-guide']);
+  });
+});

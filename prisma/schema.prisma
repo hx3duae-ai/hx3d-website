@@ -104,6 +104,7 @@ model DownloadLink {
   revokedAt    DateTime?
   createdAt    DateTime        @default(now())
   events       DownloadEvent[]
+  draft        ReplyDraft?
   @@index([fileId])
 }
 
@@ -113,4 +114,24 @@ model DownloadEvent {
   link      DownloadLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
   createdAt DateTime     @default(now())
   @@index([linkId])
+}
+
+// ---- Instagram inbound messages/comments -> reply drafts awaiting admin approval ----
+// Nothing is sent by this code. A draft becomes a download link only when an admin approves it.
+model ReplyDraft {
+  id           String    @id @default(cuid())
+  channel      String    // "instagram_dm" | "instagram_comment"
+  senderRef    String    // Meta-scoped user id (needed to reply), never a phone or email
+  inboundText  String    // trimmed to 300 characters
+  inboundMid   String    @unique // Meta message/comment id: idempotency
+  keyword      String
+  fileId       String?
+  draftText    String
+  status       String    @default("pending") // pending | approved | rejected
+  linkId       String?   @unique // set on approval
+  link         DownloadLink? @relation(fields: [linkId], references: [id], onDelete: SetNull)
+  createdAt    DateTime  @default(now())
+  decidedAt    DateTime?
+  decidedBy    String?
+  @@index([status, createdAt])
 }

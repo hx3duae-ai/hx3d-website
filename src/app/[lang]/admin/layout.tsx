@@ -24,6 +24,7 @@ export default async function AdminLayout({ children, params }: { children: Reac
           <Link className="lang" href={`/${lang}/admin/orders`}>{t.orders}</Link>
           <Link className="lang" href={`/${lang}/admin/customers`}>{t.customers}</Link>
           <Link className="lang" href={`/${lang}/admin/files`}>{lang === 'ar' ? 'الملفات' : 'Files'}</Link>
+          <Link className="lang" href={`/${lang}/admin/outbox`}>{lang === 'ar' ? 'الردود' : 'Replies'}</Link>
         </span>
       </nav>
       {children}

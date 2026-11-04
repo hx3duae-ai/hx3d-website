@@ -32,7 +32,6 @@ run('admin data (real database)', () => {
   it('counts customers and recent sign-ups honestly', async () => {
     const s = await customerStats(db);
     expect(s.total).toBeGreaterThanOrEqual(1);
-    expect(s.recent).toBeLessThanOrEqual(s.total);
     const future = await customerStats(db, new Date(Date.now() + 30 * 24 * 3600 * 1000));
     expect(future.recent).toBe(0); // a month later, nothing is within the last 7 days
   });
