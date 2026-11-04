@@ -7,91 +7,80 @@
 @font-face{font-family:Ruqaa;font-weight:700;src:url(node_modules/@fontsource/aref-ruqaa/files/aref-ruqaa-arabic-700-normal.woff2)}
 :root{--pink:#FF66B2;--ink:#111}
 *{box-sizing:border-box;margin:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:#ececec;font-family:Cairo,CairoL,sans-serif;color:var(--ink)}
-#bg{position:absolute;inset:0;background:#f1f1ef;
- background-image:linear-gradient(#cfcfcf 2px,transparent 2px),linear-gradient(90deg,#cfcfcf 2px,transparent 2px),linear-gradient(#e2e2e2 1px,transparent 1px),linear-gradient(90deg,#e2e2e2 1px,transparent 1px);
- background-size:96px 96px,96px 96px,24px 24px,24px 24px}
-#crumple,#grain{position:absolute;inset:0;pointer-events:none}
-#crumple{mix-blend-mode:multiply;opacity:.55}
-#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,rgba(0,0,0,0) 50%,rgba(0,0,0,.28));z-index:60;pointer-events:none}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#f1f1ef;font-family:Cairo,CairoL,sans-serif;color:var(--ink)}
+#bg{position:absolute;inset:0;background:#f3f3f1;background-image:linear-gradient(#d2d2d2 2px,transparent 2px),linear-gradient(90deg,#d2d2d2 2px,transparent 2px),linear-gradient(#e4e4e4 1px,transparent 1px),linear-gradient(90deg,#e4e4e4 1px,transparent 1px);background-size:90px 90px,90px 90px,22.5px 22.5px,22.5px 22.5px}
+#crumple{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.5}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.22));z-index:80}
+#stage{position:absolute;inset:0;filter:drop-shadow(0 16px 18px rgba(0,0,0,.2)) drop-shadow(0 3px 4px rgba(0,0,0,.12))}
 .o{position:absolute}
-.shadow{box-shadow:0 22px 40px rgba(0,0,0,.28),0 4px 10px rgba(0,0,0,.18)}
-.print{background:#f7f5ef;padding:34px 34px 34px;border-radius:4px}
-.print .ph{width:100%;height:100%;background:#151515;position:relative;overflow:hidden;border-radius:2px}
-.print .ph::after{content:"";position:absolute;inset:0;opacity:.35;mix-blend-mode:screen;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.35'/></svg>")}
-.halftone{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1.2px,transparent 1.4px);background-size:9px 9px}
-.label{font-weight:900;line-height:1;padding:16px 34px 34px;white-space:nowrap;direction:rtl}
+.cut{background:#fff}
 .pk{background:var(--pink)}
-.wh{background:#fff}
-.bk{background:var(--ink);color:#fff}
-.tape{position:absolute;width:170px;height:58px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 4px rgba(0,0,0,.1)}
-.hand{font-family:Ruqaa;font-weight:700}
+.gr{background:#e6e6e3}
+.tex::after{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.lbl{direction:rtl;font-weight:900;line-height:1.05;padding:18px 40px 34px;white-space:nowrap}
 .ltr{direction:ltr;unicode-bidi:isolate;font-family:CairoL,Cairo}
-.strip{background:#fbfbf8;padding:26px 30px;direction:rtl}
+.hand{font-family:Ruqaa;font-weight:700;direction:rtl}
+svg{overflow:visible}
 </style></head><body>
 <div id="bg"></div>
-<svg id="crumple" width="1920" height="1080"><filter id="cr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".0045" numOctaves="4" seed="7"/><feDiffuseLighting lighting-color="#fff" surfaceScale="9"><feDistantLight azimuth="225" elevation="55"/></feDiffuseLighting></filter><rect width="1920" height="1080" filter="url(#cr)"/></svg>
+<svg id="crumple" width="1080" height="1920"><filter id="cr"><feTurbulence type="fractalNoise" baseFrequency=".005" numOctaves="4" seed="11"/><feDiffuseLighting lighting-color="#fff" surfaceScale="9"><feDistantLight azimuth="225" elevation="55"/></feDiffuseLighting></filter><rect width="1080" height="1920" filter="url(#cr)"/></svg>
 <div id="stage"></div>
 <div id="vig"></div>
 <svg width="0" height="0" style="position:absolute"><defs>
- <g id="clip"><path d="M14 150 V30 a16 16 0 0 1 32 0 V128 a10 10 0 0 1 -20 0 V44" fill="none" stroke="#8e8e8e" stroke-width="7" stroke-linecap="round"/><path d="M14 150 V30 a16 16 0 0 1 32 0 V128 a10 10 0 0 1 -20 0 V44" fill="none" stroke="#e9e9e9" stroke-width="2.5" stroke-linecap="round" transform="translate(-1.5 -1.5)"/></g>
+ <g id="clip"><path d="M14 150 V30 a16 16 0 0 1 32 0 V128 a10 10 0 0 1 -20 0 V44" fill="none" stroke="#8e8e8e" stroke-width="7" stroke-linecap="round"/><path d="M14 150 V30 a16 16 0 0 1 32 0 V128 a10 10 0 0 1 -20 0 V44" fill="none" stroke="#ececec" stroke-width="2.5" stroke-linecap="round" transform="translate(-1.5 -1.5)"/></g>
  <g id="spool"><circle cx="100" cy="100" r="92" fill="#fff" stroke="#111" stroke-width="7"/><circle cx="100" cy="100" r="60" fill="none" stroke="currentColor" stroke-width="44"/><circle cx="100" cy="100" r="26" fill="#fff" stroke="#111" stroke-width="7"/><circle cx="100" cy="100" r="8" fill="#111"/><path d="M160 140 q40 12 34 60" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/></g>
- <g id="printer"><rect x="20" y="10" width="260" height="300" rx="14" fill="none" stroke="#fff" stroke-width="9"/><line x1="40" y1="70" x2="260" y2="70" stroke="#fff" stroke-width="9"/><rect x="120" y="58" width="60" height="44" rx="6" fill="#fff"/><polygon points="138,102 162,102 154,120 146,120" fill="#fff"/><rect x="60" y="250" width="180" height="16" fill="#555" stroke="#fff" stroke-width="5"/></g>
+ <g id="printer"><rect x="20" y="10" width="260" height="300" rx="14" fill="#fff" stroke="#111" stroke-width="9"/><line x1="40" y1="70" x2="260" y2="70" stroke="#111" stroke-width="9"/><rect x="120" y="58" width="60" height="44" rx="6" fill="#111"/><polygon points="138,102 162,102 154,120 146,120" fill="#111"/><rect x="60" y="250" width="180" height="16" fill="#d6d6d6" stroke="#111" stroke-width="6"/></g>
 </defs></svg>
 <script>
 const V={
- 1:{fs2:92,fs:150,t1:'حل <span class="ltr">5</span> مشاكل',t2:'في طباعتك',note:['خيوط؟','التصاق؟','طبقات؟'],tag:'الحل هنا',art:'problems'},
- 2:{fs2:92,fs:140,t1:'<span class="ltr">PLA</span> أم <span class="ltr">PETG</span>؟',t2:'الفرق الحقيقي',note:['أيهما','أقوى؟'],tag:'مقارنة',art:'pla'},
- 3:{fs2:80,fs:140,t1:'لا تشترِ طابعة',t2:'قبل أن تعرف هذا!',note:['5 أمور','مهمة'],tag:'قبل الشراء',art:'buy'}
-};
+ 1:{l1:'حل <span class="ltr">5</span> مشاكل',l2:'في طباعتك',f1:132,f2:110,note:['خيوط؟','التصاق؟','طبقات؟'],tag:'الحل هنا',art:'problems'},
+ 2:{l1:'<span class="ltr">PLA</span> أم <span class="ltr">PETG</span>؟',l2:'الفرق الحقيقي',f1:118,f2:100,note:['أيهما','أقوى؟'],tag:'مقارنة',art:'pla'},
+ 3:{l1:'لا تشترِ طابعة',l2:'قبل أن تعرف هذا!',f1:116,f2:92,note:['5 أمور','مهمة'],tag:'قبل الشراء',art:'buy'}};
 const c=V[+(new URLSearchParams(location.search).get('v')||1)];
 const art={
-problems:`<svg viewBox="0 0 640 400" width="100%" height="100%"><g transform="translate(150 40) scale(1.05)"><use href="#printer"/>
- <rect x="112" y="180" width="76" height="70" fill="#FF66B2"/><g stroke="#111" stroke-width="3" opacity=".5"><line x1="112" y1="203" x2="188" y2="203"/><line x1="112" y1="226" x2="188" y2="226"/></g>
- <g fill="none" stroke="#fff" stroke-width="3"><path d="M188 190 q30 -6 40 14 q6 14 -12 22"/><path d="M188 205 q36 0 36 28"/></g>
- <circle cx="205" cy="210" r="46" fill="none" stroke="#FF66B2" stroke-width="7" stroke-dasharray="230 30"/></g>
- <g fill="#FF66B2"><circle cx="70" cy="80" r="9"/><circle cx="560" cy="300" r="7"/><circle cx="590" cy="90" r="5"/></g></svg>`,
-pla:`<svg viewBox="0 0 640 400" width="100%" height="100%"><g transform="translate(60 70)"><g transform="scale(1.25)" style="color:#9a9a9a"><use href="#spool"/></g></g><g transform="translate(340 70)"><g transform="scale(1.25)" style="color:#FF66B2"><use href="#spool"/></g></g>
- <text x="185" y="385" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="46" fill="#fff">PLA</text><text x="465" y="385" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="46" fill="#FF66B2">PETG</text>
- <circle cx="320" cy="200" r="34" fill="#fff"/><text x="320" y="214" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="34" fill="#111">VS</text></svg>`,
-buy:`<svg viewBox="0 0 640 400" width="100%" height="100%"><g transform="translate(140 40) scale(1.05)"><use href="#printer"/><rect x="115" y="196" width="70" height="54" fill="#FF66B2"/></g>
- <g transform="translate(440 120) rotate(14)"><path d="M0 30 L30 0 H140 V60 H30z" fill="#FF66B2" stroke="#fff" stroke-width="5"/><circle cx="32" cy="30" r="8" fill="#151515" stroke="#fff" stroke-width="4"/><text x="88" y="44" text-anchor="middle" font-family="Cairo" font-weight="900" font-size="40" fill="#111">؟</text></g>
- <g fill="#FF66B2"><circle cx="80" cy="330" r="8"/><circle cx="590" cy="320" r="6"/></g></svg>`
-};
+problems:`<svg viewBox="0 0 400 400" width="100%" height="100%"><g transform="translate(50 30) scale(1.0)"><use href="#printer"/>
+ <rect x="112" y="186" width="76" height="64" fill="#FF66B2" stroke="#111" stroke-width="6"/><g stroke="#111" stroke-width="3" opacity=".45"><line x1="112" y1="207" x2="188" y2="207"/><line x1="112" y1="228" x2="188" y2="228"/></g>
+ <g fill="none" stroke="#111" stroke-width="3"><path d="M188 196 q30 -6 40 14 q6 14 -12 22"/><path d="M188 211 q36 0 36 28"/></g>
+ <circle cx="208" cy="214" r="48" fill="none" stroke="#FF66B2" stroke-width="8" stroke-dasharray="240 34"/></g></svg>`,
+pla:`<svg viewBox="0 0 400 400" width="100%" height="100%"><g transform="translate(10 60) scale(.85)" style="color:#9a9a9a"><use href="#spool"/></g><g transform="translate(215 60) scale(.85)" style="color:#FF66B2"><use href="#spool"/></g>
+ <text x="95" y="320" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="44" fill="#111">PLA</text><text x="300" y="320" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="44" fill="#FF66B2">PETG</text>
+ <circle cx="200" cy="145" r="30" fill="#FF66B2" stroke="#111" stroke-width="5"/><text x="200" y="158" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="30" fill="#111">VS</text></svg>`,
+buy:`<svg viewBox="0 0 400 400" width="100%" height="100%"><g transform="translate(40 30)"><use href="#printer"/><rect x="115" y="196" width="70" height="54" fill="#FF66B2" stroke="#111" stroke-width="6"/></g>
+ <g transform="translate(250 90) rotate(14)"><path d="M0 30 L30 0 H130 V60 H30z" fill="#FF66B2" stroke="#111" stroke-width="5"/><circle cx="32" cy="30" r="8" fill="#fff" stroke="#111" stroke-width="4"/><text x="82" y="46" text-anchor="middle" font-family="Cairo" font-weight="900" font-size="42" fill="#111">؟</text></g></svg>`};
 document.getElementById('stage').innerHTML=`
- <!-- pen top-left -->
- <svg class="o" style="left:-40px;top:20px" width="420" height="260" viewBox="0 0 420 260"><g transform="rotate(-38 210 130)"><rect x="40" y="108" width="300" height="44" rx="22" fill="#111"/><rect x="300" y="104" width="70" height="52" rx="10" fill="#FF66B2"/><polygon points="40,108 0,130 40,152" fill="#d9d9d9" stroke="#111" stroke-width="4"/><rect x="90" y="96" width="120" height="12" rx="6" fill="#333"/></g></svg>
- <!-- pencil top-right -->
- <svg class="o" style="right:-60px;top:-10px" width="520" height="120" viewBox="0 0 520 120"><g transform="rotate(8 260 60)"><rect x="60" y="40" width="420" height="40" fill="#fff" stroke="#111" stroke-width="4"/><rect x="430" y="40" width="50" height="40" fill="#FF66B2" stroke="#111" stroke-width="4"/><polygon points="60,40 10,60 60,80" fill="#f0d9b5" stroke="#111" stroke-width="4"/><polygon points="26,54 10,60 26,66" fill="#111"/></g></svg>
- <!-- tape roll bottom-left -->
- <svg class="o shadowsvg" style="left:-70px;bottom:-60px" width="300" height="300" viewBox="0 0 300 300"><circle cx="150" cy="150" r="130" fill="rgba(240,240,240,.85)" stroke="#bdbdbd" stroke-width="4"/><circle cx="150" cy="150" r="80" fill="#e6e6e6" stroke="#9a9a9a" stroke-width="10"/><circle cx="150" cy="150" r="60" fill="#f1f1ef"/></svg>
- <!-- spool bottom-right -->
- <svg class="o" style="right:40px;bottom:-70px;color:#FF66B2;filter:drop-shadow(0 14px 18px rgba(0,0,0,.25))" width="260" height="260" viewBox="0 0 200 200"><use href="#spool"/></svg>
- <!-- polaroid right edge -->
- <div class="o print shadow" style="right:-90px;top:250px;width:330px;height:380px;transform:rotate(7deg);padding:22px 22px 70px"><div class="ph" style="background:#2a2a2a"><div class="halftone"></div>
-  <svg viewBox="0 0 200 200" width="100%" height="100%"><path d="M70 40 h60 l-10 30 q40 40 20 100 h-80 q-20 -60 20 -100z" fill="#cfcfcf" stroke="#fff" stroke-width="5"/><g stroke="#888" stroke-width="3"><line x1="52" y1="100" x2="148" y2="100"/><line x1="48" y1="130" x2="152" y2="130"/></g></svg></div></div>
- <!-- back prints -->
- <div class="o print shadow" style="left:620px;top:205px;width:820px;height:560px;transform:rotate(5deg)"><div class="ph" style="background:#262626"><div class="halftone"></div></div></div>
- <div class="o print shadow" style="left:560px;top:230px;width:820px;height:560px;transform:rotate(-6deg)"><div class="ph" style="background:#1d1d1d"><div class="halftone"></div></div></div>
- <!-- main print -->
- <div class="o print shadow" style="left:560px;top:235px;width:820px;height:560px;transform:rotate(-1.5deg)"><div class="ph"><div class="halftone"></div>${art[c.art]}</div></div>
- <!-- left note strip with clip -->
- <div class="o strip shadow" style="left:300px;top:330px;width:300px;height:520px;transform:rotate(-5deg);font-size:54px;font-weight:700;line-height:1.6;text-align:center;padding-top:60px">${c.note.map(x=>'<div>'+x+'</div>').join('')}
-  <svg width="300" height="40" viewBox="0 0 300 40" style="margin-top:16px"><path d="M30 20 q60 -24 120 0 t120 0" fill="none" stroke="#FF66B2" stroke-width="7" stroke-linecap="round"/></svg></div>
- <svg class="o" style="left:520px;top:300px;transform:rotate(-5deg)" width="60" height="170" viewBox="0 0 60 170"><use href="#clip"/></svg>
- <!-- tape on main -->
- <div class="tape" style="left:1290px;top:215px;transform:rotate(38deg)"></div>
- <!-- title label top -->
- <div class="o label pk shadow" style="left:50%;top:70px;transform:translateX(-50%) rotate(-1.5deg);font-size:${c.fs}px">${c.t1}</div>
- <!-- second label bottom with clip -->
- <div class="o label wh shadow" style="left:690px;top:800px;transform:rotate(1.5deg);font-size:${c.fs2}px;border-right:14px solid #FF66B2">${c.t2}<svg style="position:absolute;right:-34px;top:-62px;transform:rotate(6deg)" width="60" height="170" viewBox="0 0 60 170"><use href="#clip"/></svg></div>
- <!-- luggage tag -->
- <div class="o" style="right:120px;top:640px;transform:rotate(-14deg)">
-  <svg width="330" height="210" viewBox="0 0 330 210" style="filter:drop-shadow(0 12px 14px rgba(0,0,0,.25))"><path d="M70 10 H320 V200 H70 L10 140 V70 z" fill="#111"/><circle cx="58" cy="105" r="14" fill="#f1f1ef" stroke="#FF66B2" stroke-width="5"/>
-  <text x="200" y="125" text-anchor="middle" font-family="Ruqaa" font-weight="700" font-size="56" fill="#FF66B2" direction="rtl">${c.tag}</text></svg>
-  <svg class="o" style="left:-60px;top:50px" width="120" height="80" viewBox="0 0 210 120"><path d="M200 45 C140 10 80 110 0 60" fill="none" stroke="#777" stroke-width="3"/></svg>
+ <svg class="o" style="left:-90px;top:380px" width="420" height="260" viewBox="0 0 420 260"><g transform="rotate(-14 210 130)"><rect x="40" y="108" width="300" height="44" rx="22" fill="#fff" stroke="#111" stroke-width="5"/><rect x="300" y="104" width="70" height="52" rx="10" fill="#FF66B2" stroke="#111" stroke-width="5"/><polygon points="40,108 0,130 40,152" fill="#e2e2e2" stroke="#111" stroke-width="4"/></g></svg>
+ <svg class="o" style="right:-80px;top:1460px" width="520" height="120" viewBox="0 0 520 120"><g transform="rotate(-14 260 60)"><rect x="60" y="40" width="420" height="40" fill="#fff" stroke="#111" stroke-width="4"/><rect x="430" y="40" width="50" height="40" fill="#FF66B2" stroke="#111" stroke-width="4"/><polygon points="60,40 10,60 60,80" fill="#f0d9b5" stroke="#111" stroke-width="4"/><polygon points="26,54 10,60 26,66" fill="#111"/></g></svg>
+ <svg class="o" style="left:-80px;bottom:-80px" width="320" height="320" viewBox="0 0 300 300"><circle cx="150" cy="150" r="130" fill="rgba(245,245,245,.9)" stroke="#c4c4c4" stroke-width="4"/><circle cx="150" cy="150" r="80" fill="#ececec" stroke="#a8a8a8" stroke-width="10"/><circle cx="150" cy="150" r="60" fill="#f3f3f1"/></svg>
+ <svg class="o" style="right:-40px;bottom:-60px;color:#FF66B2" width="280" height="280" viewBox="0 0 200 200"><use href="#spool"/></svg>
+ <!-- back papers -->
+ <div class="o cut tex pk" data-tear="16" style="left:150px;top:560px;width:800px;height:820px;transform:rotate(6deg);opacity:.9"></div>
+ <div class="o cut tex gr" data-tear="16" style="left:110px;top:590px;width:820px;height:820px;transform:rotate(-5deg)"></div>
+ <!-- main paper -->
+ <div class="o cut tex" data-tear="16" style="left:120px;top:560px;width:840px;height:840px;transform:rotate(-1.5deg)"><div style="position:absolute;inset:90px 80px 110px">${art[c.art]}</div></div>
+ <!-- polaroid cutout -->
+ <div class="o cut tex" data-tear="8" style="right:-70px;top:1170px;width:280px;height:320px;transform:rotate(9deg);padding:20px 20px 70px"><div class="pk" style="width:100%;height:100%;position:relative">
+  <svg viewBox="0 0 200 200" width="100%" height="100%"><path d="M70 40 h60 l-10 30 q40 40 20 100 h-80 q-20 -60 20 -100z" fill="#fff" stroke="#111" stroke-width="6"/><g stroke="#bbb" stroke-width="3"><line x1="52" y1="100" x2="148" y2="100"/><line x1="48" y1="130" x2="152" y2="130"/></g></svg></div></div>
+ <!-- tape -->
+ <div class="o" style="left:420px;top:530px;width:230px;height:62px;background:rgba(255,102,178,.55);transform:rotate(-4deg)"></div>
+ <!-- title strips -->
+ <div class="o lbl cut pk tex" data-tear="9" style="right:50px;top:200px;transform:rotate(-2deg);font-size:${c.f1}px">${c.l1}</div>
+ <div class="o lbl cut tex" data-tear="9" style="right:90px;top:390px;transform:rotate(1.5deg);font-size:${c.f2}px">${c.l2}</div>
+ <svg class="o" style="right:36px;top:350px;transform:rotate(8deg)" width="60" height="170" viewBox="0 0 60 170"><use href="#clip"/></svg>
+ <!-- note strip -->
+ <div class="o cut tex" data-tear="8" style="left:40px;top:1330px;width:400px;height:330px;transform:rotate(-6deg);direction:rtl;font-weight:700;font-size:56px;line-height:1.45;text-align:center;padding-top:40px">${c.note.map(x=>'<div>'+x+'</div>').join('')}</div>
+ <svg class="o" style="left:370px;top:1290px;transform:rotate(-6deg)" width="60" height="170" viewBox="0 0 60 170"><use href="#clip"/></svg>
+ <!-- tag -->
+ <div class="o" style="right:70px;top:1500px;transform:rotate(-12deg)">
+  <svg width="420" height="220" viewBox="0 0 420 220"><path d="M90 10 H410 V210 H90 L14 145 V75 z" fill="#FF66B2" stroke="#111" stroke-width="5"/><circle cx="72" cy="110" r="16" fill="#f3f3f1" stroke="#111" stroke-width="5"/>
+  <text x="255" y="135" text-anchor="middle" font-family="Ruqaa" font-weight="700" font-size="66" fill="#111" direction="rtl">${c.tag}</text></svg>
+  <svg class="o" style="left:-70px;top:70px" width="120" height="90" viewBox="0 0 120 90"><path d="M110 40 C80 10 40 90 0 50" fill="none" stroke="#777" stroke-width="3"/></svg>
  </div>
  <!-- brand -->
- <div class="o" style="left:46px;bottom:40px;display:flex;align-items:center;gap:12px;background:#111;color:#fff;border-radius:40px;padding:10px 26px 10px 20px;font-family:CairoL;font-weight:900;font-size:40px;z-index:70"><span style="width:18px;height:18px;border-radius:50%;background:#FF66B2;display:inline-block"></span>HX 3D</div>
-`;
+ <div class="o cut pk" data-tear="5" style="left:50px;top:60px;padding:14px 30px 16px 24px;font-family:CairoL;font-weight:900;font-size:46px;display:flex;align-items:center;gap:14px"><span style="width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid #111;display:inline-block"></span>HX 3D</div>`;
+function rnd(s){let x=Math.sin(s*999.7)*43758.5453;return x-Math.floor(x);}
+function tear(el,seed,a){const w=el.offsetWidth,h=el.offsetHeight,st=a>10?26:16,p=[];let k=seed;
+ for(let x=0;x<=w;x+=st)p.push(`${Math.min(x,w)}px ${rnd(k++)*a}px`);for(let y=st;y<=h;y+=st)p.push(`${w-rnd(k++)*a}px ${Math.min(y,h)}px`);
+ for(let x=w-st;x>=0;x-=st)p.push(`${Math.max(x,0)}px ${h-rnd(k++)*a}px`);for(let y=h-st;y>0;y-=st)p.push(`${rnd(k++)*a}px ${y}px`);
+ el.style.clipPath=`polygon(${p.join(',')})`;}
+document.fonts.ready.then(()=>{let s=3;document.querySelectorAll('[data-tear]').forEach(el=>tear(el,s+=53,+el.dataset.tear));document.body.dataset.ready=1;});
 </script></body></html>
