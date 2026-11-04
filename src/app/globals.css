@@ -196,3 +196,9 @@ a.cat:hover { color: var(--ink); }
 .faq { padding: 14px 18px; margin-bottom: 10px; } .faq summary { cursor: pointer; font-weight: 700; } .faq p { margin: 8px 0 0; }
 .warn { color: #ffcc80; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 8px 0 0; }
+
+/* HX Core admin forms */
+.core-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 10px; }
+.core-form input, .core-form select { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; min-width: 0; }
+.core-form input { flex: 1 1 220px; max-width: 420px; }
+.core-form input:focus, .core-form select:focus { outline: none; border-color: var(--pink); box-shadow: 0 0 0 3px rgba(232,106,179,.18); }
