@@ -66,6 +66,13 @@ const dust=document.createElement('div');dust.id='dust';
 const dots=[];for(let i=0;i<10;i++){const d=document.createElement('div');const s=6+R(i)*10;d.style.cssText=`position:absolute;width:${s}px;height:${s}px;background:${i%3?'#FF66B2':'#111'};opacity:${i%3?.55:.25};${i%2?'border-radius:50%':'transform:rotate(45deg)'}`;dust.appendChild(d);dots.push([d,R(i+1)*1080,R(i+7)*1920,R(i+13)]);}
 document.body.insertBefore(dust,document.querySelector('.scene'));dust.style.zIndex=0;
 
+
+// prepare animated parts: nozzles (black rect + tip polygon) and drops
+document.querySelectorAll('.scene svg').forEach(sv=>{
+ sv.querySelectorAll('rect[fill="#111"]').forEach(r=>{const n=r.nextElementSibling;if(n&&n.tagName==='polygon'&&n.getAttribute('fill')==='#111'&&!r.parentNode.classList.contains('noz')){const g=document.createElementNS(NS,'g');g.classList.add('noz');r.parentNode.insertBefore(g,r);g.appendChild(r);g.appendChild(n);}});
+ sv.querySelectorAll('path').forEach(p=>{if((p.getAttribute('d')||'').startsWith('M50 8 C50 8')||(p.getAttribute('d')||'').startsWith('M40 30 q-26'))p.closest('svg').classList.add('drop');});
+ if(sv.querySelector('use[href="#spool"]'))sv.classList.add('spin');
+});
 const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-x,3);
 const base=window.setT;
 window.setT=function(t){
@@ -83,6 +90,15 @@ window.setT=function(t){
   // idle float for visible top-level elements
   inner.querySelectorAll(':scope > .el[data-at]').forEach((el,i)=>{const at=+el.dataset.at;if(lt<at+.7||el.classList.contains('paper'))return;
    const a=el.classList.contains('note')?3:1.6;el.style.transform+=` translate(${Math.sin(t*1.1+i*1.7)*a}px,${Math.cos(t*.9+i)*a}px) rotate(${Math.sin(t*.8+i)*.4}deg)`;});
+
+  // object motion
+  inner.querySelectorAll('svg.spin').forEach((el,i)=>{el.style.transformOrigin='50% 50%';el.style.transform+=` rotate(${(t-s)*(i%2?-45:55)}deg)`;});
+  inner.querySelectorAll('svg.drop').forEach((el,i)=>{el.style.transform+=` translateY(${Math.abs(Math.sin(t*2.2+i))*-14}px)`;});
+  inner.querySelectorAll('.noz').forEach((g,i)=>{g.style.transform=`translateX(${Math.sin(t*1.8+i)*26}px)`;});
+  inner.querySelectorAll('rect.bar').forEach((b,i)=>{const at=+b.dataset.at,d=+(b.dataset.d||.6);if(lt>at+d)b.style.transform=`scaleY(${1+Math.sin(t*3+i*.9)*.05})`;});
+  inner.querySelectorAll('circle.dot').forEach((c,i)=>{c.style.transformBox='fill-box';c.style.transformOrigin='center';if(lt>+c.dataset.at+.6)c.style.transform=`scale(${1+Math.sin(t*4+i)*.18})`;});
+  inner.querySelectorAll(':scope > svg.el:not(.spin):not(.drop)').forEach((el,i)=>{const at=+(el.dataset.at||0);if(lt>at+.7){el.style.transformOrigin='50% 50%';el.style.transform+=` scale(${1+Math.sin(t*1.6+i)*.025}) rotate(${Math.sin(t*1.2+i*2)*1.6}deg)`;}});
+  inner.querySelectorAll('[data-draw]').forEach(p=>{if(lt>+p.dataset.draw+1)p.style.strokeWidth=(+(p.getAttribute('stroke-width')||8))*(1+Math.sin(t*3)*.12);});
   inner.querySelectorAll('[data-dcat]').forEach(el=>{const at=+el.dataset.dcat,q=eo(cl((lt-at)/.6));
    if(el.dataset.kind==='draw'){el.style.opacity=lt>=at?1:0;el.querySelectorAll('.dd').forEach(p=>{p.style.strokeDasharray=1;p.style.strokeDashoffset=1-q;});}
    else{el.style.opacity=q;el.style.transform=`rotate(${el.dataset.rot}deg) scale(${1.25-.25*q})`;}});
