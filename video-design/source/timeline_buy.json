@@ -1,0 +1,235 @@
+[
+ {
+  "start": 0.0,
+  "end": 2.9,
+  "time": "00:00-00:02",
+  "text": "تفكّر في شراء طابعة؟",
+  "frames": [
+   "45 s1",
+   "46 s1"
+  ],
+  "action": "waving entrance"
+ },
+ {
+  "start": 2.9,
+  "end": 4.9,
+  "time": "00:02-00:04",
+  "text": "قبل أن تدفع",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger – warning"
+ },
+ {
+  "start": 4.9,
+  "end": 6.9,
+  "time": "00:04-00:06",
+  "text": "اعرف هذه الأمور الخمسة",
+  "frames": [
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "pointing at paper"
+ },
+ {
+  "start": 6.9,
+  "end": 8.0,
+  "time": "00:06-00:08",
+  "text": "أولاً",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 8.0,
+  "end": 12.1,
+  "time": "00:08-00:12",
+  "text": "حجم الطباعة – مساحة تكفي",
+  "frames": [
+   "194 s5",
+   "195 s5",
+   "184 s5"
+  ],
+  "action": "open arms – size"
+ },
+ {
+  "start": 12.1,
+  "end": 13.9,
+  "time": "00:12-00:13",
+  "text": "ثانياً نوع الطابعة",
+  "frames": [
+   "62 s1",
+   "44 s1",
+   "62 s1"
+  ],
+  "action": "raise two fingers"
+ },
+ {
+  "start": 13.9,
+  "end": 16.5,
+  "time": "00:13-00:16",
+  "text": "الخيط أسهل وأرخص",
+  "frames": [
+   "186 s5",
+   "187 s5"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 16.5,
+  "end": 19.5,
+  "time": "00:16-00:19",
+  "text": "الريزن تفاصيل أدق",
+  "frames": [
+   "204 s5",
+   "205 s5"
+  ],
+  "action": "OK sign – precise"
+ },
+ {
+  "start": 19.5,
+  "end": 22.4,
+  "time": "00:19-00:22",
+  "text": "تحتاج تهوية وتنظيف",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug – downside"
+ },
+ {
+  "start": 22.4,
+  "end": 24.6,
+  "time": "00:22-00:24",
+  "text": "ثالثاً معايرة السطح",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 24.6,
+  "end": 26.8,
+  "time": "00:24-00:26",
+  "text": "تضبط السطح تلقائياً",
+  "frames": [
+   "160 s5",
+   "174 s5"
+  ],
+  "action": "pointing at bed"
+ },
+ {
+  "start": 26.8,
+  "end": 28.9,
+  "time": "00:26-00:28",
+  "text": "توفّر وقتاً وأخطاء",
+  "frames": [
+   "66 s1",
+   "48 s1"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 28.9,
+  "end": 30.9,
+  "time": "00:28-00:30",
+  "text": "رابعاً الخيوط المدعومة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 30.9,
+  "end": 35.5,
+  "time": "00:30-00:35",
+  "text": "تطبع الخيوط مثل PLA وغيره",
+  "frames": [
+   "51 s1",
+   "70 s1",
+   "52 s1"
+  ],
+  "action": "pointing at spools"
+ },
+ {
+  "start": 35.5,
+  "end": 38.5,
+  "time": "00:35-00:38",
+  "text": "خامساً الدعم وقطع الغيار",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 38.5,
+  "end": 41.5,
+  "time": "00:38-00:41",
+  "text": "مجتمع كبير",
+  "frames": [
+   "179 s5",
+   "180 s5",
+   "202 s5"
+  ],
+  "action": "open arms – community"
+ },
+ {
+  "start": 41.5,
+  "end": 42.5,
+  "time": "00:41-00:42",
+  "text": "قطع غيار متوفرة",
+  "frames": [
+   "204 s5"
+  ],
+  "action": "OK sign"
+ },
+ {
+  "start": 42.5,
+  "end": 46.5,
+  "time": "00:42-00:46",
+  "text": "اعرف احتياجك ثم اختر",
+  "frames": [
+   "55 s1",
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "think then point"
+ },
+ {
+  "start": 46.5,
+  "end": 47.9,
+  "time": "00:46-00:47",
+  "text": "إذا احترت اسألنا",
+  "frames": [
+   "65 s1",
+   "67 s1"
+  ],
+  "action": "friendly wave"
+ },
+ {
+  "start": 47.9,
+  "end": 54.7,
+  "time": "00:47-00:54",
+  "text": "CTA اكتب طابعة في التعليقات",
+  "frames": [
+   "186 s5",
+   "187 s5",
+   "190 s5",
+   "191 s5",
+   "157 s5",
+   "158 s5"
+  ],
+  "action": "thumbs up + celebrate + goodbye wave"
+ }
+]

@@ -1,0 +1,328 @@
+[
+ {
+  "start": 0.0,
+  "end": 2.5,
+  "time": "00:00-00:02",
+  "text": "طباعتك ثلاثية الأبعاد",
+  "frames": [
+   "45 s1",
+   "46 s1"
+  ],
+  "action": "waving entrance"
+ },
+ {
+  "start": 2.5,
+  "end": 3.9,
+  "time": "00:02-00:03",
+  "text": "تخرج تالفة؟",
+  "frames": [
+   "63 s1"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 3.9,
+  "end": 6.9,
+  "time": "00:03-00:06",
+  "text": "خمس مشاكل شائعة",
+  "frames": [
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "pointing"
+ },
+ {
+  "start": 6.9,
+  "end": 8.7,
+  "time": "00:06-00:08",
+  "text": "تُحلّ في دقائق",
+  "frames": [
+   "66 s1",
+   "48 s1"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 8.7,
+  "end": 10.7,
+  "time": "00:08-00:10",
+  "text": "المشكلة الأولى",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 10.7,
+  "end": 12.7,
+  "time": "00:10-00:12",
+  "text": "سطح غير مستوٍ",
+  "frames": [
+   "160 s5",
+   "174 s5"
+  ],
+  "action": "pointing at drawing"
+ },
+ {
+  "start": 12.7,
+  "end": 15.0,
+  "time": "00:12-00:15",
+  "text": "الطبقة الأولى هي الأساس",
+  "frames": [
+   "174 s5",
+   "175 s5"
+  ],
+  "action": "pointing"
+ },
+ {
+  "start": 15.0,
+  "end": 17.5,
+  "time": "00:15-00:17",
+  "text": "تتشوّه القطعة",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 17.5,
+  "end": 19.5,
+  "time": "00:17-00:19",
+  "text": "المشكلة الثانية",
+  "frames": [
+   "62 s1",
+   "44 s1",
+   "62 s1"
+  ],
+  "action": "raise two fingers"
+ },
+ {
+  "start": 19.5,
+  "end": 22.0,
+  "time": "00:19-00:22",
+  "text": "الخيط الرطب يمتص الرطوبة",
+  "frames": [
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "pointing at spool"
+ },
+ {
+  "start": 22.0,
+  "end": 25.2,
+  "time": "00:22-00:25",
+  "text": "تسمع طقطقة",
+  "frames": [
+   "170 s5",
+   "172 s5"
+  ],
+  "action": "hand to head – listening"
+ },
+ {
+  "start": 25.2,
+  "end": 26.8,
+  "time": "00:25-00:26",
+  "text": "خزّنه في مكان جاف",
+  "frames": [
+   "204 s5",
+   "205 s5"
+  ],
+  "action": "OK sign"
+ },
+ {
+  "start": 26.8,
+  "end": 28.8,
+  "time": "00:26-00:28",
+  "text": "المشكلة الثالثة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 28.8,
+  "end": 30.9,
+  "time": "00:28-00:30",
+  "text": "حرارة غير مناسبة",
+  "frames": [
+   "160 s5",
+   "174 s5"
+  ],
+  "action": "pointing at thermometer"
+ },
+ {
+  "start": 30.9,
+  "end": 33.0,
+  "time": "00:30-00:33",
+  "text": "الحرارة العالية",
+  "frames": [
+   "198 s5",
+   "202 s5"
+  ],
+  "action": "both hands up"
+ },
+ {
+  "start": 33.0,
+  "end": 35.0,
+  "time": "00:33-00:35",
+  "text": "خيوط رفيعة",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 35.0,
+  "end": 37.1,
+  "time": "00:35-00:37",
+  "text": "المنخفضة تُضعف",
+  "frames": [
+   "54 s1",
+   "64 s1"
+  ],
+  "action": "arms crossed"
+ },
+ {
+  "start": 37.1,
+  "end": 39.5,
+  "time": "00:37-00:39",
+  "text": "المشكلة الرابعة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 39.5,
+  "end": 41.8,
+  "time": "00:39-00:41",
+  "text": "كلما زادت السرعة",
+  "frames": [
+   "190 s5",
+   "191 s5"
+  ],
+  "action": "jump – speed"
+ },
+ {
+  "start": 41.8,
+  "end": 43.8,
+  "time": "00:41-00:43",
+  "text": "يظهر الاهتزاز",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 43.8,
+  "end": 45.8,
+  "time": "00:43-00:45",
+  "text": "خفّف السرعة",
+  "frames": [
+   "49 s1",
+   "50 s1"
+  ],
+  "action": "hands on hips – calm"
+ },
+ {
+  "start": 45.8,
+  "end": 49.2,
+  "time": "00:45-00:49",
+  "text": "المشكلة الخامسة اتجاه القطعة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "51 s1"
+  ],
+  "action": "raise one finger then point"
+ },
+ {
+  "start": 49.2,
+  "end": 52.2,
+  "time": "00:49-00:52",
+  "text": "قوة القطعة",
+  "frames": [
+   "56 s1",
+   "57 s1"
+  ],
+  "action": "flex biceps"
+ },
+ {
+  "start": 52.2,
+  "end": 54.8,
+  "time": "00:52-00:54",
+  "text": "الأجزاء المعلّقة تحتاج دعامات",
+  "frames": [
+   "198 s5",
+   "184 s5"
+  ],
+  "action": "hands up – support"
+ },
+ {
+  "start": 54.8,
+  "end": 56.8,
+  "time": "00:54-00:56",
+  "text": "صحّح المشاكل الخمس",
+  "frames": [
+   "186 s5",
+   "187 s5"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 56.8,
+  "end": 58.4,
+  "time": "00:56-00:58",
+  "text": "وستتغيّر طباعتك",
+  "frames": [
+   "190 s5",
+   "191 s5"
+  ],
+  "action": "celebrate jump"
+ },
+ {
+  "start": 58.4,
+  "end": 60.4,
+  "time": "00:58-01:00",
+  "text": "جرّب وأخبرنا",
+  "frames": [
+   "65 s1",
+   "67 s1"
+  ],
+  "action": "wave"
+ },
+ {
+  "start": 60.4,
+  "end": 63.6,
+  "time": "01:00-01:03",
+  "text": "CTA اكتب مشاكل في التعليقات",
+  "frames": [
+   "47 s1",
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "attention + point"
+ },
+ {
+  "start": 63.6,
+  "end": 68.53,
+  "time": "01:03-01:08",
+  "text": "ونرسل لك الملف",
+  "frames": [
+   "186 s5",
+   "187 s5",
+   "157 s5",
+   "158 s5"
+  ],
+  "action": "thumbs up + goodbye wave"
+ }
+]
