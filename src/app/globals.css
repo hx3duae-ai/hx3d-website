@@ -196,3 +196,9 @@ a.cat:hover { color: var(--ink); }
 .faq { padding: 14px 18px; margin-bottom: 10px; } .faq summary { cursor: pointer; font-weight: 700; } .faq p { margin: 8px 0 0; }
 .warn { color: #ffcc80; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 8px 0 0; }
+.filerow { border-bottom: 1px solid var(--line); padding: 12px 0; display: grid; gap: 6px; }
+.linkform { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.linkform label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.linkform input, .linkform select { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.linkbox { width: 100%; display: grid; gap: 6px; border: 1px dashed var(--pink); border-radius: 12px; padding: 10px; }
+.linkbox code { overflow-wrap: anywhere; font-size: 12px; }

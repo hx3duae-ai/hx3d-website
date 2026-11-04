@@ -74,3 +74,43 @@ model WebhookEvent {          // idempotency for Shopify webhooks (Phase 4)
   topic      String
   receivedAt DateTime @default(now())
 }
+
+// ---- Private file delivery ----
+// Files live outside the public web root. Only a hashed download token is stored, never the token itself.
+model DeliverableFile {
+  id          String         @id @default(cuid())
+  title       String
+  keyword     String         @unique   // normalised (lowercase, Arabic letters folded)
+  description String?
+  storageName String         @unique   // random name on disk, never the original name
+  originalName String
+  mime        String
+  size        Int
+  sha256      String
+  createdAt   DateTime       @default(now())
+  active      Boolean        @default(true)
+  links       DownloadLink[]
+}
+
+model DownloadLink {
+  id           String          @id @default(cuid())
+  tokenHash    String          @unique
+  fileId       String
+  file         DeliverableFile @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  recipient    String?         // internal label only, e.g. "Instagram order #12"
+  expiresAt    DateTime
+  maxDownloads Int             @default(1)
+  downloads    Int             @default(0)
+  revokedAt    DateTime?
+  createdAt    DateTime        @default(now())
+  events       DownloadEvent[]
+  @@index([fileId])
+}
+
+model DownloadEvent {
+  id        String       @id @default(cuid())
+  linkId    String
+  link      DownloadLink @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  createdAt DateTime     @default(now())
+  @@index([linkId])
+}

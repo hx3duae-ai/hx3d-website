@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 import path from 'node:path';
 export default {
+  experimental: { serverActions: { bodySizeLimit: '51mb' } },
   webpack: (c) => { c.resolve.alias['@'] = path.resolve('src'); return c; },
   poweredByHeader: false,
   headers: async () => [{
