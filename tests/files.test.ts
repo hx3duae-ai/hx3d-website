@@ -91,3 +91,28 @@ describe('keyword with punctuation', () => {
     expect(matchKeywords('test guide please', ['test-guide'])).toEqual(['test-guide']);
   });
 });
+
+import { saveLink } from '@/lib/files/storage';
+import { ingestEvents } from '@/lib/meta/drafts';
+describe('public link deliverables', () => {
+  const run2 = process.env.DATABASE_URL ? describe : describe.skip;
+  run2('saveLink and draft text (real database)', () => {
+    const db2 = new PrismaClient();
+    afterAll(async () => { await db2.replyDraft.deleteMany({ where: { inboundMid: { startsWith: 'test-link-' } } }); await db2.deliverableFile.deleteMany({ where: { keyword: { startsWith: 'test-link-' } } }); await db2.$disconnect(); });
+    it('rejects non-https and credential-carrying URLs', async () => {
+      expect((await saveLink(db2, { title: 't', keyword: 'test-link-a', url: 'http://insecure.example/x' })).ok).toBe(false);
+      expect((await saveLink(db2, { title: 't', keyword: 'test-link-a', url: 'javascript:alert(1)' })).ok).toBe(false);
+      expect((await saveLink(db2, { title: 't', keyword: 'test-link-a', url: 'https://user:pw@example.com/' })).ok).toBe(false);
+    });
+    it('a valid link is stored as kind=link with no file on disk, and its draft carries the URL', async () => {
+      const r = await saveLink(db2, { title: 'ريل 1', keyword: 'test-link-reel', url: 'https://www.instagram.com/reel/TEST123/' });
+      expect(r.ok).toBe(true);
+      const row = await db2.deliverableFile.findUniqueOrThrow({ where: { keyword: 'test-link-reel' } });
+      expect(row.kind).toBe('link'); expect(row.storageName).toBeNull();
+      await ingestEvents(db2, [{ channel: 'instagram_comment', senderRef: 'u9', text: 'ممكن test-link-reel', mid: 'test-link-mid-1' }]);
+      const d = await db2.replyDraft.findUniqueOrThrow({ where: { inboundMid: 'test-link-mid-1' } });
+      expect(d.draftText).toContain('https://www.instagram.com/reel/TEST123/');
+      expect(d.draftText).not.toContain('{LINK}');
+    });
+  });
+});

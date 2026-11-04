@@ -27,6 +27,8 @@ export async function redeem(db: Db, token: string, now = new Date()): Promise<R
   if (link.revokedAt) return { ok: false, reason: 'revoked' };
   if (link.expiresAt <= now) return { ok: false, reason: 'expired' };
   if (!link.file.active) return { ok: false, reason: 'file_inactive' };
+  if (link.file.kind !== 'file' || !link.file.storageName || !link.file.originalName || !link.file.mime || link.file.size == null)
+    return { ok: false, reason: 'not_found' }; // links are not downloadable files
   const r = await db.downloadLink.updateMany({
     where: { id: link.id, revokedAt: null, expiresAt: { gt: now }, downloads: { lt: link.maxDownloads } },
     data: { downloads: { increment: 1 } },

@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db';
 import { currentUser } from '@/lib/auth';
 import { hasRole } from '@/lib/rbac';
 import { audit } from '@/lib/audit';
-import { saveDeliverable } from '@/lib/files/storage';
+import { saveDeliverable, saveLink } from '@/lib/files/storage';
 import { createLink, revokeLink } from '@/lib/files/links';
 import { isLocale } from '@/lib/i18n';
 
@@ -47,4 +47,14 @@ export async function revokeLinkAction(lang: string, fd: FormData): Promise<void
   await revokeLink(prisma, id);
   await audit('file.link.revoke', { actorId: u.id, entity: 'DownloadLink', entityId: id });
   revalidatePath(`/${lang}/admin/files`);
+}
+
+export async function addLinkAction(lang: string, fd: FormData): Promise<void> {
+  if (!isLocale(lang)) return;
+  const u = await staff(); if (!u) redirect(`/${lang}/login`);
+  const r = await saveLink(prisma, { title: String(fd.get('title') ?? ''), keyword: String(fd.get('keyword') ?? ''), url: String(fd.get('url') ?? '') });
+  if (!r.ok) redirect(`/${lang}/admin/files?msg=${r.reason}`);
+  await audit('file.link.add', { actorId: u.id, entity: 'DeliverableFile', entityId: r.id });
+  revalidatePath(`/${lang}/admin/files`);
+  redirect(`/${lang}/admin/files?msg=uploaded`);
 }

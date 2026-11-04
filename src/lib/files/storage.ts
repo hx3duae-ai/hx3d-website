@@ -31,3 +31,18 @@ export async function readDeliverable(storageName: string, expectedSha: string):
   const buf = await readFile(path.join(filesDir(), storageName));
   return createHash('sha256').update(buf).digest('hex') === expectedSha ? buf : null;
 }
+
+/** A public link deliverable (for example a reel). Only https URLs are accepted. Nothing is stored on disk. */
+export async function saveLink(db: PrismaClient, input: { title: string; keyword: string; url: string; description?: string }) {
+  let u: URL;
+  try { u = new URL(input.url.trim()); } catch { return { ok: false as const, reason: 'url' as const }; }
+  if (u.protocol !== 'https:' || u.href.length > 500 || u.username || u.password) return { ok: false as const, reason: 'url' as const };
+  const keyword = normalizeKeyword(input.keyword);
+  if (!keyword || keyword.length > 40) return { ok: false as const, reason: 'keyword' as const };
+  if (await db.deliverableFile.findUnique({ where: { keyword } })) return { ok: false as const, reason: 'keyword_taken' as const };
+  const row = await db.deliverableFile.create({ data: {
+    title: input.title.trim().slice(0, 120), keyword, description: input.description?.trim().slice(0, 500) || null,
+    kind: 'link', url: u.href,
+  } });
+  return { ok: true as const, id: row.id };
+}

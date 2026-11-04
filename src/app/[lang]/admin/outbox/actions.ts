@@ -18,6 +18,14 @@ export async function approveDraftAction(lang: string, _prev: ApproveState, fd: 
   const id = String(fd.get('draftId') ?? '');
   const d = await prisma.replyDraft.findUnique({ where: { id } });
   if (!d || d.status !== 'pending' || !d.fileId) return { error: 'notpending' };
+  const f = await prisma.deliverableFile.findUnique({ where: { id: d.fileId } });
+  if (!f) return { error: 'notpending' };
+  if (f.kind === 'link') {
+    // Public link: nothing to create. The text was already complete when the draft was made.
+    await prisma.replyDraft.update({ where: { id }, data: { status: 'approved', decidedAt: new Date(), decidedBy: u.id } });
+    await audit('outbox.approve', { actorId: u.id, entity: 'ReplyDraft', entityId: id });
+    return { url: f.url ?? '' };
+  }
   const link = await createLink(prisma, d.fileId, { maxDownloads: 1, ttlHours: 48, recipient: `${d.channel} ${d.senderRef}` });
   const base = process.env.SITE_URL || 'http://localhost:3000';
   const url = `${base}/api/files/${link.token}`;
