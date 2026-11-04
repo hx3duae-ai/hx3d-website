@@ -12,14 +12,14 @@ for p in parts:
     scenes.append(st);hl+=[st+float(v)*k for v in re.findall(r'data-hl="([\d.]+)"',p)]
 hl=sorted(set(hl));cta=scenes[-1];outro=scenes[-2]
 env=json.loads(open(envf).read().split('=',1)[1].rstrip(';'))
-WAVE=['q231',9,'q207'];TALK=[1,26,'q220',17,24,18,25,27,19];POINT=[3,'q211',28,'q228',29,'q245'];CHAP=[40,'q208',6];REST=0;CELEB=['q252','q223','q247','q251','q235']
+WAVE=['r157','r045','q231'];TALK=[1,'r171',26,'r184','q220',17,'r194',24,'r063',18,'r172',25,27,19];POINT=[3,'r051','q211',28,'r160','q228',29,'r070','q245'];CHAP=[40,'r062','q208','r047',6];REST=0;CELEB=['r190','q252','r186','r179','q223','r191','q247','r187']
 n=int(tot*FPS)+1;pose=[]
 ti=0;last=None;hold=0
 for f in range(n):
     t=f/FPS;e=env[min(f,len(env)-1)];win=env[max(0,f-8):f+9]
     if t<1.6: p=WAVE[0]
     elif t>=cta+0.35:
-        p=42 if t<cta+3.4 else (11 if t<cta+5.4 else 'q252')
+        p=42 if t<cta+3.4 else ('r186' if t<cta+5.4 else 'r190')
     elif any(h-0.35<=t<=h+1.1 for h in hl):
         i=[j for j,h in enumerate(hl) if h-0.35<=t<=h+1.1][0];p=POINT[i%len(POINT)]
     elif any(sc+0.2<=t<=sc+1.4 for sc in scenes[1:-2]):
@@ -35,7 +35,7 @@ for f in range(n):
 os.makedirs(out,exist_ok=True)
 cache={}
 def img(i):
-    if i not in cache: cache[i]=Image.open(f'../poses2/norm/q{int(i[1:]):03d}.png' if isinstance(i,str) else f'../poses/norm/p{i:02d}.png').convert('RGBA')
+    if i not in cache: cache[i]=Image.open((f'../poses2/norm/q{int(i[1:]):03d}.png' if i[0]=='q' else f'../poses4/norm/q{int(i[1:]):03d}.png') if isinstance(i,str) else f'../poses/norm/p{i:02d}.png').convert('RGBA')
     return cache[i]
 W,H=640,640
 prev=None
