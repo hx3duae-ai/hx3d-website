@@ -80,7 +80,8 @@ model WebhookEvent {          // idempotency for Shopify webhooks (Phase 4)
 model DeliverableFile {
   id           String         @id @default(cuid())
   title        String
-  keyword      String         @unique   // normalised (lowercase, Arabic letters folded)
+  keyword      String         // normalised. Unique per post (mediaId) or unique among general files: see migration indexes
+  mediaId      String?        // Instagram media id of the reel this file belongs to; null = general file
   description  String?
   kind         String         @default("file") // "file" (private, one-time link) | "link" (public URL, sent as-is)
   url          String?        // public URL when kind = "link"
@@ -129,7 +130,9 @@ model ReplyDraft {
   keyword      String
   fileId       String?
   draftText    String
-  status       String    @default("pending") // pending | approved | rejected
+  status       String    @default("pending") // pending | needs_choice | needs_mapping | approved | rejected
+  mediaId      String?   // Instagram media id the comment came from, if any
+  candidateIds String?   // JSON array of file ids the admin may choose from (needs_choice)
   linkId       String?   @unique // set on approval
   link         DownloadLink? @relation(fields: [linkId], references: [id], onDelete: SetNull)
   createdAt    DateTime  @default(now())

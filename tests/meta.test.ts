@@ -42,8 +42,8 @@ describe('parseInbound', () => {
       ] },
     ] });
     expect(ev).toEqual([
-      { channel: 'instagram_dm', senderRef: 'u1', text: 'ابغى ملف', mid: 'm1' },
-      { channel: 'instagram_comment', senderRef: 'u4', text: 'ملف لو سمحت', mid: 'c1' },
+      { channel: 'instagram_dm', senderRef: 'u1', text: 'ابغى ملف', mid: 'm1', mediaId: null },
+      { channel: 'instagram_comment', senderRef: 'u4', text: 'ملف لو سمحت', mid: 'c1', mediaId: null },
     ]);
     expect(parseInbound({ object: 'page', entry: [{ messaging: [{ sender: { id: 'x' }, message: { mid: 'y', text: 'ملف' } }] }] })).toEqual([]);
     expect(parseInbound(null)).toEqual([]);

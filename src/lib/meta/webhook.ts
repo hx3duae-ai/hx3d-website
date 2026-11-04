@@ -18,7 +18,7 @@ export function verifySubscription(params: URLSearchParams, verifyToken: string)
   return a.length === b.length && timingSafeEqual(a, b) ? challenge : null;
 }
 
-export type InboundEvent = { channel: 'instagram_dm' | 'instagram_comment'; senderRef: string; text: string; mid: string };
+export type InboundEvent = { channel: 'instagram_dm' | 'instagram_comment'; senderRef: string; text: string; mid: string; mediaId: string | null };
 
 /** Extracts only text DMs and comments. Other event types are ignored. */
 export function parseInbound(payload: unknown): InboundEvent[] {
@@ -28,11 +28,12 @@ export function parseInbound(payload: unknown): InboundEvent[] {
   for (const e of p.entry ?? []) {
     for (const m of (e.messaging ?? []) as Array<{ sender?: { id?: string }; message?: { mid?: string; text?: string; is_echo?: boolean } }>) {
       if (m.message?.text && m.message.mid && !m.message.is_echo && m.sender?.id)
-        out.push({ channel: 'instagram_dm', senderRef: m.sender.id, text: m.message.text, mid: m.message.mid });
+        out.push({ channel: 'instagram_dm', senderRef: m.sender.id, text: m.message.text, mid: m.message.mid, mediaId: null });
     }
-    for (const c of (e.changes ?? []) as Array<{ field?: string; value?: { id?: string; text?: string; from?: { id?: string } } }>) {
+    for (const c of (e.changes ?? []) as Array<{ field?: string; value?: { id?: string; text?: string; from?: { id?: string }; media?: { id?: string } } }>) {
+      // The comment carries the id of the reel it was written on: that is what routes it to the right file.
       if (c.field === 'comments' && c.value?.text && c.value.id && c.value.from?.id)
-        out.push({ channel: 'instagram_comment', senderRef: c.value.from.id, text: c.value.text, mid: c.value.id });
+        out.push({ channel: 'instagram_comment', senderRef: c.value.from.id, text: c.value.text, mid: c.value.id, mediaId: c.value.media?.id ?? null });
     }
   }
   return out;

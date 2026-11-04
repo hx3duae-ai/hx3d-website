@@ -107,7 +107,7 @@ describe('public link deliverables', () => {
     it('a valid link is stored as kind=link with no file on disk, and its draft carries the URL', async () => {
       const r = await saveLink(db2, { title: 'ريل 1', keyword: 'test-link-reel', url: 'https://www.instagram.com/reel/TEST123/' });
       expect(r.ok).toBe(true);
-      const row = await db2.deliverableFile.findUniqueOrThrow({ where: { keyword: 'test-link-reel' } });
+      const row = await db2.deliverableFile.findFirstOrThrow({ where: { keyword: 'test-link-reel', mediaId: null } });
       expect(row.kind).toBe('link'); expect(row.storageName).toBeNull();
       await ingestEvents(db2, [{ channel: 'instagram_comment', senderRef: 'u9', text: 'ممكن test-link-reel', mid: 'test-link-mid-1' }]);
       const d = await db2.replyDraft.findUniqueOrThrow({ where: { inboundMid: 'test-link-mid-1' } });

@@ -13,7 +13,6 @@ export async function saveDeliverable(db: PrismaClient, buf: Buffer, input: { or
   if (!check.ok) return { ok: false as const, reason: check.reason };
   const keyword = normalizeKeyword(input.keyword);
   if (!keyword || keyword.length > 40) return { ok: false as const, reason: 'keyword' as const };
-  if (await db.deliverableFile.findUnique({ where: { keyword } })) return { ok: false as const, reason: 'keyword_taken' as const };
   const storageName = randomUUID();
   const dir = filesDir(); await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, storageName), buf, { mode: 0o600 });
@@ -39,7 +38,6 @@ export async function saveLink(db: PrismaClient, input: { title: string; keyword
   if (u.protocol !== 'https:' || u.href.length > 500 || u.username || u.password) return { ok: false as const, reason: 'url' as const };
   const keyword = normalizeKeyword(input.keyword);
   if (!keyword || keyword.length > 40) return { ok: false as const, reason: 'keyword' as const };
-  if (await db.deliverableFile.findUnique({ where: { keyword } })) return { ok: false as const, reason: 'keyword_taken' as const };
   const row = await db.deliverableFile.create({ data: {
     title: input.title.trim().slice(0, 120), keyword, description: input.description?.trim().slice(0, 500) || null,
     kind: 'link', url: u.href,
