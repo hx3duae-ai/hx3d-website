@@ -1,0 +1,260 @@
+[
+ {
+  "start": 0.0,
+  "end": 1.5,
+  "time": "00:00-00:01",
+  "text": "(دخول)",
+  "frames": [
+   "45 s1",
+   "46 s1"
+  ],
+  "action": "waving entrance"
+ },
+ {
+  "start": 1.5,
+  "end": 3.4,
+  "time": "00:01-00:03",
+  "text": "هل تحتار بين PLA وPETG؟",
+  "frames": [
+   "63 s1"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 3.4,
+  "end": 6.1,
+  "time": "00:03-00:06",
+  "text": "إليك الفرق الذي يغيّر نتيجة الطباعة",
+  "frames": [
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "pointing"
+ },
+ {
+  "start": 6.1,
+  "end": 7.9,
+  "time": "00:06-00:07",
+  "text": "خيط PLA سهل الطباعة",
+  "frames": [
+   "66 s1",
+   "48 s1"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 7.9,
+  "end": 10.1,
+  "time": "00:07-00:10",
+  "text": "مناسب للمبتدئين والمجسمات",
+  "frames": [
+   "174 s5",
+   "160 s5"
+  ],
+  "action": "presenting"
+ },
+ {
+  "start": 10.1,
+  "end": 11.5,
+  "time": "00:10-00:11",
+  "text": "والتفاصيل الدقيقة",
+  "frames": [
+   "204 s5",
+   "205 s5"
+  ],
+  "action": "OK sign – precise"
+ },
+ {
+  "start": 11.5,
+  "end": 14.9,
+  "time": "00:11-00:14",
+  "text": "أما PETG فهو أقوى وأكثر مرونة",
+  "frames": [
+   "56 s1",
+   "57 s1"
+  ],
+  "action": "flex biceps"
+ },
+ {
+  "start": 14.9,
+  "end": 17.5,
+  "time": "00:14-00:17",
+  "text": "ويتحمل الماء والرطوبة",
+  "frames": [
+   "204 s5",
+   "205 s5"
+  ],
+  "action": "OK sign"
+ },
+ {
+  "start": 17.5,
+  "end": 19.5,
+  "time": "00:17-00:19",
+  "text": "في الحرارة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 19.5,
+  "end": 22.7,
+  "time": "00:19-00:22",
+  "text": "يلين PLA عند ستين درجة",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug – softens"
+ },
+ {
+  "start": 22.7,
+  "end": 26.3,
+  "time": "00:22-00:26",
+  "text": "يتحمل PETG أكثر، ثمانين درجة",
+  "frames": [
+   "198 s5",
+   "202 s5"
+  ],
+  "action": "both hands up – higher"
+ },
+ {
+  "start": 26.3,
+  "end": 28.9,
+  "time": "00:26-00:28",
+  "text": "في الطباعة: PLA أسهل في الضبط",
+  "frames": [
+   "186 s5",
+   "187 s5"
+  ],
+  "action": "thumbs up"
+ },
+ {
+  "start": 28.9,
+  "end": 31.2,
+  "time": "00:28-00:31",
+  "text": "PETG يحتاج حرارة أعلى",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise finger – note"
+ },
+ {
+  "start": 31.2,
+  "end": 33.2,
+  "time": "00:31-00:33",
+  "text": "وقد يترك خيوطاً رفيعة",
+  "frames": [
+   "168 s5",
+   "173 s5"
+  ],
+  "action": "shrug"
+ },
+ {
+  "start": 33.2,
+  "end": 35.8,
+  "time": "00:33-00:35",
+  "text": "اختر PLA للنماذج والديكور",
+  "frames": [
+   "52 s1",
+   "53 s1"
+  ],
+  "action": "point left / present"
+ },
+ {
+  "start": 35.8,
+  "end": 38.2,
+  "time": "00:35-00:38",
+  "text": "واختر PETG للقطع",
+  "frames": [
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "point right"
+ },
+ {
+  "start": 38.2,
+  "end": 40.9,
+  "time": "00:38-00:40",
+  "text": "الحرارة أو الماء أو الإجهاد",
+  "frames": [
+   "56 s1",
+   "57 s1"
+  ],
+  "action": "flex – stress"
+ },
+ {
+  "start": 40.9,
+  "end": 42.9,
+  "time": "00:40-00:42",
+  "text": "الخلاصة",
+  "frames": [
+   "47 s1",
+   "60 s1",
+   "47 s1"
+  ],
+  "action": "raise one finger"
+ },
+ {
+  "start": 42.9,
+  "end": 44.9,
+  "time": "00:42-00:44",
+  "text": "لا يوجد خيط أفضل دائماً",
+  "frames": [
+   "54 s1",
+   "64 s1"
+  ],
+  "action": "arms crossed"
+ },
+ {
+  "start": 44.9,
+  "end": 46.2,
+  "time": "00:44-00:46",
+  "text": "بل الخيط المناسب لقطعتك",
+  "frames": [
+   "160 s5",
+   "174 s5"
+  ],
+  "action": "pointing"
+ },
+ {
+  "start": 46.2,
+  "end": 47.7,
+  "time": "00:46-00:47",
+  "text": "جرّب وأخبرنا بالنتيجة",
+  "frames": [
+   "65 s1",
+   "67 s1"
+  ],
+  "action": "wave"
+ },
+ {
+  "start": 47.7,
+  "end": 50.5,
+  "time": "00:47-00:50",
+  "text": "اكتب خيوط في التعليقات",
+  "frames": [
+   "47 s1",
+   "51 s1",
+   "70 s1"
+  ],
+  "action": "attention + point"
+ },
+ {
+  "start": 50.5,
+  "end": 54.01,
+  "time": "00:50-00:54",
+  "text": "ونرسل لك ملف المقارنة",
+  "frames": [
+   "186 s5",
+   "187 s5",
+   "157 s5",
+   "158 s5"
+  ],
+  "action": "thumbs up + goodbye"
+ }
+]
