@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#efefed;font-family:Cairo,CairoL,sans-serif;color:#151515}
+#bg{position:absolute;inset:0;background:#f2f2f0;background-image:linear-gradient(rgba(0,0,0,.07) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(0,0,0,.07) 1.5px,transparent 1.5px);background-size:36px 36px}
+#cr{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.55}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 58%,rgba(0,0,0,.16));z-index:90}
+.o{position:absolute}
+.sk{fill:none;stroke:#3a3a3a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.skl{fill:none;stroke:#9a9a9a;stroke-width:3;stroke-linecap:round}
+.pk{stroke:#FF66B2}
+.strip{background:#fff;padding:26px 44px 38px;direction:rtl;filter:drop-shadow(0 10px 14px rgba(0,0,0,.14)) drop-shadow(0 2px 3px rgba(0,0,0,.1))}
+.strip>div{background:#fff}
+.t1{font-weight:900;line-height:1.08;white-space:nowrap}
+.t1 em{font-style:normal;color:#FF66B2}
+.hl{background:#FF66B2;color:#151515;padding:0 14px 4px;display:inline-block;transform:rotate(-1.5deg)}
+.t2{font-weight:700;font-size:44px;color:#444;margin-top:12px;white-space:nowrap}
+.stk{filter:drop-shadow(0 14px 16px rgba(0,0,0,.22)) drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+.lbl{background:#fff;padding:4px 16px 8px;font-weight:700;font-size:32px;direction:rtl;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+.ltr{direction:ltr;unicode-bidi:isolate;font-family:CairoL,Cairo}
+.chain{direction:rtl;display:flex;gap:14px;align-items:center;font-weight:700;font-size:34px;background:#fff;padding:10px 26px 14px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.14))}
+.chain .a{color:#FF66B2;font-weight:900}
+.chain b{background:#FF66B2;padding:0 10px}
+#logo{right:44px;top:44px;font-family:CairoL;font-weight:900;font-size:58px;line-height:.85;text-align:center;background:#fff;padding:12px 16px;transform:rotate(3deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+#logo span{display:block;color:#FF66B2}
+</style></head><body>
+<div id="bg"></div>
+<svg id="cr" width="1080" height="1920"><filter id="f"><feTurbulence type="fractalNoise" baseFrequency=".0042" numOctaves="5" seed="23"/><feDiffuseLighting lighting-color="#fff" surfaceScale="7"><feDistantLight azimuth="235" elevation="58"/></feDiffuseLighting></filter><rect width="1080" height="1920" filter="url(#f)"/></svg>
+<div id="stage"></div>
+<div id="vig"></div>
+<script>
+const V={
+1:{t1:'حل <span class="ltr">5</span> <span class="hl">مشاكل</span>',t2:'في طباعتك… قبل ما تخرب القطعة',fs:128,
+ ph:[['s_spaghetti.png',230,640,620,-3]],tags:[['خيوط زائدة',720,700],['التصاق ضعيف',120,1090]],
+ icons:'therm', chain:['السطح','الخيط','الحرارة','السرعة','الاتجاه'], m:'m1.png'},
+2:{t1:'<span class="ltr">PLA</span> أم <span class="hl ltr">PETG</span>؟',t2:'الفرق اللي يغيّر نتيجة طباعتك',fs:122,
+ ph:[['s_spool_black.png',90,690,430,-5],['s_spool_pink.png',560,670,450,5]],tags:[['PLA',230,1130],['PETG',720,1130]],
+ icons:'vs', chain:['القوة','الحرارة','سهولة الطباعة','الاستخدام'], m:'m2.png'},
+3:{t1:'لا تشترِ <span class="hl">طابعة</span>',t2:'قبل أن تعرف هذه الأمور الخمسة',fs:126,
+ ph:[['s_printer_open.png',70,720,470,-4],['s_printer_closed.png',580,700,420,4]],tags:[['مفتوحة',220,1140],['مغلقة',730,1140]],
+ icons:'tag', chain:['الحجم','النوع','المعايرة','الخيوط','الدعم'], m:'m3.png'}};
+const c=V[+(new URLSearchParams(location.search).get('v')||1)];
+const Q=`<svg class="o" style="left:250px;top:330px;opacity:.9" width="600" height="760" viewBox="0 0 300 380">
+ <path class="sk" style="stroke:#c9c9c9;stroke-width:10" d="M70 110 C70 40 130 14 165 16 C220 18 252 58 250 104 C248 160 196 176 172 206 C160 222 158 244 158 268"/>
+ <path class="skl" style="stroke:#d6d6d6" d="M82 112 C84 52 134 28 166 30 M240 104 C238 150 192 168 166 196 M150 268 L170 268"/>
+ <circle cx="160" cy="330" r="22" fill="none" stroke="#c9c9c9" stroke-width="10"/></svg>`;
+const ICONS={
+therm:`<svg class="o" style="left:880px;top:560px" width="130" height="330" viewBox="0 0 60 150"><rect class="sk" x="20" y="8" width="20" height="104" rx="10"/><circle class="sk" cx="30" cy="124" r="18" style="fill:#FF66B2"/><rect x="25" y="40" width="10" height="80" fill="#FF66B2"/><path class="skl" d="M44 30h8M44 50h8M44 70h8M44 90h8"/></svg>
+ <svg class="o" style="left:60px;top:560px" width="150" height="150" viewBox="0 0 100 100"><g class="sk"><circle cx="50" cy="50" r="18"/><path d="M50 14v12M50 74v12M14 50h12M74 50h12M25 25l9 9M66 66l9 9M75 25l-9 9M34 66l-9 9"/></g></svg>`,
+vs:`<svg class="o" style="left:450px;top:780px" width="180" height="180" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#fff" stroke="#151515" stroke-width="5"/><text x="50" y="64" text-anchor="middle" font-family="CairoL" font-weight="900" font-size="38" fill="#FF66B2">VS</text></svg>`,
+tag:`<svg class="o" style="left:450px;top:560px;transform:rotate(-14deg)" width="190" height="130" viewBox="0 0 120 80"><path class="sk" d="M24 6 H112 V74 H24 L4 40 Z" style="fill:#fff"/><circle class="sk" cx="26" cy="40" r="7"/><path class="sk pk" d="M56 50 l16 -22 M58 28h0M70 52h0" style="stroke-width:6"/></svg>
+ <svg class="o" style="left:880px;top:1320px" width="130" height="150" viewBox="0 0 80 100"><path class="sk" d="M40 8 L50 30 L74 32 L56 48 L62 74 L40 60 L18 74 L24 48 L6 32 L30 30 Z" style="fill:#fff"/><path class="sk pk" d="M30 82 l-6 14 M50 82 l6 14"/></svg>`};
+const th=(x,y,d,cls)=>`<svg class="o" style="left:${x}px;top:${y}px" width="420" height="300" viewBox="0 0 420 300"><path class="${cls}" d="${d}" stroke-dasharray="14 12"/></svg>`;
+document.getElementById('stage').innerHTML=`
+ ${Q}
+ <svg class="o" style="left:0;top:0" width="1080" height="1920" viewBox="0 0 1080 1920"><g fill="none" stroke="#FF66B2" stroke-width="4" opacity=".8">
+  <path d="M-20 760 C140 690 120 900 300 860 S520 1000 640 940"/><path d="M1100 1210 C980 1290 960 1140 840 1180 S660 1300 560 1250"/></g>
+  <g fill="none" stroke="#9a9a9a" stroke-width="2.5" opacity=".7"><path d="M20 1460 C200 1400 260 1520 420 1480"/><path d="M1060 620 C980 680 1000 760 940 800"/></g></svg>
+ ${c.ph.map(([s,x,y,w,r])=>`<img class="o stk" src="${s}" style="left:${x}px;top:${y}px;width:${w}px;transform:rotate(${r}deg)">`).join('')}
+ ${ICONS[c.icons]}
+ ${c.tags.map(([t,x,y])=>`<div class="o lbl ${/^[A-Z]/.test(t)?'ltr':''}" style="left:${x}px;top:${y}px;transform:rotate(${x>500?2:-2}deg)">${t}</div>`).join('')}
+ <svg class="o" style="left:600px;top:1260px" width="260" height="200" viewBox="0 0 260 200"><path d="M20 180 C60 90 150 60 230 50" fill="none" stroke="#151515" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 12"/><path d="M200 26 L236 48 L206 78" fill="none" stroke="#151515" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+ <div class="o strip" style="right:60px;top:230px;transform:rotate(-1.2deg)"><div class="t1" style="font-size:${c.fs}px">${c.t1}</div><div class="t2">${c.t2}</div></div>
+ <img class="o" src="${c.m}" style="left:150px;top:1250px;width:520px;filter:drop-shadow(0 16px 16px rgba(0,0,0,.25))">
+ <div class="o chain" style="left:50%;top:1760px;transform:translateX(-50%) rotate(-.8deg);white-space:nowrap">${c.chain.map((s,i)=>(i?'<span class="a">←</span>':'')+(i==c.chain.length-1?`<b>${s}</b>`:`<span>${s}</span>`)).join('')}</div>
+ <div class="o" id="logo">HX<span>3D</span></div>`;
+document.fonts.ready.then(()=>{document.body.dataset.ready=1});
+</script></body></html>
