@@ -1,12 +1,15 @@
-"""HX 3D business tools: cost calculator, per-colour cost, price suggestion, quotes (PDF)."""
-from __future__ import annotations
-import datetime, io
-from .config import MATERIALS, BRAND
+"""HX 3D business tools: production usage report (grams / hours / colour changes) and owner-priced quote PDFs.
 
-DEFAULTS = {"material": "PLA", "price_kg": None, "power_w": 120.0, "kwh_price": 0.12, "machine_per_hour": 0.50,
-            "labor_per_hour": 0.0, "labor_hours": 0.25, "failure_pct": 8.0, "margin_pct": 40.0, "vat_pct": 0.0,
-            "flush_g_per_change": 0.35, "currency": "USD", "packaging": 0.0}
-# every default above is an editable ASSUMPTION, not a Bambu/AMS specification.
+BUSINESS RULE: this module never calculates, estimates or suggests a price, cost or margin.
+Only the owner decides prices; the quote PDF only lays out the amounts the owner typed in,
+and the HTTP endpoint for it requires the owner token (HX_OWNER_TOKEN).
+"""
+from __future__ import annotations
+import datetime, hashlib, hmac, io, os
+from .config import BRAND
+
+DEFAULTS = {"flush_g_per_change": 0.35}
+# an editable ASSUMPTION, not a Bambu/AMS specification.
 
 
 def color_changes_estimate(height_mm, layer, n_colors, density_of_changes=0.5):
@@ -14,30 +17,26 @@ def color_changes_estimate(height_mm, layer, n_colors, density_of_changes=0.5):
     return int((height_mm / layer) * (n_colors - 1) * density_of_changes)
 
 
-def cost(parts_by_color: dict, hours: float, height_mm: float, layer=0.2, **kw):
-    """parts_by_color = {hex: grams}. Returns itemised cost + suggested price."""
-    o = {**DEFAULTS, **{k: v for k, v in kw.items() if v is not None}}
-    M = MATERIALS[o["material"]]; ppk = o["price_kg"] or M["price_kg"]
-    items = []; mat_total = 0.0
-    for hx, g in parts_by_color.items():
-        c = g * ppk / 1000; mat_total += c; items.append({"label": f"filament {hx}", "grams": round(g, 2), "cost": round(c, 3)})
-    n = len(parts_by_color); changes = color_changes_estimate(height_mm, layer, n)
-    purge_g = changes * o["flush_g_per_change"]; purge_c = purge_g * ppk / 1000
-    elec = o["power_w"] / 1000 * hours * o["kwh_price"]; mach = o["machine_per_hour"] * hours
-    labor = o["labor_per_hour"] * o["labor_hours"]
-    sub = mat_total + purge_c + elec + mach + labor + o["packaging"]
-    fail = sub * o["failure_pct"] / 100
-    total = sub + fail
-    price = total * (1 + o["margin_pct"] / 100); vat = price * o["vat_pct"] / 100
-    return {"items": items, "material_cost": round(mat_total, 3),
-            "purge": {"color_changes_est": changes, "grams": round(purge_g, 1), "cost": round(purge_c, 3), "note": "ESTIMATE - read the real purge volume from Bambu Studio"},
-            "electricity": round(elec, 3), "machine": round(mach, 3), "labor": round(labor, 3), "packaging": o["packaging"],
-            "failure_allowance": round(fail, 3), "cost_total": round(total, 2), "margin_pct": o["margin_pct"],
-            "price_ex_vat": round(price, 2), "vat": round(vat, 2), "price_inc_vat": round(price + vat, 2),
-            "profit": round(price - total, 2), "currency": o["currency"], "assumptions": o}
+def usage(parts_by_color: dict, hours: float, height_mm: float, layer=0.2, flush_g_per_change=None):
+    """parts_by_color = {hex: grams}. Physical usage only (grams, hours) - no money, no price."""
+    fpc = DEFAULTS["flush_g_per_change"] if flush_g_per_change is None else flush_g_per_change
+    items = [{"label": f"filament {hx}", "grams": round(g, 2)} for hx, g in parts_by_color.items()]
+    changes = color_changes_estimate(height_mm, layer, len(parts_by_color))
+    purge_g = changes * fpc
+    return {"items": items, "filament_g": round(sum(parts_by_color.values()), 2),
+            "purge": {"color_changes_est": changes, "grams": round(purge_g, 1), "note": "ESTIMATE - read the real purge volume from Bambu Studio"},
+            "print_hours": round(hours, 2), "pricing": "Prices are set by the owner only - this tool does not calculate or suggest prices."}
 
 
-def quote_pdf(client: dict, lines: list[dict], currency="USD", notes="", validity_days=14, logo_text="HX 3D") -> bytes:
+def owner_token_ok(presented: str | None) -> bool:
+    """True only if HX_OWNER_TOKEN is configured (>= 24 chars) and matches (constant time)."""
+    expected = os.environ.get("HX_OWNER_TOKEN", "")
+    if len(expected) < 24 or not presented: return False
+    return hmac.compare_digest(hashlib.sha256(presented.encode()).digest(), hashlib.sha256(expected.encode()).digest())
+
+
+def quote_pdf(client: dict, lines: list[dict], currency="AED", notes="", validity_days=14, logo_text="HX 3D") -> bytes:
+    """Lays out the amounts the OWNER entered. Never invents or adjusts a number."""
     from reportlab.lib.pagesizes import A4
     from reportlab.lib import colors as rc
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle

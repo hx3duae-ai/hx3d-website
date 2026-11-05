@@ -29,6 +29,6 @@ Pass each agent only the card path plus its handoff line. Everything else lives 
 - "وضع الفريق": list every card with stage ≠ `done`, grouped by stage.
 
 ## Stop and ask the founder when
-- price is `TBD` at the Finance step
+- price is `TBD` at the Finance step — no agent may fill it in; only the owner prices (`PRICING-POLICY.md`)
 - an agent wants to send anything to a client (all client messages are drafts or Chatwoot private notes)
 - a client complains or asks for a refund

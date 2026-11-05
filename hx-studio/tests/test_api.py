@@ -38,8 +38,18 @@ def test_doctor_endpoint_diagnoses_and_repairs():
 def test_inventory_colormatch_and_cost():
     assert c.post("/api/inventory/example").status_code == 200
     m = c.post("/api/colors/match", json={"colors": ["#ff66b2"]}).json(); assert m["matches"][0]["verdict"] == "excellent"
-    cost = c.post("/api/business/cost", json={"grams_by_color": {"a": 10, "b": 10}, "hours": 2, "height_mm": 30}).json(); assert cost["price_ex_vat"] > cost["cost_total"] > 0
-    assert c.post("/api/business/quote", json={"client": {"name": "A"}, "lines": [{"desc": "x", "qty": 1, "unit": 10}]}).content[:4] == b"%PDF"
+    u = c.post("/api/business/usage", json={"grams_by_color": {"a": 10, "b": 10}, "hours": 2, "height_mm": 30}).json(); assert u["filament_g"] == 20 and "price_ex_vat" not in u
+    assert c.post("/api/business/cost", json={}).status_code == 410  # automatic price calculator removed
+
+
+def test_quote_pdf_is_owner_only(monkeypatch):
+    body = {"client": {"name": "A"}, "lines": [{"desc": "x", "qty": 1, "unit": 10}]}
+    monkeypatch.delenv("HX_OWNER_TOKEN", raising=False)
+    assert c.post("/api/business/quote", json=body).status_code == 503  # fails closed when not configured
+    monkeypatch.setenv("HX_OWNER_TOKEN", "o" * 32)
+    assert c.post("/api/business/quote", json=body).status_code == 403
+    assert c.post("/api/business/quote", json=body, headers={"x-owner-token": "employee-token-xxxxxxxxxxxxxxx"}).status_code == 403
+    assert c.post("/api/business/quote", json=body, headers={"x-owner-token": "o" * 32}).content[:4] == b"%PDF"
 
 
 def test_ui_is_served():

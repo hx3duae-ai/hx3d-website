@@ -9,3 +9,6 @@ export const dateTime = (iso?: string) =>
   iso
     ? new Intl.DateTimeFormat("ar-AE-u-nu-latn", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Dubai" }).format(new Date(iso))
     : "—";
+
+/** Money for display; `locked` → owner-only placeholder. */
+export const money = (n: number, locked?: boolean) => (locked ? "🔒 للمالك" : aed(n));

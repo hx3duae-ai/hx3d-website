@@ -17,7 +17,7 @@ export async function getSettings(): Promise<IgSettings> {
 export async function saveSettings(patch: Partial<IgSettings>) {
   const cur = await getSettings();
   const next: IgSettings = { ...cur };
-  for (const k of ["handle", "whatsapp", "catalogUrl", "bookingUrl", "priceGuide", "playbook"] as const)
+  for (const k of ["handle", "whatsapp", "catalogUrl", "bookingUrl", "playbook"] as const)
     if (typeof patch[k] === "string") next[k] = (patch[k] as string).slice(0, 8000);
   if (Array.isArray(patch.rules))
     next.rules = patch.rules.slice(0, 30).map((r) => ({
@@ -157,10 +157,13 @@ export async function leadFromInstagram(b: Record<string, unknown>) {
     phone: str("phone") || undefined,
     email: str("email") || undefined,
     orderType: guessOrderType(`${message} ${str("orderType")}`),
-    price: Number(b.budget) > 0 ? Math.round(Number(b.budget)) : 0,
+    // The customer's stated budget is a note only — never the price. Only the owner sets prices.
+    price: 0,
     status: "lead",
     source: "instagram",
-    notes: [`انستقرام ${username}`, message, str("details")].filter(Boolean).join("\n"),
+    notes: [`انستقرام ${username}`, message, str("details"), Number(b.budget) > 0 ? `ميزانية ذكرها العميل: ${Math.round(Number(b.budget))}` : ""]
+      .filter(Boolean)
+      .join("\n"),
   });
   return c;
 }

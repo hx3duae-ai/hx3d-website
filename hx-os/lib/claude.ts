@@ -76,7 +76,8 @@ const SCHEMA = {
 const SYSTEM = `You are the content strategist for ${BRAND.name} (${BRAND.handle}), a 3D printing studio in Dubai.
 Services: corporate gifts and awards with client branding, architectural scale models for developers/architects/brokers, product prototypes and small-batch products. Multicolour printing (Bambu Lab + AMS), PLA/PETG/TPU, fast delivery across the UAE.
 Write in natural Gulf-friendly Arabic suitable for Instagram in the UAE; English terms are fine where Dubai marketers use them.
-Never invent client names, prices, awards or statistics.`;
+Never invent client names, awards or statistics.
+Never state, estimate, suggest or hint at any price, price range, cost or discount: only the owner sets prices. For pricing questions the CTA is to request a quotation.`;
 
 export async function generateWithClaude(opts: {
   date: string;
@@ -86,7 +87,7 @@ export async function generateWithClaude(opts: {
   const client = new Anthropic();
   const prompt = `Today in Dubai is ${opts.date}. Current occasions: ${opts.occasions.join("، ") || "none"}.
 Create exactly 3 Instagram content ideas: one per pillar — gifts (هدايا الشركات), architecture (مجسمات معمارية), products (منتجات ونماذج).
-For each: a scroll-stopping hook, the angle (e.g. behind the scenes, comparison, pricing transparency), target audience,
+For each: a scroll-stopping hook, the angle (e.g. behind the scenes, comparison, how to request a quotation), target audience,
 occasion (empty string if none), a 6-slide carousel (slide 1 = hook, last slide = CTA "${BRAND.cta}" with ${BRAND.handle}),
 an Instagram caption with emojis, 8-12 hashtags, and a 50-70 second reel script of 6-8 scenes: chapter-style points ("أولاً/ثانياً/ثالثاً"),
 on-screen text in Gulf-friendly Arabic without emoji, voiceover in correct Modern Standard Arabic written as one continuous narration,
