@@ -254,7 +254,14 @@ export default function CRM() {
                         </select>
                       </span>
                     </td>
-                    <td className="small">{SOURCES[c.source]}</td>
+                    <td className="small">
+                      {SOURCES[c.source]}
+                      {c.igHandle && (
+                        <a href={`https://instagram.com/${c.igHandle}`} target="_blank" rel="noreferrer" className="muted" style={{ display: "block", direction: "ltr", textAlign: "start" }}>
+                          @{c.igHandle}
+                        </a>
+                      )}
+                    </td>
                     <td className="small muted">
                       {c.status === "delivered" ? `سُلّم ${shortDate(c.deliveredAt)}` : c.bookingStart ? `موعد ${dateTime(c.bookingStart)}` : shortDate(c.createdAt)}
                     </td>

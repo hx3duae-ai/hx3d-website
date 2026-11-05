@@ -6,6 +6,7 @@
 |---|---|---|
 | 1 | **Content OS** — 3 أفكار يومياً + كاروسيل + سكريبت ريل + رندر Remotion/FFmpeg | ✅ يعمل |
 | 2 | **CRM** — العملاء، الحالات، Cal.com، المبيعات الشهرية | ✅ يعمل |
+| IG | **Instagram (OOTTO)** — الأداء، Inbox AI، جدولة 7 بوستات، تعليق «سعر» ← كتالوج بالخاص | ✅ يعمل |
 | 3 | App Builder | 🔜 |
 | 4 | Video Studio (Veo) | 🔜 |
 | 5 | Client Hunter | 🔜 |
@@ -37,6 +38,15 @@ npm run dev                  # http://localhost:3100
   - **سحب**: حط `CAL_API_KEY` واضغط «سحب الحجوزات الآن». يشتغل على localhost.
   - **Webhook**: `POST /api/webhooks/calcom` مع الأحداث Booking Created / Rescheduled / Cancelled. حط نفس الـ secret في `CAL_WEBHOOK_SECRET`. على localhost يحتاج نفق مثل `cloudflared tunnel --url http://localhost:3100`.
 - زر «→ محتوى» على أي طلب مسلّم يسوي فكرة «قصة عميل» في Content OS، ونشرها يكون بعد موافقتك.
+
+## Instagram (OOTTO)
+- الوكلاء الأربعة في `../.claude/agents/` يستخدمون OOTTO MCP (`../.mcp.json`) للقراءة والإرسال، وHX OS للقرار والـ CRM.
+- `POST /api/instagram/inbound` — تعليق أو رسالة (أو `{items:[…]}`): يطابق الكلمات (سعر، بكم، INFO، price…)، يمنع التكرار، ينشئ/يحدّث ليد في CRM، ويجهّز رسالة الكتالوج.
+- `GET /api/instagram/events?action=catalog_queued` — الطابور اللي يرسله وكيل OOTTO، ثم `PATCH /api/instagram/events/<id>` بـ `catalog_sent`.
+- `POST /api/instagram/posts` — يخطط 7 أيام (4 ريلز + 3 كاروسيل) من أفكار Content OS، ويولّد أفكار للأيام الفاضية. نشر البوست يعلّم الفكرة «منشورة».
+- `POST /api/instagram/metrics` — snapshot من OOTTO (Followers, Views, Reach, Saves, Shares, Top Reel).
+- اختياري بدون OOTTO: `META_PAGE_TOKEN` + `IG_USER_ID` للإرسال المباشر، و`META_VERIFY_TOKEN` + `META_APP_SECRET` لـ Webhook ‏`/api/webhooks/meta`.
+- دليل التركيب الكامل: `../docs/HX-OS-V2-SETUP.md`.
 
 ## الربط بين الوحدات
 - `lib/db.ts`: مخزن واحد مشترك (ideas / clients / activity).

@@ -28,6 +28,8 @@ export type Client = {
   status: ClientStatus;
   source: "manual" | "calcom" | "instagram" | "whatsapp" | "referral";
   notes?: string;
+  igHandle?: string; // Instagram username, without @
+  igUserId?: string; // Instagram-scoped user id (dedupe key for IG leads)
   bookingUid?: string; // Cal.com booking uid (dedupe key)
   bookingStart?: string;
   createdAt: string;

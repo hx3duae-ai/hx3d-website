@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 export const MODULES = [
   { href: "/content", n: 1, label: "Content OS", ready: true },
   { href: "/crm", n: 2, label: "CRM العملاء", ready: true },
+  { href: "/instagram", n: "IG", label: "Instagram (OOTTO)", ready: true },
   { href: "/builder", n: 3, label: "App Builder", ready: false },
   { href: "/video-studio", n: 4, label: "Video Studio", ready: false },
   { href: "/client-hunter", n: 5, label: "Client Hunter", ready: false },

@@ -45,7 +45,11 @@ function toIdea(d: DraftIdea & Partial<FullIdea>, date: string, source: Idea["so
 
 /** Make sure today's 3 ideas exist. Idempotent. */
 export async function ensureToday() {
-  const date = dubaiDate();
+  return ensureDate(dubaiDate());
+}
+
+/** Make sure a given day (today or a future day the IG scheduler is planning) has its 3 ideas. */
+export async function ensureDate(date: string) {
   const existing = (await all<Idea>("ideas")).filter((i) => i.date === date && i.source !== "crm");
   if (existing.length >= 3) return { created: 0 };
   const { ideas, source, note } = await draft(date, 0);

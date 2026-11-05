@@ -9,7 +9,7 @@ import crypto from "node:crypto";
 export const DATA_DIR = process.env.HX_DATA_DIR || path.join(process.cwd(), "data");
 export const MEDIA_DIR = path.join(DATA_DIR, "media");
 
-export type Collection = "ideas" | "clients" | "activity" | "settings";
+export type Collection = "ideas" | "clients" | "activity" | "settings" | "ig_events" | "ig_posts" | "ig_metrics";
 
 const queues = new Map<string, Promise<unknown>>();
 
@@ -69,7 +69,7 @@ export function dubaiDate(d = new Date()) {
 export type Activity = {
   id: string;
   at: string;
-  module: "content" | "crm" | "builder" | "video" | "hunter" | "brain";
+  module: "content" | "crm" | "instagram" | "builder" | "video" | "hunter" | "brain";
   kind: string;
   text: string;
   ref?: string;

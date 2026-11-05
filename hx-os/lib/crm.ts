@@ -14,6 +14,7 @@ export function sanitize(input: Record<string, unknown>): Partial<Client> {
   for (const k of ["name", "company", "phone", "email", "notes"] as const) {
     if (k in input) out[k] = s(k) ?? "";
   }
+  if ("igHandle" in input) out.igHandle = (s("igHandle") ?? "").replace(/^@/, "");
   if ("orderType" in input && (input.orderType as string) in ORDER_TYPES) out.orderType = input.orderType as OrderType;
   if ("status" in input && (input.status as string) in CLIENT_STATUS) out.status = input.status as ClientStatus;
   if (typeof input.source === "string" && ["manual", "calcom", "instagram", "whatsapp", "referral"].includes(input.source))
@@ -39,6 +40,8 @@ export async function createClient(data: Partial<Client> & { source?: Client["so
     status: data.status ?? "lead",
     source: data.source ?? "manual",
     notes: data.notes,
+    igHandle: data.igHandle,
+    igUserId: data.igUserId,
     bookingUid: data.bookingUid,
     bookingStart: data.bookingStart,
     createdAt: now(),
