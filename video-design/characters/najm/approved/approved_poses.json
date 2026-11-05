@@ -1,0 +1,310 @@
+[
+ {
+  "file": "najm_arms-crossed_054_s1.png",
+  "pose": 54,
+  "sheet": "s1",
+  "gesture_ar": "أيدي متكتّفة",
+  "gesture_en": "arms-crossed"
+ },
+ {
+  "file": "najm_arms-wide_184_s5.png",
+  "pose": 184,
+  "sheet": "s5",
+  "gesture_ar": "يدين مفتوحة",
+  "gesture_en": "arms-wide"
+ },
+ {
+  "file": "najm_arms-wide_194_s5.png",
+  "pose": 194,
+  "sheet": "s5",
+  "gesture_ar": "يدين مفتوحة",
+  "gesture_en": "arms-wide"
+ },
+ {
+  "file": "najm_arms-wide_195_s5.png",
+  "pose": 195,
+  "sheet": "s5",
+  "gesture_ar": "يدين مفتوحة",
+  "gesture_en": "arms-wide"
+ },
+ {
+  "file": "najm_finger-one_047_s1.png",
+  "pose": 47,
+  "sheet": "s1",
+  "gesture_ar": "رفع إصبع",
+  "gesture_en": "finger-one"
+ },
+ {
+  "file": "najm_finger-two_062_s1.png",
+  "pose": 62,
+  "sheet": "s1",
+  "gesture_ar": "إصبعين",
+  "gesture_en": "finger-two"
+ },
+ {
+  "file": "najm_flex_056_s1.png",
+  "pose": 56,
+  "sheet": "s1",
+  "gesture_ar": "عضلات",
+  "gesture_en": "flex"
+ },
+ {
+  "file": "najm_flex_057_s1.png",
+  "pose": 57,
+  "sheet": "s1",
+  "gesture_ar": "عضلات",
+  "gesture_en": "flex"
+ },
+ {
+  "file": "najm_hand-head_170_s5.png",
+  "pose": 170,
+  "sheet": "s5",
+  "gesture_ar": "يد على الراس",
+  "gesture_en": "hand-head"
+ },
+ {
+  "file": "najm_hands-up_198_s5.png",
+  "pose": 198,
+  "sheet": "s5",
+  "gesture_ar": "يدين لفوق",
+  "gesture_en": "hands-up"
+ },
+ {
+  "file": "najm_hip-point_070_s1.png",
+  "pose": 70,
+  "sheet": "s1",
+  "gesture_ar": "يد على الخصر وإشارة",
+  "gesture_en": "hip-point"
+ },
+ {
+  "file": "najm_hip-point-left_175_s5.png",
+  "pose": 175,
+  "sheet": "s5",
+  "gesture_ar": "إشارة يسار ويد على الخصر",
+  "gesture_en": "hip-point-left"
+ },
+ {
+  "file": "najm_hips_049_s1.png",
+  "pose": 49,
+  "sheet": "s1",
+  "gesture_ar": "يدين على الخصر",
+  "gesture_en": "hips"
+ },
+ {
+  "file": "najm_hips_050_s1.png",
+  "pose": 50,
+  "sheet": "s1",
+  "gesture_ar": "يدين على الخصر",
+  "gesture_en": "hips"
+ },
+ {
+  "file": "najm_hips_064_s1.png",
+  "pose": 64,
+  "sheet": "s1",
+  "gesture_ar": "يدين على الخصر",
+  "gesture_en": "hips"
+ },
+ {
+  "file": "najm_jump_190_s5.png",
+  "pose": 190,
+  "sheet": "s5",
+  "gesture_ar": "قفز احتفال",
+  "gesture_en": "jump"
+ },
+ {
+  "file": "najm_jump_191_s5.png",
+  "pose": 191,
+  "sheet": "s5",
+  "gesture_ar": "قفز احتفال",
+  "gesture_en": "jump"
+ },
+ {
+  "file": "najm_neutral_044_s1.png",
+  "pose": 44,
+  "sheet": "s1",
+  "gesture_ar": "وقفة عادية",
+  "gesture_en": "neutral"
+ },
+ {
+  "file": "najm_neutral_060_s1.png",
+  "pose": 60,
+  "sheet": "s1",
+  "gesture_ar": "وقفة عادية",
+  "gesture_en": "neutral"
+ },
+ {
+  "file": "najm_neutral_172_s5.png",
+  "pose": 172,
+  "sheet": "s5",
+  "gesture_ar": "وقفة عادية",
+  "gesture_en": "neutral"
+ },
+ {
+  "file": "najm_ok_204_s5.png",
+  "pose": 204,
+  "sheet": "s5",
+  "gesture_ar": "علامة تمام",
+  "gesture_en": "ok"
+ },
+ {
+  "file": "najm_ok_205_s5.png",
+  "pose": 205,
+  "sheet": "s5",
+  "gesture_ar": "علامة تمام",
+  "gesture_en": "ok"
+ },
+ {
+  "file": "najm_point-left_052_s1.png",
+  "pose": 52,
+  "sheet": "s1",
+  "gesture_ar": "إشارة يسار",
+  "gesture_en": "point-left"
+ },
+ {
+  "file": "najm_point-left_053_s1.png",
+  "pose": 53,
+  "sheet": "s1",
+  "gesture_ar": "إشارة يسار",
+  "gesture_en": "point-left"
+ },
+ {
+  "file": "najm_point-right_051_s1.png",
+  "pose": 51,
+  "sheet": "s1",
+  "gesture_ar": "إشارة يمين",
+  "gesture_en": "point-right"
+ },
+ {
+  "file": "najm_point-right_160_s5.png",
+  "pose": 160,
+  "sheet": "s5",
+  "gesture_ar": "إشارة يمين",
+  "gesture_en": "point-right"
+ },
+ {
+  "file": "najm_present_174_s5.png",
+  "pose": 174,
+  "sheet": "s5",
+  "gesture_ar": "تقديم بيد",
+  "gesture_en": "present"
+ },
+ {
+  "file": "najm_shrug_063_s1.png",
+  "pose": 63,
+  "sheet": "s1",
+  "gesture_ar": "هزّ كتفين",
+  "gesture_en": "shrug"
+ },
+ {
+  "file": "najm_shrug_168_s5.png",
+  "pose": 168,
+  "sheet": "s5",
+  "gesture_ar": "هزّ كتفين",
+  "gesture_en": "shrug"
+ },
+ {
+  "file": "najm_shrug_173_s5.png",
+  "pose": 173,
+  "sheet": "s5",
+  "gesture_ar": "هزّ كتفين",
+  "gesture_en": "shrug"
+ },
+ {
+  "file": "najm_thinking_055_s1.png",
+  "pose": 55,
+  "sheet": "s1",
+  "gesture_ar": "تفكير",
+  "gesture_en": "thinking"
+ },
+ {
+  "file": "najm_thumb_048_s1.png",
+  "pose": 48,
+  "sheet": "s1",
+  "gesture_ar": "إبهام",
+  "gesture_en": "thumb"
+ },
+ {
+  "file": "najm_thumbs_066_s1.png",
+  "pose": 66,
+  "sheet": "s1",
+  "gesture_ar": "إبهامين",
+  "gesture_en": "thumbs"
+ },
+ {
+  "file": "najm_thumbs_186_s5.png",
+  "pose": 186,
+  "sheet": "s5",
+  "gesture_ar": "إبهامين",
+  "gesture_en": "thumbs"
+ },
+ {
+  "file": "najm_thumbs_187_s5.png",
+  "pose": 187,
+  "sheet": "s5",
+  "gesture_ar": "إبهامين",
+  "gesture_en": "thumbs"
+ },
+ {
+  "file": "najm_wave-both_045_s1.png",
+  "pose": 45,
+  "sheet": "s1",
+  "gesture_ar": "تلويح باليدين",
+  "gesture_en": "wave-both"
+ },
+ {
+  "file": "najm_wave-both_046_s1.png",
+  "pose": 46,
+  "sheet": "s1",
+  "gesture_ar": "تلويح باليدين",
+  "gesture_en": "wave-both"
+ },
+ {
+  "file": "najm_wave-both_157_s5.png",
+  "pose": 157,
+  "sheet": "s5",
+  "gesture_ar": "تلويح باليدين",
+  "gesture_en": "wave-both"
+ },
+ {
+  "file": "najm_wave-high_179_s5.png",
+  "pose": 179,
+  "sheet": "s5",
+  "gesture_ar": "تلويح باليدين لفوق",
+  "gesture_en": "wave-high"
+ },
+ {
+  "file": "najm_wave-high_180_s5.png",
+  "pose": 180,
+  "sheet": "s5",
+  "gesture_ar": "تلويح باليدين لفوق",
+  "gesture_en": "wave-high"
+ },
+ {
+  "file": "najm_wave-high_202_s5.png",
+  "pose": 202,
+  "sheet": "s5",
+  "gesture_ar": "تلويح باليدين لفوق",
+  "gesture_en": "wave-high"
+ },
+ {
+  "file": "najm_wave-one_158_s5.png",
+  "pose": 158,
+  "sheet": "s5",
+  "gesture_ar": "تلويح بيد",
+  "gesture_en": "wave-one"
+ },
+ {
+  "file": "najm_wave-one_065_s1.png",
+  "pose": 65,
+  "sheet": "s1",
+  "gesture_ar": "تلويح بيد",
+  "gesture_en": "wave-one"
+ },
+ {
+  "file": "najm_wave-one_067_s1.png",
+  "pose": 67,
+  "sheet": "s1",
+  "gesture_ar": "تلويح بيد",
+  "gesture_en": "wave-one"
+ }
+]
