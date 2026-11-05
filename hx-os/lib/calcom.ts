@@ -43,13 +43,14 @@ export async function handleWebhook(body: Record<string, unknown>) {
   });
 }
 
-/** Pull bookings via Cal.com API v2. */
+/** Pull bookings via Cal.com / Cal.diy API v2. Set CAL_API_URL for a self-hosted Cal.diy. */
 export async function syncFromApi() {
   const key = process.env.CAL_API_KEY;
   if (!key) throw new Error("CAL_API_KEY غير موجود في .env.local");
   const counts = { created: 0, updated: 0, skipped: 0 };
   for (const status of ["upcoming", "past"]) {
-    const url = `https://api.cal.com/v2/bookings?status=${status}&take=100`;
+    const base = (process.env.CAL_API_URL || "https://api.cal.com").replace(/\/$/, "");
+    const url = `${base}/v2/bookings?status=${status}&take=100`;
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${key}`, "cal-api-version": "2024-08-13" },
       cache: "no-store",
