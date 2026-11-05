@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 1 | 11 Plugin رسمية من Anthropic | ✅ مفعّلة في المشروع · 👤 تفعيلها في claude.ai | `.claude/settings.json` |
 | 1 | ربط HubSpot و Notion و Slack | 👤 claude.ai ← Settings ← Connectors | |
-| 2 | Chatwoot + Cal.diy + Cap + AppFlowy | ✅ سكربت التركيب جاهز · 👤 سيرفر VPS | `infra/install.sh` |
+| 2 | Chatwoot + Cal.diy + Cap + AppFlowy + Postiz | ✅ سكربت التركيب جاهز · 👤 سيرفر VPS | `infra/install.sh` |
 | 2 | VoiceStudio | 👤 على جهازك (يحتاج GPU) | `infra/README.md` |
 | 2 | Cal.diy مع CRM حق HX OS | ✅ | `hx-os/lib/calcom.ts` |
 | 3 | 4 Agents يسلمون الشغل لبعض | ✅ | `.claude/agents/` |
@@ -43,6 +43,7 @@ sudo bash infra/install.sh
 | Cal.diy | Calendly | 3001 |
 | Cap | Loom | 3002 |
 | AppFlowy Cloud | Notion | 8080 |
+| Postiz | OOTTO / Buffer | 4007 |
 | VoiceStudio | ElevenLabs | جهازك |
 
 ## الخطوة 3: فريق الوكلاء
