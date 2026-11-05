@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HX 3D Innovation Evaluation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FF66B2;--ink:#000;--paper:#fff;--muted:#555;--line:#e6e6e6;--soft:#fff0f7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 Cairo,system-ui,sans-serif}
+header{background:var(--ink);color:var(--paper);padding:40px 16px 32px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header .wrap{padding:0}
+.brand{font-weight:800;font-size:28px;letter-spacing:.5px}.brand b{color:var(--pink)}
+h1{font-size:30px;line-height:1.2;margin:8px 0 6px}
+header p{margin:0;color:#ccc}
+h2{font-size:22px;margin:40px 0 10px;padding-bottom:6px;border-bottom:3px solid var(--pink)}
+h3{font-size:18px;margin:22px 0 6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:14px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--ink);color:var(--paper);font-weight:600}
+.scroll{overflow-x:auto}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:800;font-size:13px;white-space:nowrap}
+.acc{background:var(--pink);color:var(--ink)}
+.test{background:var(--paper);color:var(--ink);border:2px solid var(--pink)}
+.rej{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--line);border-left:6px solid var(--pink);padding:14px 18px;margin:18px 0;border-radius:6px}
+.note{background:var(--soft);padding:12px 16px;border-radius:6px}
+code{background:#f4f4f4;padding:1px 5px;border-radius:4px;font-size:13px}
+pre{background:var(--ink);color:var(--paper);padding:14px;border-radius:6px;overflow-x:auto;font-size:13px;line-height:1.45}
+pre .p{color:var(--pink)}
+ul{padding-left:20px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 40px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">HX <b>3D</b></div>
+  <h1>Weekly Innovation Research Evaluation</h1>
+  <p>5 November 2026 · 6 projects · research only. Nothing was cloned, installed or changed. Waiting for approval before any implementation.</p>
+</div></header>
+
+<main class="wrap">
+
+<h2>Summary</h2>
+<div class="scroll"><table>
+<tr><th>Project</th><th>License</th><th>Already covered in HX 3D?</th><th>Score /10</th><th>Recommendation</th></tr>
+<tr><td><b>BGE-M3 / FlagEmbedding</b></td><td>MIT</td><td>No. It fills the planned <i>Second Brain</i> slot (HX OS module 6, marked 🔜)</td><td><b>9</b></td><td><span class="tag acc">Accept</span> (start with a proof of concept)</td></tr>
+<tr><td><b>Microsoft TRELLIS.2</b></td><td>MIT (code + weights). Its NVIDIA dependencies have a separate license that may forbid commercial use</td><td>Partly. <code>HX_I23D_CMD</code> hook already exists in hx-studio; no volumetric model is connected</td><td><b>6</b></td><td><span class="tag test">Test Further</span></td></tr>
+<tr><td><b>MeshRight</b></td><td>GPL-3.0</td><td>Mostly. The hx-studio <i>Model Doctor</i> already diagnoses and repairs. MeshRight adds scan cleanup, hollowing, molds and point clouds</td><td><b>6</b></td><td><span class="tag test">Test Further</span> (separate desktop/MCP tool only)</td></tr>
+<tr><td><b>RAGFlow</b></td><td>Apache-2.0</td><td>Would duplicate HX Brain plus the planned Second Brain</td><td><b>5</b></td><td><span class="tag rej">Reject</span> (for now)</td></tr>
+<tr><td><b>FreeCAD</b></td><td>LGPL-2.1+</td><td>Yes. hx-studio uses build123d on the same OpenCascade kernel and already exports STEP</td><td><b>4</b></td><td><span class="tag rej">Reject</span> (platform integration). OK as a personal desktop tool</td></tr>
+<tr><td><b>Dify</b> (license only)</td><td>Modified Apache-2.0 ("Dify Open Source License")</td><td>Would duplicate HX Team agents, Claude and HX OS</td><td><b>3</b></td><td><span class="tag rej">Reject</span></td></tr>
+</table></div>
+
+<div class="note"><b>About "NAJM AI".</b> The repository has no NAJM AI service code. Najm appears only as the brand mascot (<code>hx3d-brand-style</code> skill; the files in <code>video-design/characters/najm/</code> are not added yet) and as the wiki tag <code>project/najm</code>. In this report, NAJM AI means the planned assistant layer on top of HX OS. It would call Claude through the existing <code>hx-os/lib/claude.ts</code> and the hx-studio API. Please correct this if NAJM AI is something else.</div>
+
+<h2>What HX 3D has today (baseline)</h2>
+<ul>
+<li><b>hx-os</b>: Next.js 16.4, React 19.3, TypeScript 7, port 3100. Its data is JSON files in <code>data/</code> via <code>lib/db.ts</code>; there is no SQL database. It uses the Anthropic SDK when <code>ANTHROPIC_API_KEY</code> is set and has Remotion rendering. Module 6, <i>Second Brain</i>, is planned with local Transformers.js embeddings and has no external API.</li>
+<li><b>hx-slicer</b>: Next.js 16.4.4 with three.js r187, react-three-fiber, lib3mf and three-bvh-csg, used for viewing 3MF files.</li>
+<li><b>hx-studio</b>: a Python 3.11+ FastAPI app on port 8420 (trimesh, manifold3d, build123d/OCCT, lib3mf). It includes Model Doctor (diagnose, plus a safe repair that refuses to keep a result whose volume drifts more than 1%), a print optimizer, STEP export, and a pluggable <code>backends.py</code> with the <code>HX_I23D_CMD</code> image-to-3D hook. It reports its features at <code>/api/capabilities</code>.</li>
+<li><b>hx-brain</b>: an Obsidian/Markdown wiki and chat-history importer. The <i>QMD</i> hybrid search is documented in the second-brain skill.</li>
+<li><b>infra</b>: one 4 vCPU / 8 GB server (Chatwoot, Cal.diy, Cap, AppFlowy), about 25–40 AED a month.</li>
+</ul>
+
+<!-- ============ BGE-M3 ============ -->
+<h2>1 · BGE-M3 / FlagEmbedding</h2>
+<div class="card">
+<h3>Project overview</h3>
+<p>BAAI's multilingual embedding model: 568M parameters, 1024-dimension vectors, up to 8,192 tokens, and dense, sparse and multi-vector retrieval in one model. It covers more than 100 languages; its MIRACL benchmark includes Arabic. FlagEmbedding (<code>github.com/FlagOpen/FlagEmbedding</code>) is the Python library that runs it. A companion reranker, <code>bge-reranker-v2-m3</code> (568M), is also available.</p>
+<p><b>License:</b> MIT for both the model and the library. Commercial use is allowed; keep the notice. <b>Dependencies:</b> FlagEmbedding pulls in PyTorch and transformers (about 2 GB installed). In Node, use an ONNX export through Transformers.js. Community ONNX ports exist on Hugging Face; their license and quality must be checked before use.</p>
+
+<h3>Integration architecture</h3>
+<pre>hx-os (Next.js)                         hx-brain/wiki + hx-os/data/*.json (read-only)
+  /brain page ─► /api/brain/search ─┐            │ indexer (rebuildable)
+                                    ▼            ▼
+              Option A: Transformers.js + BGE-M3 ONNX (in-process, Node)
+              Option B: FastAPI sidecar in hx-studio  POST /api/embed  (FlagEmbedding)
+                                    │
+                          <span class="p">separate derived index</span> (e.g. data/brain-index/*.bin)
+                                    │  top-k chunks + sources
+                                    ▼
+              NAJM AI answer = Claude (lib/claude.ts) + retrieved Arabic/English context</pre>
+<ul>
+<li><b>Fits Next.js:</b> yes. Option A keeps everything in Node and matches the documented Second Brain plan. Option B reuses the existing hx-studio Python service.</li>
+<li><b>No database change:</b> the vector index would be a separate file that can be deleted and rebuilt from the wiki and JSON data. The existing collections are not touched. Where the index lives still needs your approval.</li>
+<li><b>NAJM AI:</b> answers in both languages ("وش آخر طلبات العملاء؟"), with citations to wiki pages. The hx-team agents (sales, support) could use the same search.</li>
+</ul>
+
+<h3>Hosting and hardware</h3>
+<p>Runs on CPU. The weights are about 2.2 GB (fp32) or about 1.1 GB (fp16/int8 ONNX); plan for 3–4 GB of RAM while it runs. Indexing a few thousand wiki chunks takes minutes on a laptop CPU. No GPU is needed. The current 8 GB server is already in use, so run it on the founder's machine first.</p>
+<h3>Security and maintenance risks</h3>
+<ul><li>Low. It runs offline, with no API keys and no data leaving the machine.</li>
+<li>Pin the model revision and check the file hash at download; check any community ONNX port before trusting it.</li>
+<li>Upstream is active (BAAI). The model is stable, so it rarely needs updating.</li></ul>
+<h3>Estimated cost</h3><p>0 AED for licensing and hosting on the existing laptop. About 4–8 hours of build effort for the POC.</p>
+<p><b>Compatibility 9/10 · <span class="tag acc">Accept</span></b>: use it as the embedding model for the already-planned Second Brain. It is not a new system.</p>
+</div>
+
+<!-- ============ TRELLIS ============ -->
+<h2>2 · Microsoft TRELLIS / TRELLIS.2</h2>
+<div class="card">
+<h3>Project overview</h3>
+<p>Microsoft's image-to-3D generator. TRELLIS.2 (<code>github.com/microsoft/TRELLIS.2</code>, 4B model <code>microsoft/TRELLIS.2-4B</code>) turns one image into a textured mesh (GLB) and an MP4 preview. The older TRELLIS (v1) has image and text versions.</p>
+<p><b>License:</b> MIT for the code and weights. <b>Dependency risk:</b> the pipeline needs NVIDIA <code>nvdiffrast</code> (and nvdiffrec code). Their "NVIDIA Source Code License (1-Way Commercial)" appears to limit use to non-commercial purposes; see TRELLIS.2 issue #22 and the ScanCode license entry. Selling client prints made with it must not start until this is confirmed in writing or the dependency is replaced. Other dependencies: PyTorch with CUDA 12.4, xformers or flash-attn, and custom CUDA extensions.</p>
+<h3>Integration architecture</h3>
+<pre>hx-studio "Image to 3D"  ──►  backends.run_external_i23d()      <span class="p">(already exists, no code change)</span>
+     HX_I23D_CMD='trellis-wrapper --in {image} --out {out_dir}'
+                       │ runs on a separate GPU host (rented/on-demand)
+                       ▼
+                  mesh.glb ─► Model Doctor (diagnose/repair, 1% drift gate)
+                           ─► optimizer ─► validated 3MF for Bambu P2S + AMS
+                           ─► hx-slicer preview (three.js)</pre>
+<ul><li><b>Fits Next.js:</b> not directly; this is GPU Python. It plugs into hx-studio through the existing hook, so no HX code changes are needed.</li>
+<li><b>NAJM AI:</b> could prepare an image-to-print job for the founder to approve. It would also feed the <code>hx-3d-image-to-3mf</code> skill, which already expects a volumetric backend.</li>
+<li><b>Overlap:</b> the local 2.5D relief only covers single-view reliefs. TRELLIS adds a full 3D model, so this is new capability, not a duplicate.</li></ul>
+<h3>Hosting and hardware</h3>
+<p>Officially it needs an NVIDIA GPU with 24 GB or more (tested on A100 and H100), on Linux only. Community forks claim 8–16 GB at lower resolutions; none of these are verified. It cannot run on the 8 GB CPU server or the founder's laptop unless the laptop has an RTX 4090-class card.</p>
+<h3>Estimated cost</h3>
+<ul><li>On-demand cloud GPU (24–48 GB): roughly 1.5–7 AED an hour. For about 20 test jobs a month, expect <b>about 50–150 AED a month</b>, including start-up time.</li>
+<li>Owning the hardware (24–32 GB consumer GPU workstation): about 9,000–15,000 AED one-off, plus electricity.</li>
+<li>All prices are rough market estimates, not quotes.</li></ul>
+<h3>Security and maintenance risks</h3>
+<ul><li><code>HX_I23D_CMD</code> runs with <code>shell=True</code>, so the wrapper must be a fixed script that only accepts file paths.</li>
+<li>The CUDA extension stack is fragile; pin exact versions and run it in a container.</li>
+<li>Generated meshes are often non-manifold or thin, so the Doctor/QC gate stays required. Do not upload client photos to a third-party GPU host unless the client agrees.</li></ul>
+<p><b>Compatibility 6/10 · <span class="tag test">Test Further</span></b>: run a short trial on a rented GPU with 10 sample images through the existing pipeline. Clear up the nvdiffrast license before any commercial use.</p>
+</div>
+
+<!-- ============ MeshRight ============ -->
+<h2>3 · MeshRight</h2>
+<div class="card">
+<h3>Project overview</h3>
+<p><code>github.com/Huzy85/MeshRight</code> is a free Meshmixer-style repair tool for scans and models, made for 3D printing. It runs locally in the browser (Python backend, three.js frontend) and has a CLI (<code>meshright check|fix|ask</code>) and an MCP server (<code>meshright mcp</code>). Features: a 0–100 print-readiness score, one-click cleanup, make solid, add thickness, orientation, splitting with pins, hollowing, molds, colour 3MF for Bambu/Orca/Prusa, and point-cloud import (E57/LAS).</p>
+<p><b>License:</b> GPL-3.0; the bundled three.js is MIT. <b>Maturity:</b> v0.3.0, which the project calls "early alpha". The repository is 4 months old with one maintainer, 2 stars, 0 forks, and many AI-assisted commits. The last commit's CI run shows "failure".</p>
+<h3>Integration architecture</h3>
+<pre>Founder's machine only (separate process, no code imported into HX):
+  Claude / NAJM AI ──MCP──► meshright mcp ──► check / Clean up / export 3MF
+  or: meshright check model.stl --json  ──►  report attached to the job in hx-studio</pre>
+<ul><li><b>GPL-3.0:</b> calling it as a separate program is fine. Copying its code into hx-studio or hx-os, or linking to it, would put HX code under GPL. Do not do that.</li>
+<li><b>Overlap:</b> hx-studio's Model Doctor already covers diagnose and safe repair, the optimizer covers orientation, <code>split.py</code> covers splitting, and the colour 3MF export already exists. MeshRight only adds things for scanned input: point clouds, scanner detection, sculpting, hollowing for resin, and molds.</li></ul>
+<h3>Hosting and hardware</h3><p>Desktop app for Windows, macOS or Linux; 8 GB RAM handles most scans and 16 GB is needed for multi-million-triangle scans. No GPU. No server needed.</p>
+<h3>Security and maintenance risks</h3>
+<ul><li>The binaries are unsigned. The <code>--host 0.0.0.0</code> option has no password, and anyone who can reach it can also use the stored AI key. Keep it on <code>127.0.0.1</code>.</li>
+<li>The project depends on one maintainer and is alpha quality, so there is a real risk it is abandoned. Pin a version.</li>
+<li>Its "Ask AI" feature sends the check report (not the model) to the AI provider the user picks.</li></ul>
+<h3>Estimated cost</h3><p>0 AED. About 1–2 hours to try it on 5 real client scans and compare the results with Model Doctor.</p>
+<p><b>Compatibility 6/10 · <span class="tag test">Test Further</span></b>: use it only as an optional external tool for scanned input. Do not replace Model Doctor.</p>
+</div>
+
+<!-- ============ RAGFlow ============ -->
+<h2>4 · RAGFlow</h2>
+<div class="card">
+<h3>Project overview</h3>
+<p><code>github.com/infiniflow/ragflow</code> is a full retrieval-augmented generation platform: it parses complex documents (PDFs, tables, scans), builds a knowledge base, adds agents and cites its sources. The latest release is <b>v1.0.0-rc3</b> (30 Oct 2026), a release candidate rather than a stable release.</p>
+<p><b>License:</b> Apache-2.0, which allows commercial use. <b>Dependencies:</b> Docker 24.0+ and Compose 2.26.1+. The stack bundles Elasticsearch or Infinity, MySQL, MinIO and Redis/kvrocks. It can use BGE-M3 as its embedding model.</p>
+<h3>Integration architecture (if it were adopted)</h3>
+<pre>hx-os /api/brain/* ──HTTP (API key, server-side only)──► RAGFlow (own server, Docker)
+                                                          ├ MySQL  ├ Elasticsearch/Infinity
+                                                          ├ MinIO  └ Redis/kvrocks</pre>
+<h3>Hosting and hardware</h3><p>Minimum 4 CPU cores, 16 GB RAM and 50 GB disk. The current 8 GB server cannot host it next to Chatwoot and the other tools, so it would need a second VPS (about 60–90 AED a month for a 16 GB Hetzner-class server).</p>
+<h3>Security and maintenance risks</h3>
+<ul><li>It runs four more stateful services, each needing patching, backups and secrets. That adds a second, separate store of business data outside HX OS's JSON files and the HX Brain wiki.</li>
+<li>Release-candidate status means breaking changes are still possible.</li></ul>
+<h3>Why reject now</h3><p>HX Brain (Markdown wiki) plus the planned local Second Brain already covers the need at HX's current scale. RAGFlow would be the duplicate system the brief says to avoid. Look at it again if HX needs to search hundreds of supplier PDFs, scanned invoices or datasheets with tables.</p>
+<p><b>Compatibility 5/10 · <span class="tag rej">Reject</span></b> (look again in 6 months, or if document volume grows)</p>
+</div>
+
+<!-- ============ FreeCAD ============ -->
+<h2>5 · FreeCAD</h2>
+<div class="card">
+<h3>Project overview</h3>
+<p><code>github.com/FreeCAD/FreeCAD</code> is a mature open-source parametric CAD application. The current stable release is <b>1.1.4</b> (Sept 2026); <b>26.3 RC2</b> is in testing (the version after 1.1 is called 26.3). It includes Part Design, Sketcher, TechDraw, FEM, Assembly and CAM, and can run without a screen through <code>FreeCADCmd</code> and Python.</p>
+<p><b>License:</b> LGPL-2.1-or-later. Using it as a separate program is safe for commercial work. <b>Dependencies:</b> OpenCascade, Qt, Python 3.11 and Coin3D; the install is about 1 GB.</p>
+<h3>Integration options</h3>
+<ul><li>A headless worker could run <code>FreeCADCmd</code> scripts to make parametric parts or 2D drawings (TechDraw PDFs).</li>
+<li><b>Overlap:</b> hx-studio already does parametric solids with build123d, which uses the same OpenCascade kernel, and writes true B-rep STEP files. The <code>text-to-cad</code> skills also use build123d. FreeCAD would be a second CAD engine for the same job.</li>
+<li>Genuinely new would be FEM stress checks and engineering drawings. Neither is asked for in current HX work.</li></ul>
+<h3>Hosting and hardware</h3><p>CPU only; 4–8 GB RAM is enough. As a server worker it needs a container and about 1–2 GB of disk.</p>
+<h3>Security and maintenance risks</h3><ul><li>Running FreeCAD macros or scripts from users would let them run arbitrary Python. Never expose it to clients.</li><li>Large dependency stack and a version change (1.1 to 26.3) under way.</li></ul>
+<h3>Estimated cost</h3><p>0 AED for the license. A server worker would need about 1–2 extra GB of RAM on a VPS.</p>
+<p><b>Compatibility 4/10 · <span class="tag rej">Reject</span></b> for platform integration. The founder can still use the FreeCAD desktop app to open and edit hx-studio's STEP exports.</p>
+</div>
+
+<!-- ============ Dify ============ -->
+<h2>6 · Dify (license review only)</h2>
+<div class="card">
+<p><code>github.com/langgenius/dify</code> uses the <b>"Dify Open Source License"</b>: Apache-2.0 with two extra conditions.</p>
+<ol>
+<li><b>No multi-tenant use</b> without written permission from LangGenius. This does not apply to uses that skip Dify's frontend. A platform serving several HX clients or agencies would need a commercial agreement.</li>
+<li><b>Logo and copyright must stay:</b> you may not remove or change the Dify logo or copyright in the console or in apps built with it. This conflicts with HX's requirement for its own branding (pink #FF66B2, black and white).</li>
+</ol>
+<p>It would also duplicate HX Team (4 agents), Claude skills and HX OS workflows. The hosted version is a paid subscription, and self-hosting needs about 4 vCPU and 8 GB RAM.</p>
+<p><b>Compatibility 3/10 · <span class="tag rej">Reject</span></b>. The license restricts HX branding, and Dify would be a duplicate agent system.</p>
+</div>
+
+<h2>Estimated costs (monthly, AED)</h2>
+<div class="scroll"><table>
+<tr><th>Item</th><th>If approved as recommended</th><th>Notes</th></tr>
+<tr><td>BGE-M3 Second Brain POC</td><td>0</td><td>Runs on the founder's machine; no new server</td></tr>
+<tr><td>TRELLIS.2 test</td><td>≈50–150 (on demand)</td><td>Rented GPU only during tests; stop when not in use</td></tr>
+<tr><td>MeshRight test</td><td>0</td><td>Desktop only</td></tr>
+<tr><td>RAGFlow / FreeCAD worker / Dify</td><td>0 (rejected)</td><td>RAGFlow would have been ≈60–90 for a 16 GB server</td></tr>
+<tr><td><b>Total</b></td><td><b>≈50–150</b></td><td>Plus the current ≈25–40 server</td></tr>
+</table></div>
+
+<h2>License risks</h2>
+<div class="scroll"><table>
+<tr><th>Project</th><th>Risk</th><th>What to do</th></tr>
+<tr><td>BGE-M3 / FlagEmbedding</td><td>Low (MIT)</td><td>Keep the notice; check the license of any ONNX port</td></tr>
+<tr><td>TRELLIS.2</td><td><b>High</b>: its NVIDIA nvdiffrast/nvdiffrec dependencies may be non-commercial</td><td>Get legal confirmation, or replace the renderer, before any paid client work</td></tr>
+<tr><td>MeshRight</td><td>Medium (GPL-3.0)</td><td>Run it only as a separate program; never copy or link its code</td></tr>
+<tr><td>RAGFlow</td><td>Low (Apache-2.0)</td><td>None (rejected)</td></tr>
+<tr><td>FreeCAD</td><td>Low (LGPL-2.1+)</td><td>Run it as a separate program; keep notices</td></tr>
+<tr><td>Dify</td><td><b>High</b>: no multi-tenant use; logo must stay</td><td>Rejected</td></tr>
+</table></div>
+
+<h2>Steps if you approve (nothing has been done yet)</h2>
+<ol>
+<li><b>BGE-M3:</b> a proof of concept on a branch: a separate, rebuildable index plus <code>/api/brain/search</code>, with existing data files only read. Needs your approval of where the index lives.</li>
+<li><b>TRELLIS.2:</b> 10 test images on a rented GPU through <code>HX_I23D_CMD</code>, results put through Model Doctor, and a short report on printability. License question raised first.</li>
+<li><b>MeshRight:</b> 5 real scans compared with Model Doctor, run on the founder's machine.</li>
+</ol>
+<p>Constraints kept: nothing cloned or installed, no existing files changed, no tools replaced, no database changes, no API keys used or exposed, no duplicate systems added.</p>
+
+<footer>HX 3D UAE · Innovation research · 2026-11-05 · Sources: each project's official GitHub repository and model card, the FreeCAD download page, TRELLIS.2 issue #22, and the ScanCode LicenseDB (nvidia-1-way-commercial). Hardware and cost figures are estimates to check before purchase.</footer>
+</main>
+</body>
+</html>
