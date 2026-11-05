@@ -23,7 +23,7 @@ async function draft(date: string, salt: number): Promise<{ ideas: (DraftIdea & 
   return { ideas: generateDailyIdeas(date, salt), source: "engine" };
 }
 
-function toIdea(d: DraftIdea & Partial<FullIdea>, date: string, source: Idea["source"]): Idea {
+export function toIdea(d: DraftIdea & Partial<FullIdea>, date: string, source: Idea["source"]): Idea {
   const id = newId("idea");
   return {
     id,

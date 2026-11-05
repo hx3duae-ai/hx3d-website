@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const MODULES = [
+  { href: "/instagram", n: "IG", label: "Instagram · OOTTO", ready: true },
   { href: "/content", n: 1, label: "Content OS", ready: true },
   { href: "/crm", n: 2, label: "CRM العملاء", ready: true },
   { href: "/builder", n: 3, label: "App Builder", ready: false },

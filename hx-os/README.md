@@ -4,6 +4,7 @@
 
 | # | الوحدة | الحالة |
 |---|---|---|
+| IG | **Instagram · OOTTO** — Metrics، Inbox AI، Scheduler (7 بوستات بالأسبوع)، Comment → DM | ✅ يعمل (OOTTO يتربط في Claude) |
 | 1 | **Content OS** — 3 أفكار يومياً + كاروسيل + سكريبت ريل + رندر Remotion/FFmpeg | ✅ يعمل |
 | 2 | **CRM** — العملاء، الحالات، Cal.com، المبيعات الشهرية | ✅ يعمل |
 | 3 | App Builder | 🔜 |
@@ -37,6 +38,11 @@ npm run dev                  # http://localhost:3100
   - **سحب**: حط `CAL_API_KEY` واضغط «سحب الحجوزات الآن». يشتغل على localhost.
   - **Webhook**: `POST /api/webhooks/calcom` مع الأحداث Booking Created / Rescheduled / Cancelled. حط نفس الـ secret في `CAL_WEBHOOK_SECRET`. على localhost يحتاج نفق مثل `cloudflared tunnel --url http://localhost:3100`.
 - زر «→ محتوى» على أي طلب مسلّم يسوي فكرة «قصة عميل» في Content OS، ونشرها يكون بعد موافقتك.
+
+## Instagram · OOTTO
+- OOTTO هو اللي ينفّذ على انستقرام من داخل Claude (تضيف connector مخصص بالرابط `https://mcp.ootto.ai/mcp`). HX OS يحفظ الخطة والقواعد وسكريبت المبيعات وتاريخ الأداء، وكل تبويب فيه برومبت جاهز تنسخه وتلصقه في Claude.
+- `POST /api/instagram/leads`: يحوّل محادثة انستقرام لليد في الـ CRM. لو فتحت التطبيق للإنترنت، حط `HX_INBOUND_TOKEN`.
+- الخطوات كاملة في `../HX-OS-V2.md`.
 
 ## الربط بين الوحدات
 - `lib/db.ts`: مخزن واحد مشترك (ideas / clients / activity).
