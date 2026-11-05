@@ -12,6 +12,9 @@
 | Second Brain skills | ✅ `/second-brain` · `/second-brain-ingest` · `/second-brain-query` · `/second-brain-lint` | `.claude/skills/second-brain*` |
 | Obsidian vault | ✅ | `hx-brain/` |
 | استيراد ChatGPT + Claude | ✅ السكربت جاهز ومجرب · 👤 تنزل ملفات التصدير | `hx-brain/tools/import_chats.py` |
+| charlie947/ai-second-brain | ✅ مثبت ومعدّل على `hx-brain` | `.claude/skills/ai-second-brain` + `skills-upload/ai-second-brain.zip` |
+| `/today` · `/ideas` · `/create` | ✅ | `.claude/skills/today` · `ideas` · `create` |
+| iMessage Channels | 👤 على جهاز Mac فقط | تحت |
 
 ---
 
@@ -95,5 +98,23 @@ hx-brain/
 2. **Open folder as vault** ← اختر مجلد `hx-brain`.
 3. اختياري: إضافة **Obsidian Web Clipper** للمتصفح، واحفظ المقالات في `sources/`.
 
-### ليش ما استخدمت charlie947/ai-second-brain؟
-قلت «أو»، فاخترت واحد. NicholasSpisak فيه `/second-brain` و `/second-brain-ingest` جاهزين وبنيته `sources` و `wiki` و `CLAUDE.md` نفس اللي تبيه.
+### charlie947/ai-second-brain (مثبت)
+دليل يمشيك خطوة خطوة في 3 مراحل. عدّلته بحيث يشتغل على `hx-brain` نفسه، فما يسوي vault ثاني وما يمسح `CLAUDE.md`.
+- **المرحلة 1 (AI Brain):** بعد ما تستورد المحادثات، يشغّل 10 وكلاء مع بعض يضيفون tags للأشخاص والأماكن والمشاريع، ويربطون المحادثات بصفحات الـ wiki.
+- **المرحلة 2 (Karpathy Wiki):** جاهزة من قبل في `/second-brain-ingest`.
+- **المرحلة 3:** ثلاث أوامر جديدة:
+
+| الأمر | وش يسوي |
+|---|---|
+| `/today` | خطة يومك: المواعيد، الإيميلات المستعجلة، العملاء اللي لازم تتابعهم، وانستا |
+| `/ideas` | 5 أفكار محتوى وفرصتين بزنس من اللي صار آخر أسبوعين |
+| `/create <موضوع>` | بوست أو ريل أو كاروسيل جاهز بأسلوبك ومن معلوماتك |
+
+**👤 الباقي عليك:**
+- **Google Calendar:** اربطه في Connectors عشان `/today` يشوف مواعيدك. Gmail مربوط من قبل.
+- **iMessage Channels:** تكلم الـ Second Brain من جوالك. يشتغل على Mac بس:
+  ```
+  claude --channels plugin:imessage@claude-plugins-official
+  ```
+  بعدها: System Settings ← Privacy & Security ← Full Disk Access ← فعّل Terminal.
+- **claude.ai:** ارفع `skills-upload/ai-second-brain.zip` في Settings ← Capabilities ← Skills.
