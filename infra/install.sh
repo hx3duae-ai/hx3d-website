@@ -5,16 +5,17 @@
 #   Cal.diy         (instead of Calendly)  → http://SERVER:3001
 #   Chatwoot        (instead of Intercom)  → http://SERVER:3000   (WhatsApp + Instagram + email inbox)
 #   Cap Web         (instead of Loom)      → http://SERVER:3002
+#   Postiz          (instead of OOTTO / Buffer) → http://SERVER:4007   (schedule Instagram, TikTok, YouTube, X…)
 #
 # VoiceStudio (instead of ElevenLabs) is a desktop app that needs your own GPU, so it is not installed
 # here. See infra/README.md.
 #
 # Usage:
 #   sudo bash infra/install.sh            # everything
-#   sudo bash infra/install.sh chatwoot   # only one: appflowy | caldiy | chatwoot | cap
+#   sudo bash infra/install.sh chatwoot   # only one: appflowy | caldiy | chatwoot | cap | postiz
 #
 # Every tool is installed from its own official repo and docker-compose file, in /opt/hx3d/<tool>.
-# Ports are moved so the four tools don't clash. Needs Docker Compose 2.24.4 or newer.
+# Ports are moved so the five tools don't clash. Needs Docker Compose 2.24.4 or newer.
 set -euo pipefail
 
 ROOT="${HX_STACK_DIR:-/opt/hx3d}"
@@ -167,18 +168,63 @@ ENV
   docker compose up -d
 }
 
+# ---------------------------------------------------------------- Postiz
+install_postiz() {
+  log "Postiz → http://$HOST:4007"
+  local d="$ROOT/postiz"
+  # The official compose repo also holds the dynamicconfig/ folder Temporal needs.
+  clone https://github.com/gitroomhq/postiz-docker-compose.git "$d"
+  cd "$d"
+  if [ ! -f .env ]; then
+    cat > .env <<ENV
+# Postiz settings read by docker-compose.override.yml. Fill the Meta app keys to connect Instagram + Facebook.
+POSTIZ_URL=http://$HOST:4007
+POSTIZ_JWT_SECRET=$(rand 32)
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
+TIKTOK_CLIENT_ID=
+TIKTOK_CLIENT_SECRET=
+YOUTUBE_CLIENT_ID=
+YOUTUBE_CLIENT_SECRET=
+ENV
+    chmod 600 .env
+  fi
+  # Real URLs + secret, plain-HTTP cookies until HTTPS is set up, and Temporal UI moved off 8080 (AppFlowy uses it).
+  cat > docker-compose.override.yml <<'YML'
+services:
+  postiz:
+    environment:
+      MAIN_URL: "${POSTIZ_URL}"
+      FRONTEND_URL: "${POSTIZ_URL}"
+      NEXT_PUBLIC_BACKEND_URL: "${POSTIZ_URL}/api"
+      JWT_SECRET: "${POSTIZ_JWT_SECRET}"
+      NOT_SECURED: "true"
+      FACEBOOK_APP_ID: "${FACEBOOK_APP_ID:-}"
+      FACEBOOK_APP_SECRET: "${FACEBOOK_APP_SECRET:-}"
+      TIKTOK_CLIENT_ID: "${TIKTOK_CLIENT_ID:-}"
+      TIKTOK_CLIENT_SECRET: "${TIKTOK_CLIENT_SECRET:-}"
+      YOUTUBE_CLIENT_ID: "${YOUTUBE_CLIENT_ID:-}"
+      YOUTUBE_CLIENT_SECRET: "${YOUTUBE_CLIENT_SECRET:-}"
+  temporal-ui:
+    ports: !override
+      - "127.0.0.1:8088:8080"
+YML
+  docker compose up -d
+}
+
 main() {
   [ "$(id -u)" -eq 0 ] || die "Run with sudo."
   mkdir -p "$ROOT"; touch "$SECRETS"; chmod 600 "$SECRETS"
   need_docker
   local what="${1:-all}"
   case "$what" in
-    all)      install_chatwoot; install_caldiy; install_cap; install_appflowy ;;
+    all)      install_chatwoot; install_caldiy; install_cap; install_appflowy; install_postiz ;;
     appflowy) install_appflowy ;;
     caldiy)   install_caldiy ;;
     chatwoot) install_chatwoot ;;
     cap)      install_cap ;;
-    *) die "Unknown tool: $what (appflowy | caldiy | chatwoot | cap)" ;;
+    postiz)   install_postiz ;;
+    *) die "Unknown tool: $what (appflowy | caldiy | chatwoot | cap | postiz)" ;;
   esac
   log "Done. Passwords saved in $SECRETS"
   cat <<EOF
@@ -187,6 +233,7 @@ main() {
   Cal.diy   http://$HOST:3001   the setup wizard opens on first visit
   Cap       http://$HOST:3002
   AppFlowy  http://$HOST:8080   admin login in $SECRETS
+  Postiz    http://$HOST:4007   sign up (first account), then add Meta keys in $ROOT/postiz/.env
 
   Next step: infra/README.md → "Connect to the agents"
 EOF
