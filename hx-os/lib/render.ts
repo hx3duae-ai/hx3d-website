@@ -26,7 +26,7 @@ export async function startRender(idea: Idea, what: "all" | "reel" | "carousel" 
   await fs.mkdir(dir, { recursive: true });
   const props = {
     brand: { name: BRAND.name, handle: BRAND.handle },
-    accent: PILLARS[idea.pillar].color,
+    accent: "#FF66B2", // brand: pink only
     pillarLabel: PILLARS[idea.pillar].label,
     slides: idea.carousel?.slides ?? [],
     reel: idea.reel ?? null,

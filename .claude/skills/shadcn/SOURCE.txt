@@ -1,0 +1,1 @@
+Source: https://github.com/shadcn-ui/ui (commit 8a35366, path skills/shadcn). Installed unmodified for HX 3D UAE on 2026-11-05.

@@ -67,14 +67,11 @@ try {
     const ffmpeg = process.env.FFMPEG_PATH || "ffmpeg";
     const hasFfmpeg = spawnSync(ffmpeg, ["-version"], { stdio: "ignore" }).status === 0;
     const reel = path.join(dir, "reel.mp4");
-    const music = path.join(root, "assets", "music.mp3");
     if (hasFfmpeg) {
-      const seconds = composition.durationInFrames / composition.fps;
-      const args = existsSync(music)
-        ? ["-y", "-i", raw, "-stream_loop", "-1", "-i", music, "-map", "0:v", "-map", "1:a", "-shortest",
-           "-af", `volume=0.6,afade=t=out:st=${Math.max(0, seconds - 1.5)}:d=1.5`,
-           "-c:v", "libx264", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", reel]
-        : ["-y", "-i", raw, "-c:v", "libx264", "-crf", "20", "-preset", "medium", "-pix_fmt", "yuv420p", "-movflags", "+faststart", reel];
+      // HX 3D export spec: H.264 Main 4.1, 30 fps, keyframe every second, CRF 19, yuv420p, faststart.
+      // No music by brand rule; a voiceover track (AAC stereo 44.1 kHz 160k) can be muxed in later.
+      const args = ["-y", "-i", raw, "-c:v", "libx264", "-profile:v", "main", "-level", "4.1", "-r", "30", "-g", "30",
+        "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", reel];
       const r = spawnSync(ffmpeg, args, { stdio: "ignore" });
       if (r.status !== 0) await fs.copyFile(raw, reel);
       const thumb = path.join(dir, "thumb.jpg");

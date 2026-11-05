@@ -493,7 +493,7 @@ function IdeaModal({
           <div className="row" style={{ justifyContent: "space-between" }}>
             <div>
               <b>رندر الفيديو والصور</b>
-              <div className="muted small">Remotion يرسم الشرائح (PNG ‏1080×1350) والريل (MP4 ‏1080×1920) — FFmpeg يضغط ويضيف الموسيقى (assets/music.mp3) والصورة المصغرة.</div>
+              <div className="muted small">Remotion يرسم الشرائح (PNG ‏1080×1350) والريل (MP4 ‏1080×1920) — FFmpeg يصدّر بمواصفات HX (H.264 Main 4.1، ‏CRF 19) ويسوي الصورة المصغرة. بدون موسيقى.</div>
             </div>
             <div className="row">
               <button className="btn primary sm" disabled={rendering} onClick={() => startRender("all")}>

@@ -1,0 +1,1 @@
+Source: https://github.com/firebase/agent-skills (commit b76be96, path skills/firebase-ai-logic-basics). Installed unmodified for HX 3D UAE on 2026-11-05.

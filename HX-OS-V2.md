@@ -27,6 +27,10 @@
 | 4 | Gmail / Google Drive | ✅ مربوطين في حسابك |
 | 4 | Google Calendar / Notion | 👤 |
 | 4 | Projects: Work / HX3D Business / Personal | 👤 التعليمات جاهزة تحت |
+| 5 | 10 skills من skills.sh (مثبتة في المشروع + ملفات zip لـ claude.ai) | ✅ في المشروع / 👤 رفعها على claude.ai |
+| 5 | Mod «You Should Know» | ✅ مفعّل في `.claude/settings.json` |
+| 5 | Mod «Auto-handoff» | ❓ ينتظر موافقتك |
+| 5 | الهوية (أسود + أبيض + وردي): HX OS و Remotion | ✅ |
 
 ---
 
@@ -110,6 +114,30 @@
 
 ---
 
+## المرحلة 5 — Skills + Mods + الهوية
+
+### الـ Skills (المصدر: skills.sh، «The Open Agent Skills Ecosystem»)
+- **مثبتة في المشروع:** `.claude/skills/`، وتشتغل تلقائياً في Claude Code داخل هذا المستودع.
+- **👤 لـ claude.ai:** `skills-upload/*.zip`. روح Customize ← Skills ← Upload، وارفع ملف وحد كل مرة، وابدأ بـ `hx3d-brand-style`.
+- **قبل التثبيت:** راجعت كل الملفات. ما فيها أوامر شبكة تشتغل لحالها، ولا تعليمات مخفية.
+- **السياق المشترك:** `.agents/product-marketing.md` فيه بيانات HX، وكل skills التسويق تقراه.
+- **❓ «value» و «app-developers»:** ما لقيت لهم skill واضح. حطيت `offers` بدال «value» (معادلة القيمة)، وأضفت `social`. لو تقصد شي ثاني، أرسل لي الرابط.
+- **⚠️ ملاحظة:** لما تشغّل skill مع نص بعد اسمه، Claude Code يبدّل الرموز `$1` و `$2` داخل الـ skill بكلمات من النص. اكتب طلبك عادي بدون ما تحط نص بعد اسم الـ skill.
+
+### الـ Mods
+- ✅ **You Should Know:** مفعّل كـ `cc-plugin-you-should-know@builtin`. أو من الطرفية: `/plugin` ← enable.
+- ❓ **Auto-handoff:** مو مدمج في Claude Code. أقرب واحد في دليل Anthropic هو `claude-context-auto-handoff`، وهو من المجتمع وفيه hooks وخادم خارجي. ما ركبته بدون موافقتك.
+  - Claude Code يضغط المحادثة لحاله لما تطول.
+  - لو تبيه، من الطرفية: `/plugin` ← ابحث عن `claude-context-auto-handoff` ← Install.
+
+### الهوية
+- ✅ `.claude/skills/hx3d-brand-style`: ملف «أسلوبي» كامل كـ skill، ويغلب أي skill تصميم ثاني.
+- ✅ **Remotion:** ورق مربعات، قصاصات بشريط لاصق، Cairo، كلمة مميزة بخلفية وردية، وشريط تقدّم وردي فوق. الإيموجي تنحذف من الصور.
+- ✅ **FFmpeg:** H.264 Main 4.1، ‏30fps، إطار رئيسي كل ثانية، CRF 19، yuv420p، faststart، وبدون موسيقى (أنحذف دمج `music.mp3`).
+- ✅ **واجهة HX OS:** وردي وأبيض وأسود، بخط Cairo، وبدون وضع داكن.
+- ⏳ **باقي من دليل الأسلوب:** نجم، وصوت عبدالعزيز من منصت، وقوالب الـ PDF والصور المصغّرة. مجلد `video-design/` مو موجود في هذا المستودع، فأحتاج ملفاته.
+- 🔗 **صفحة اختبار marketing-psychology:** https://claude.ai/artifact/W5akJxsifU1yDy3aLg1bXs
+
 ## الشغل الجاي (بالترتيب)
 1. 👤 تربط OOTTO وتعبّي الكتالوج والأسعار، وبعدها نجرّب الوكلاء الأربعة على حسابك الحقيقي.
 2. 🔜 Second Brain: يفهرس العملاء والأفكار والأداء والنشاط، وتسأله «وش آخر طلبات العملاء؟».
@@ -118,3 +146,4 @@
 ## سجل التغييرات
 - **5 نوفمبر 2026:** HX OS V1. Content OS و CRM و Cal.com و Remotion/FFmpeg.
 - **5 نوفمبر 2026:** HX OS V2. صفحة Instagram (4 وكلاء لـ OOTTO) وربطها بالـ CRM، و Founder Board skill، وهذا الملف.
+- **5 نوفمبر 2026:** 10 skills، و Mod «You Should Know»، والهوية الوردية في HX OS و Remotion و FFmpeg، واختبار marketing-psychology.

@@ -1,9 +1,9 @@
 export type Pillar = "gifts" | "architecture" | "products";
 
 export const PILLARS: Record<Pillar, { label: string; en: string; color: string }> = {
-  gifts: { label: "هدايا الشركات", en: "Corporate Gifts", color: "#c8a24a" },
-  architecture: { label: "مجسمات معمارية", en: "Architectural Models", color: "#3f8fd2" },
-  products: { label: "منتجات ونماذج", en: "Products & Prototypes", color: "#3fb68b" },
+  gifts: { label: "هدايا الشركات", en: "Corporate Gifts", color: "#FF66B2" },
+  architecture: { label: "مجسمات معمارية", en: "Architectural Models", color: "#111111" },
+  products: { label: "منتجات ونماذج", en: "Products & Prototypes", color: "#9a9a9a" },
 };
 
 export type IdeaStatus = "new" | "approved" | "posted" | "archived";
