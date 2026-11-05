@@ -1,0 +1,310 @@
+<title>HX3D Instagram Psychology</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&family=Aref+Ruqaa:wght@400;700&display=swap">
+<style>
+/* Layout: one editorial column on graph paper; each funnel stage is a torn paper scrap, step chain at the bottom of each scrap. Single light look on purpose (brand forbids full-black backgrounds). */
+:root {
+  --paper: #ffffff;
+  --grid: #ebebef;
+  --ink: #111113;
+  --ink-2: #4b4b52;
+  --line: #d9d9de;
+  --pink: #FF66B2;
+  --pink-soft: #ffe3f1;
+  --display: "Cairo", "Segoe UI", Tahoma, sans-serif;
+  --hand: "Aref Ruqaa", "Cairo", serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--display); font-weight: 500; font-size: 16px; line-height: 1.8;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.wrap {
+  max-width: 980px; margin: 0 auto;
+  padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 34px;
+}
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo { font-weight: 900; font-size: 18px; letter-spacing: .5px; direction: ltr; }
+.logo b { background: var(--pink); padding: 0 6px; border-radius: 3px; }
+.progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; flex: 1 1 160px; max-width: 280px; }
+.progress span { display: block; height: 100%; width: 100%; background: var(--pink); }
+
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1 { font-weight: 900; font-size: clamp(30px, 6vw, 52px); line-height: 1.35; }
+.hl { background: linear-gradient(transparent 12%, var(--pink) 12%, var(--pink) 88%, transparent 88%); padding: 0 .18em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.lede { font-size: 18px; color: var(--ink-2); max-width: 62ch; margin: 10px 0 0; }
+.note { font-family: var(--hand); font-size: 20px; color: var(--ink); }
+.note::before { content: "✎ "; color: var(--pink); }
+
+.scrap {
+  position: relative; background: var(--paper); border: 1px solid var(--line);
+  padding: 26px 24px 22px; box-shadow: 0 2px 0 rgba(17,17,19,.04), 0 10px 24px rgba(17,17,19,.06);
+  clip-path: polygon(0 1.2%, 4% 0, 9% 1%, 15% 0, 22% .8%, 30% 0, 38% 1%, 46% 0, 55% .9%, 63% 0, 71% 1%, 79% 0, 87% .8%, 94% 0, 100% 1%, 100% 99%, 95% 100%, 88% 99.2%, 80% 100%, 72% 99%, 64% 100%, 56% 99.1%, 48% 100%, 40% 99%, 32% 100%, 24% 99.2%, 16% 100%, 8% 99%, 0 100%);
+}
+.tape { position: absolute; top: -2px; inset-inline-start: 28px; width: 92px; height: 22px; background: var(--pink-soft); opacity: .95; transform: rotate(-3deg); }
+.badge { display: inline-flex; gap: 8px; align-items: center; font-weight: 900; font-size: 14px; letter-spacing: .3px; }
+.badge .n { background: var(--ink); color: var(--paper); border-radius: 4px; padding: 0 8px; font-variant-numeric: tabular-nums; }
+.scrap h2 { font-size: 26px; font-weight: 900; margin-top: 6px; }
+.scrap > p { margin: 4px 0 0; color: var(--ink-2); max-width: 66ch; }
+
+.models { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 18px; }
+.model { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; min-width: 0; background: var(--paper); }
+.model h3 { font-size: 17px; font-weight: 900; }
+.model .en { font-size: 12px; color: var(--ink-2); letter-spacing: .4px; direction: ltr; text-align: end; font-weight: 700; }
+.model .why { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+.model .do { font-size: 15px; margin: 0; }
+.model .do b { background: var(--pink-soft); padding: 0 4px; border-radius: 3px; }
+.say { font-family: var(--hand); font-size: 18px; border-inline-start: 4px solid var(--pink); padding-inline-start: 10px; margin: 2px 0 0; line-height: 1.7; }
+
+.chain { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 18px; font-weight: 700; font-size: 14px; }
+.chain span { border: 1px dashed var(--ink-2); border-radius: 6px; padding: 2px 10px; }
+.chain span.end { background: var(--pink); border: 1px solid var(--pink); }
+.chain i { font-style: normal; color: var(--ink-2); }
+
+.section-title { font-size: 28px; font-weight: 900; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 15px; }
+th, td { text-align: start; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 13px; color: var(--ink-2); font-weight: 700; letter-spacing: .3px; }
+tr:last-child td { border-bottom: 0; }
+.kw { display: inline-block; background: var(--pink); font-weight: 900; padding: 0 8px; border-radius: 4px; white-space: nowrap; }
+.fmt { white-space: nowrap; font-weight: 700; }
+
+.dm { display: grid; gap: 12px; }
+.msg { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 14px; align-items: start; }
+.bubble { background: var(--paper); border: 1px solid var(--line); border-radius: 16px 16px 4px 16px; padding: 12px 16px; min-width: 0; }
+.bubble.them { border-radius: 16px 16px 16px 4px; background: var(--pink-soft); border-color: var(--pink-soft); }
+.bubble small { display: block; font-size: 12px; color: var(--ink-2); font-weight: 700; margin-bottom: 2px; }
+.why-tag { font-size: 13px; color: var(--ink-2); border-top: 2px solid var(--pink); padding-top: 6px; }
+.why-tag b { color: var(--ink); display: block; }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+ul.rules { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+ul.rules li { padding-inline-start: 26px; position: relative; }
+ul.rules li::before { content: "✕"; position: absolute; inset-inline-start: 0; font-weight: 900; color: var(--ink); background: var(--pink); width: 18px; height: 18px; border-radius: 4px; display: grid; place-items: center; font-size: 11px; top: 6px; line-height: 1; }
+ol.tests { margin: 10px 0 0; padding-inline-start: 20px; display: grid; gap: 10px; }
+ol.tests li b { background: var(--pink-soft); padding: 0 4px; border-radius: 3px; }
+.foot { font-size: 13px; color: var(--ink-2); text-align: center; }
+:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .msg { grid-template-columns: 1fr; gap: 6px; }
+  .scrap { padding: 24px 16px 18px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hl { background-size: 100% 100%; animation: draw .9s ease-out both; background-repeat: no-repeat; }
+  @keyframes draw { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+}
+</style>
+
+<div class="wrap" dir="rtl" lang="ar">
+  <div class="top">
+    <div class="logo">HX <b>3D</b></div>
+    <div class="progress" aria-hidden="true"><span></span></div>
+  </div>
+
+  <header>
+    <h1>سيكولوجية التسويق لحساب <span class="hl">@hx3d.uae</span></h1>
+    <p class="lede">السلوك اللي نبيه: المتابع يكتب كلمة وحدة في التعليقات، يوصله الكتالوج أو الملف في الخاص، يطلب عرض سعر، ويدفع العربون. كل نموذج نفسي تحت مربوط بخطوة من هالرحلة، ومعه تطبيق جاهز لـ HX 3D.</p>
+    <div class="chain" aria-label="رحلة العميل">
+      <span>ريل يوقّفه</span><i>←</i><span>يثق فينا</span><i>←</i><span>يكتب كلمة</span><i>←</i><span>محادثة خاصة</span><i>←</i><span class="end">عربون + قصة عميل</span>
+    </div>
+    <p class="note">افتراضاتي: الجمهور شركات في الإمارات + هواة طباعة 3D، والقناة الأولى انستقرام ← الخاص ← CRM.</p>
+  </header>
+
+  <section class="scrap" aria-labelledby="s1">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="badge"><span class="n">01</span> الانتباه</div>
+    <h2 id="s1">أول 3 ثواني تقرر كل شي</h2>
+    <p>الهدف: يوقف التمرير ويكمل الريل للآخر عشان يشوف الـ CTA.</p>
+    <div class="models">
+      <article class="model">
+        <h3>الحلقة المفتوحة</h3><div class="en">Zeigarnik / Curiosity gap</div>
+        <p class="why">العقل ما يرتاح لين يقفل السؤال اللي انفتح.</p>
+        <p class="do">افتح سؤال في الثانية الأولى و<b>اقفله في آخر الريل</b>، مو في نصه.</p>
+        <p class="say">«خمس مشاكل تخرّب أول طبعة… والخامسة يسويها الكل»</p>
+      </article>
+      <article class="model">
+        <h3>أثر التباين</h3><div class="en">Contrast effect</div>
+        <p class="why">الفرق يبان أقوى لما الـ «قبل» واضح.</p>
+        <p class="do">مخطط الفيلا على الورق ← <b>المجسم المطبوع</b> بنفس الزاوية، أو ملف STL رمادي ← القطعة الوردية والسوداء.</p>
+      </article>
+      <article class="model">
+        <h3>التعرّض المتكرر</h3><div class="en">Mere exposure</div>
+        <p class="why">الناس تحب اللي تشوفه كثير.</p>
+        <p class="do">نجم في كل فيديو، نفس الألوان، نفس السلسلة تحت. <b>7 بوستات بالأسبوع</b> أهم من بوست مثالي كل شهر.</p>
+      </article>
+    </div>
+    <div class="chain"><span>سؤال</span><i>←</i><span>قبل / بعد</span><i>←</i><span class="end">يكمل المشاهدة</span></div>
+  </section>
+
+  <section class="scrap" aria-labelledby="s2">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="badge"><span class="n">02</span> الثقة</div>
+    <h2 id="s2">ليش يشتري منك أنت؟</h2>
+    <p>الهدف: قبل ما يكتب الكلمة، لازم يحس إنكم تعرفون شغلكم وإن غيره اشترى قبله.</p>
+    <div class="models">
+      <article class="model">
+        <h3>السلطة والخبرة</h3><div class="en">Authority bias</div>
+        <p class="why">نصدّق اللي يبيّن إنه خبير.</p>
+        <p class="do">اعرض الطابعة (Bambu Lab P2S + AMS)، إعدادات الطبقة والحرارة، والمكتوب <b>«توصية الشركة المصنّعة هي المرجع»</b>.</p>
+      </article>
+      <article class="model">
+        <h3>الدليل الاجتماعي</h3><div class="en">Social proof</div>
+        <p class="why">اللي يشتريه غيري أكيد آمن.</p>
+        <p class="do">عدد الطلبات المسلّمة الحقيقي من الـ CRM، وكواليس طلب شركة <b>بإذن العميل</b>.</p>
+        <p class="say">«هالأسبوع سلّمنا [العدد الحقيقي] درع لشركة في دبي — هذي الكواليس»</p>
+      </article>
+      <article class="model">
+        <h3>أثر الهفوة</h3><div class="en">Pratfall effect</div>
+        <p class="why">الاعتراف بعيب صغير يخليك أصدق.</p>
+        <p class="do">بدل «أفضل وأرخص» قل الحقيقة.</p>
+        <p class="say">«مو أرخص طباعة في دبي… بس القطعة توصلك مطابقة للملف»</p>
+      </article>
+    </div>
+    <div class="chain"><span>خبرة</span><i>←</i><span>ناس اشترت</span><i>←</i><span class="end">ثقة</span></div>
+  </section>
+
+  <section class="scrap" aria-labelledby="s3">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="badge"><span class="n">03</span> الليد</div>
+    <h2 id="s3">كلمة وحدة في التعليقات</h2>
+    <p>الهدف: أسهل خطوة ممكنة. HX OS يلقط الكلمة ويرسل الملف ويسجّل الليد تلقائي.</p>
+    <div class="models">
+      <article class="model">
+        <h3>المعاملة بالمثل + المجاني</h3><div class="en">Reciprocity · Zero-price</div>
+        <p class="why">«مجاني» يحرّك أكثر من أي خصم، واللي ياخذ هدية يحس إنه لازم يرد.</p>
+        <p class="do">كل فيديو تعليمي له ملف PDF: <span class="kw">مشاكل</span> <span class="kw">خيوط</span> <span class="kw">طابعة</span></p>
+      </article>
+      <article class="model">
+        <h3>طاقة البداية</h3><div class="en">Activation energy</div>
+        <p class="why">لو أول خطوة ثقيلة، ما أحد يبدأ.</p>
+        <p class="do">«اكتب <b>سعر</b>» بدل «راسلنا بالتفاصيل والمقاسات والكمية».</p>
+      </article>
+      <article class="model">
+        <h3>القدم في الباب</h3><div class="en">Foot-in-the-door</div>
+        <p class="why">اللي وافق على طلب صغير يوافق على اللي بعده.</p>
+        <p class="do">تعليق ← رسالة ← سؤال واحد ← عرض سعر. <b>لا تطلب كل شي مرة وحدة.</b></p>
+      </article>
+    </div>
+    <div class="chain"><span>هدية مجانية</span><i>←</i><span>كلمة وحدة</span><i>←</i><span class="end">ليد في CRM</span></div>
+  </section>
+
+  <section class="scrap" aria-labelledby="s4">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="badge"><span class="n">04</span> البيع في الخاص</div>
+    <h2 id="s4">من «بكم؟» إلى العربون</h2>
+    <p>الهدف: قرار سهل وواضح خلال المحادثة. هذي اللي يطبقها وكيل ig-inbox.</p>
+    <div class="models">
+      <article class="model">
+        <h3>مفارقة الاختيار</h3><div class="en">Paradox of choice</div>
+        <p class="why">خيارات كثيرة = ما يقرر.</p>
+        <p class="do"><b>3 باقات فقط</b> لهدايا الشركات: أساسية · بالشعار · VIP بالاسم. الوسطى هي اللي تبي تبيعها.</p>
+      </article>
+      <article class="model">
+        <h3>الترسية</h3><div class="en">Anchoring · Rule of 100</div>
+        <p class="why">أول رقم يشوفه يصير المقياس.</p>
+        <p class="do">اعرض VIP أول، بعدها الوسطى. فوق 100 درهم قل <b>«خصم 150 درهم»</b> مو «10٪».</p>
+      </article>
+      <article class="model">
+        <h3>الملكية + تأثير إيكيا</h3><div class="en">Endowment · IKEA effect</div>
+        <p class="why">اللي شارك في التصميم ويشوفه باسمه ما يبي يخسره.</p>
+        <p class="do">خلّه يختار اللون والاسم، وأرسل له <b>رندر بشعاره قبل الدفع</b>.</p>
+      </article>
+      <article class="model">
+        <h3>النفور من الخسارة (الحقيقي)</h3><div class="en">Loss aversion</div>
+        <p class="why">خسارة شي تأثر فينا أكثر من ربح نفس الشي.</p>
+        <p class="do">موعد قفل حقيقي حسب طاقة الطابعة، مثل <b>آخر يوم لطلبات اليوم الوطني (2 ديسمبر)</b>.</p>
+      </article>
+      <article class="model">
+        <h3>النفور من الندم</h3><div class="en">Regret aversion</div>
+        <p class="why">العميل خايف يندم أكثر من إنه خايف يدفع.</p>
+        <p class="do">«لو فيه عيب في الطباعة، <b>نعيدها مجاناً</b>.» قلها قبل السعر.</p>
+      </article>
+    </div>
+    <div class="chain"><span>3 خيارات</span><i>←</i><span>رندر باسمه</span><i>←</i><span>ضمان</span><i>←</i><span class="end">عربون 50٪</span></div>
+  </section>
+
+  <section class="scrap" aria-labelledby="s5">
+    <div class="tape" aria-hidden="true"></div>
+    <div class="badge"><span class="n">05</span> بعد التسليم</div>
+    <h2 id="s5">النهاية هي اللي تنذكر</h2>
+    <div class="models">
+      <article class="model">
+        <h3>قاعدة الذروة والنهاية</h3><div class="en">Peak-end rule</div>
+        <p class="do">فيديو قصير للقطعة وهي تطلع من الطابعة + بطاقة شكر عليها نجم داخل العلبة.</p>
+      </article>
+      <article class="model">
+        <h3>العجلة</h3><div class="en">Flywheel</div>
+        <p class="do">كل طلب مسلّم ← زر <b>«→ محتوى»</b> في الـ CRM ← قصة عميل جديدة ← ليدز جديدة.</p>
+      </article>
+    </div>
+    <div class="chain"><span>تسليم</span><i>←</i><span>لحظة حلوة</span><i>←</i><span class="end">محتوى + توصية</span></div>
+  </section>
+
+  <section aria-labelledby="week">
+    <h2 class="section-title" id="week">أسبوع كامل: <span class="hl">7 بوستات</span>، كل وحدة على مبدأ</h2>
+    <p class="lede">4 ريلز + 3 كاروسيل، نفس التقسيم اللي يسويه وكيل ig-scheduler.</p>
+    <div class="table-wrap" style="margin-top:14px">
+      <table>
+        <thead><tr><th>اليوم</th><th>النوع</th><th>الفكرة</th><th>المبدأ</th><th>الكلمة</th></tr></thead>
+        <tbody>
+          <tr><td>الأحد</td><td class="fmt">ريل</td><td>حل 5 مشاكل في الطباعة</td><td>الحلقة المفتوحة</td><td><span class="kw">مشاكل</span></td></tr>
+          <tr><td>الاثنين</td><td class="fmt">كاروسيل</td><td>مخطط فيلا ← مجسم مطبوع</td><td>التباين</td><td><span class="kw">سعر</span></td></tr>
+          <tr><td>الثلاثاء</td><td class="fmt">ريل</td><td>PLA أم PETG؟</td><td>السلطة</td><td><span class="kw">خيوط</span></td></tr>
+          <tr><td>الأربعاء</td><td class="fmt">كاروسيل</td><td>3 باقات هدايا اليوم الوطني</td><td>مفارقة الاختيار + الترسية</td><td><span class="kw">سعر</span></td></tr>
+          <tr><td>الخميس</td><td class="fmt">ريل</td><td>كواليس طلب شركة (بإذن العميل)</td><td>الدليل الاجتماعي</td><td><span class="kw">سعر</span></td></tr>
+          <tr><td>الجمعة</td><td class="fmt">كاروسيل</td><td>لا تشترِ طابعة قبل ما تشوف هذا</td><td>النفور من الندم</td><td><span class="kw">طابعة</span></td></tr>
+          <tr><td>السبت</td><td class="fmt">ريل</td><td>اختار لونك واسمك ونطبعه</td><td>تأثير إيكيا</td><td><span class="kw">سعر</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="dm">
+    <h2 class="section-title" id="dm">محادثة خاصة <span class="hl">جاهزة</span></h2>
+    <p class="lede">بعد ما يكتب «سعر» على كاروسيل الباقات. كل رسالة وجنبها المبدأ.</p>
+    <div class="dm" style="margin-top:14px">
+      <div class="msg"><div class="bubble"><small>HX 3D</small>هلا فيك 👋 هذا كتالوج هدايا الشركات. سؤال واحد بس: كم قطعة تحتاج تقريباً؟</div><div class="why-tag"><b>القدم في الباب</b>سؤال واحد سهل بدل استمارة</div></div>
+      <div class="msg"><div class="bubble them"><small>العميل</small>حوالي 40 للموظفين</div><div class="why-tag"><b>التزام صغير</b>جاوب، يعني دخل المحادثة</div></div>
+      <div class="msg"><div class="bubble"><small>HX 3D</small>عندنا 3 خيارات: VIP بالاسم لكل موظف، بالشعار (الأكثر طلباً)، وأساسية. لو فيه عيب في أي قطعة نعيد طباعتها مجاناً.</div><div class="why-tag"><b>ترسية + 3 خيارات + ضمان</b>VIP أول، والوسطى معلّمة</div></div>
+      <div class="msg"><div class="bubble"><small>HX 3D</small>أرسل لي الشعار وأسوي لك رندر خلال ساعة تشوفه قبل ما تقرر. آخر يوم نستلم فيه طلبات اليوم الوطني هو [التاريخ حسب الطاقة].</div><div class="why-tag"><b>إيكيا + خسارة حقيقية</b>يشوفه باسمه، والموعد صادق</div></div>
+    </div>
+  </section>
+
+  <div class="two">
+    <section class="scrap" aria-labelledby="no">
+      <div class="badge"><span class="n">!</span> أخلاقيات</div>
+      <h2 id="no" style="font-size:22px">ممنوع حتى لو يبيع</h2>
+      <ul class="rules">
+        <li>ندرة مزيفة («باقي 2 بس») أو عدّاد وهمي</li>
+        <li>أرقام طلبات أو تقييمات غير حقيقية</li>
+        <li>شعار عميل أو صورة طلبه بدون إذنه</li>
+        <li>رسائل تسويقية بعد نافذة الـ 24 ساعة من Meta</li>
+        <li>خصم فوق 10٪ بدون موافقة المؤسس</li>
+      </ul>
+    </section>
+    <section class="scrap" aria-labelledby="tests">
+      <div class="badge"><span class="n">A/B</span> اختبارات الأسبوعين الجايين</div>
+      <h2 id="tests" style="font-size:22px">3 تجارب تنقاس</h2>
+      <ol class="tests">
+        <li>الهوك: سؤال مفتوح ضد جملة عادية. <b>المقياس:</b> متوسط مدة المشاهدة. المتوقع: السؤال أعلى.</li>
+        <li>الـ CTA: «اكتب سعر» ضد «راسلنا». <b>المقياس:</b> تعليقات لكل 1,000 مشاهدة. المتوقع: الكلمة أعلى.</li>
+        <li>الخاص: رندر قبل السعر ضد السعر أول. <b>المقياس:</b> نسبة ليد ← عربون في الـ CRM. المتوقع: الرندر أعلى.</li>
+      </ol>
+      <p class="note">الأرقام تنسحب من صفحة Instagram في HX OS (الأداء + الطريق للمبيعات).</p>
+    </section>
+  </div>
+
+  <p class="foot">HX 3D Dubai · @hx3d.uae · مبني بمهارة marketing-psychology على أسلوب HX 3D (أسود · أبيض · #FF66B2)</p>
+</div>
