@@ -7,4 +7,4 @@
 - **Main funnel:** Reel → comment keyword (سعر / INFO, or a free-PDF keyword like «مشاكل», «خيوط», «طابعة») → auto DM with catalog/PDF → DM conversation → quote in AED → order confirmed with an upfront-payment discount (never a non-refundable deposit / عربون) or a Cal.com call → delivery → case-study content.
 - **Proof assets:** delivered client projects, Benchy/print close-ups, mascot «نجم» (half black, half pink star).
 - **Brand look:** black, white and pink #FF66B2 only. Editorial scrapbook style. No yellow, no music, no faces. See the `hx3d-style` skill.
-- **Constraints:** no deposit (عربون) — close with an upfront-payment discount (≤10%) or pay on delivery; no fake scarcity or fake reviews; discounts above 10% need founder approval; Meta 24-hour messaging window.
+- **Constraints:** no deposit (عربون) — close with an upfront-payment discount of about 5% or pay on delivery; no fake scarcity or fake reviews; discounts above 5% need founder approval; Meta 24-hour messaging window.
