@@ -69,199 +69,126 @@ svg.draw .pk{stroke:var(--pink)}
 <div id="logo"><b>HX</b><i>3D</i></div>
 
 <!-- S1 hook -->
-<div class="scene" data-a="0" data-b="4.0">
-  <div class="cut" style="top:300px;right:70px;transform:rotate(-2deg)" data-t="0.25">
+<div class="scene" data-a="0" data-b="3.0">
+  <div class="cut" style="top:300px;right:70px;transform:rotate(-2deg)" data-t="0.19">
     <div class="tape" style="top:-18px;right:80px;transform:rotate(-6deg)"></div>
     <div class="paper title" style="font-size:96px">كم تكلّفك القطعة</div>
   </div>
-  <div class="cut" style="top:500px;right:160px;transform:rotate(1.5deg)" data-t="0.9">
-    <div class="paper title" style="font-size:118px"><span class="hl" data-hl="1.45">فعلاً</span>؟</div>
+  <div class="cut" style="top:500px;right:160px;transform:rotate(1.5deg)" data-t="0.68">
+    <div class="paper title" style="font-size:118px"><span class="hl" data-hl="1.09">صدق</span>؟</div>
   </div>
-  <svg class="draw" style="left:110px;top:430px;width:220px;height:330px" viewBox="0 0 220 330" data-draw="0.6" data-dd="0.8">
+  <svg class="draw" style="left:110px;top:430px;width:220px;height:330px" viewBox="0 0 220 330" data-draw="0.45" data-dd="0.8">
     <path class="pk" d="M45 95 C45 30 175 20 180 95 C185 150 110 160 110 215 L110 240"/>
     <circle class="pk" cx="110" cy="290" r="6" style="fill:var(--pink)"/>
   </svg>
   <!-- price tag doodle -->
-  <div class="stk" style="top:790px;left:150px;transform:rotate(-8deg)" data-t="1.9">
+  <div class="stk" style="top:790px;left:150px;transform:rotate(-8deg)" data-t="1.42">
     <div class="in" style="padding:18px 30px;flex-direction:row;gap:20px;border-radius:20px">
       <svg width="120" height="80" viewBox="0 0 120 80"><path d="M10 40 L40 8 H112 V72 H40 Z" fill="none" stroke="#111" stroke-width="6" stroke-linejoin="round"/><circle cx="38" cy="40" r="8" fill="none" stroke="#FF66B2" stroke-width="6"/><text x="80" y="54" font-family="Cairo" font-weight="900" font-size="40" text-anchor="middle" fill="#111">؟</text></svg>
       <div style="font-size:44px;font-weight:900">السعر</div>
     </div>
   </div>
-  <div class="ruq" style="position:absolute;top:830px;right:120px;font-size:64px;transform:rotate(-3deg)" data-t="2.5">قبل ما تحدد سعرها!</div>
-  <svg class="draw dash" style="left:440px;top:860px;width:180px;height:90px" viewBox="0 0 180 90" data-draw="2.7" data-dd="0.5">
+  <div class="ruq" style="position:absolute;top:830px;right:120px;font-size:64px;transform:rotate(-3deg)" data-t="1.88">قبل لا تحط سعرها!</div>
+  <svg class="draw dash" style="left:440px;top:860px;width:180px;height:90px" viewBox="0 0 180 90" data-draw="2.03" data-dd="0.5">
     <path d="M170 40 C120 80 70 70 20 40"/><path d="M40 22 L18 40 L42 56" style="stroke-dasharray:none"/>
   </svg>
 </div>
 
-<!-- S2 calculator -->
-<div class="scene" data-a="4.0" data-b="8.05">
-  <div class="cut" style="top:230px;right:80px;transform:rotate(-1.5deg)" data-t="4.1">
-    <div class="tape p" style="top:-16px;left:60px;transform:rotate(5deg)"></div>
-    <div class="paper title" style="font-size:92px">حاسبة <span class="hl" data-hl="4.5">التسعير</span></div>
+<!-- S2 overview -->
+<div class="scene" data-a="3.0" data-b="6.58">
+  
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="3.10">
+    <div class="tape p" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">حاسبة <span class="hl" data-hl="3.4">التسعير</span></div>
   </div>
-  <div class="ruq" style="position:absolute;top:420px;right:120px;font-size:52px;transform:rotate(-2deg)" data-t="5.2">للطباعة ثلاثية الأبعاد</div>
-  <!-- mock -->
-  <div class="cut" style="top:540px;left:170px;width:740px;transform:rotate(1.5deg)" data-t="5.0">
-    <div class="tape" style="top:-18px;left:300px;transform:rotate(-3deg)"></div>
-    <div class="paper" style="padding:34px 44px;border-radius:6px">
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
-        <div style="background:var(--pink);font-weight:900;font-size:30px;padding:4px 12px;border-radius:10px;direction:ltr">HX</div>
-        <div style="font-size:38px;font-weight:900">سعر القطعة للعميل</div>
-      </div>
-      <div style="font-weight:900;font-size:150px;line-height:1.1;color:var(--pink);-webkit-text-stroke:3px #111"><span data-count="0,48,5.5,1.2,0">0</span> <span style="font-size:52px;color:#111;-webkit-text-stroke:0">درهم</span></div>
-      <div style="display:flex;height:30px;border-radius:15px;overflow:hidden;margin:18px 0;border:3px solid #111">
-        <i style="background:#111;width:34%" data-grow="6.2"></i><i style="background:var(--pink);width:26%" data-grow="6.4"></i><i style="background:#888;width:16%" data-grow="6.6"></i><i style="background:#ffc2e0;width:24%" data-grow="6.8"></i>
-      </div>
-      <div class="row2"><span>الوزن</span><b style="direction:ltr">124 g</b></div>
-      <div class="row2"><span>الزمن</span><b>3.5 ساعة</b></div>
-      <div class="row2"><span>ربحك الصافي</span><b style="color:var(--ink);background:var(--pink);padding:0 12px;border-radius:8px">12.4 درهم</b></div>
-    </div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(-1deg)" data-t="3.25">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="F" data-ca="3.0" data-cb="6.58" style="display:block;width:782px;height:880px;border-radius:6px"></div>
   </div>
-  <div class="ruq" style="position:absolute;top:120px;left:120px;font-size:50px" data-t="6.6">من <span style="font-family:Cairo;font-weight:900;direction:ltr;display:inline-block">HX 3D</span></div>
-  <svg class="draw dash" style="left:70px;top:95px;width:80px;height:60px" viewBox="0 0 80 60" data-draw="6.7" data-dd="0.4">
-    <path d="M70 40 C50 50 30 40 20 15"/><path d="M8 28 L20 12 L34 26" style="stroke-dasharray:none"/>
-  </svg>
 </div>
-
 <!-- S3 file -->
-<div class="scene" data-a="8.05" data-b="15.35">
-  <div class="badge" data-t="8.1"><span class="n">01</span><span class="l">الملف</span></div>
-  <div class="cut" style="top:190px;right:80px;transform:rotate(-1.5deg)" data-t="8.2">
-    <div class="tape" style="top:-16px;right:60px;transform:rotate(-5deg)"></div>
-    <div class="paper title" style="font-size:96px">ارفع <span class="hl" data-hl="9.0">ملفك</span></div>
+<div class="scene" data-a="6.58" data-b="12.2">
+  <div class="badge" data-t="6.63"><span class="n">01</span><span class="l">الملف</span></div>
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="6.68">
+    <div class="tape" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">ارفع <span class="hl" data-hl="7.2">ملفك</span></div>
   </div>
-  <div class="stk file" style="top:440px;right:90px;transform:rotate(-5deg)" data-t="8.7"><div class="in"><svg class="doc" viewBox="0 0 150 180"><path d="M20 10 H100 L132 42 V170 H20 Z M100 10 V42 H132" fill="#fff" stroke="#111" stroke-width="6" stroke-linejoin="round"/><path d="M48 112 L76 96 L104 112 L76 128 Z M48 112 V140 L76 156 V128 M104 112 V140 L76 156" fill="none" stroke="#FF66B2" stroke-width="6" stroke-linejoin="round"/></svg><div class="lab">STL</div></div></div>
-  <div class="stk file" style="top:420px;right:440px;transform:rotate(2deg)" data-t="9.1"><div class="in"><svg class="doc" viewBox="0 0 150 180"><path d="M20 10 H100 L132 42 V170 H20 Z M100 10 V42 H132" fill="#fff" stroke="#111" stroke-width="6" stroke-linejoin="round"/><path d="M48 112 L76 96 L104 112 L76 128 Z M48 112 V140 L76 156 V128 M104 112 V140 L76 156" fill="#FF66B2" stroke="#111" stroke-width="5" stroke-linejoin="round"/></svg><div class="lab">3MF</div></div></div>
-  <div class="stk file" style="top:450px;right:790px;transform:rotate(6deg)" data-t="9.5"><div class="in"><svg class="doc" viewBox="0 0 150 180"><path d="M20 10 H100 L132 42 V170 H20 Z M100 10 V42 H132" fill="#fff" stroke="#111" stroke-width="6" stroke-linejoin="round"/><path d="M42 90 H110 M42 112 H96 M42 134 H110 M42 156 H80" stroke="#FF66B2" stroke-width="7" stroke-linecap="round"/></svg><div class="lab">G-code</div></div></div>
-  <div class="ruq" style="position:absolute;top:720px;right:200px;font-size:48px" data-t="10.5">قبل التقطيع</div>
-  <div class="ruq" style="position:absolute;top:740px;left:70px;font-size:48px" data-t="11.3">بعد التقطيع</div>
-  <svg class="draw dash" style="left:440px;top:800px;width:200px;height:150px" viewBox="0 0 200 150" data-draw="12.6" data-dd="0.5">
-    <path d="M100 10 C130 50 70 90 100 130"/><path d="M80 112 L100 136 L122 114" style="stroke-dasharray:none"/>
-  </svg>
-  <div class="cut" style="top:960px;right:110px;transform:rotate(-2deg)" data-t="13.1"><div class="paper chip"><span>الوزن</span><span class="v">124 g</span></div></div>
-  <div class="cut" style="top:960px;left:110px;transform:rotate(2deg)" data-t="13.7"><div class="paper chip"><span>الزمن</span><span class="v">3.5 h</span></div></div>
-  <div class="chain"><span class="u" data-t="9.6">الملف</span><span class="ar" data-t="11.0">←</span><span class="u" data-t="11.2">القراءة</span><span class="ar" data-t="13.0">←</span><span class="u last" data-t="14.2">تلقائياً ✓</span></div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(1.5deg)" data-t="6.83">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="A" data-ca="6.58" data-cb="12.2" style="display:block;width:782px;height:880px;border-radius:6px"></div>
+  </div>
 </div>
-
 <!-- S4 costs -->
-<div class="scene" data-a="15.35" data-b="22.05">
-  <div class="badge" data-t="15.4"><span class="n">02</span><span class="l">التكاليف</span></div>
-  <div class="cut" style="top:190px;right:80px;transform:rotate(-1.5deg)" data-t="15.5">
-    <div class="tape p" style="top:-16px;right:70px;transform:rotate(4deg)"></div>
-    <div class="paper title" style="font-size:96px">كل <span class="hl" data-hl="16.4">التكاليف</span></div>
+<div class="scene" data-a="12.2" data-b="19.54">
+  <div class="badge" data-t="12.25"><span class="n">02</span><span class="l">التكاليف</span></div>
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="12.30">
+    <div class="tape p" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">كل <span class="hl" data-hl="13.3">التكاليف</span></div>
   </div>
-  <div style="position:absolute;top:430px;left:80px;right:80px;display:grid;grid-template-columns:1fr 1fr;gap:34px 40px">
-    <div class="cut" style="position:relative;transform:rotate(-1.5deg)" data-t="16.9"><div class="paper chip"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26"/><circle class="pk" cx="32" cy="32" r="16"/><circle cx="32" cy="32" r="5"/></svg>الخيط</div></div>
-    <div class="cut" style="position:relative;transform:rotate(1.5deg)" data-t="17.6"><div class="paper chip"><svg viewBox="0 0 64 64"><path class="pk" d="M36 4 L14 36 H32 L26 60 L50 26 H32 Z"/></svg>الكهرباء</div></div>
-    <div class="cut" style="position:relative;transform:rotate(1deg)" data-t="18.5"><div class="paper chip"><svg viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="44" rx="4"/><path class="pk" d="M20 40 H44 M32 18 V30"/></svg>إهلاك الطابعة</div></div>
-    <div class="cut" style="position:relative;transform:rotate(-1deg)" data-t="19.3"><div class="paper chip"><svg viewBox="0 0 64 64"><path d="M8 14 H56"/><path class="pk" d="M16 14 V56 M32 14 V56 M48 14 V56"/></svg>الدعامات</div></div>
-    <div class="cut" style="position:relative;transform:rotate(-1.5deg)" data-t="19.9"><div class="paper chip"><svg viewBox="0 0 64 64"><path d="M10 16 H54 M24 16 V8 H40 V16 M16 16 L20 58 H44 L48 16"/><path class="pk" d="M28 26 V48 M36 26 V48"/></svg>الهدر</div></div>
-    <div class="cut" style="position:relative;transform:rotate(1.5deg)" data-t="20.7"><div class="paper chip"><svg viewBox="0 0 64 64"><path d="M12 52 L16 38 L44 10 L54 20 L26 48 Z"/><path class="pk" d="M38 16 L48 26"/></svg>التصميم</div></div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(-1.2deg)" data-t="12.45">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="B" data-ca="12.2" data-cb="19.54" style="display:block;width:782px;height:880px;border-radius:6px"></div>
   </div>
-  <div class="cut" style="top:920px;left:110px;right:110px" data-t="16.8">
-    <div class="paper" style="padding:22px 30px;border-radius:6px">
-      <div style="display:flex;height:44px;border:4px solid #111;border-radius:22px;overflow:hidden;direction:rtl">
-        <i style="background:#111" data-gw="17.0,24"></i><i style="background:var(--pink)" data-gw="17.7,10"></i><i style="background:#666" data-gw="18.6,20"></i><i style="background:#ffc2e0" data-gw="19.4,14"></i><i style="background:#bbb" data-gw="20.0,8"></i><i style="background:#ff99cc" data-gw="20.8,24"></i>
-      </div>
-    </div>
-  </div>
-  <div class="chain"><span class="u" data-t="17.0">كل بند</span><span class="ar" data-t="20.9">←</span><span class="u last" data-t="21.1">التكلفة الحقيقية</span></div>
 </div>
-
 <!-- S5 price -->
-<div class="scene" data-a="22.05" data-b="27.05">
-  <div class="badge" data-t="22.1"><span class="n">03</span><span class="l">السعر</span></div>
-  <div class="cut" style="top:190px;right:80px;transform:rotate(-1.5deg)" data-t="22.3">
+<div class="scene" data-a="19.54" data-b="24.18">
+  <div class="badge" data-t="19.59"><span class="n">03</span><span class="l">السعر</span></div>
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="19.64">
     <div class="tape" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
-    <div class="paper title" style="font-size:96px">السعر <span class="hl" data-hl="23.5">النهائي</span></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">السعر <span class="hl" data-hl="20.8">النهائي</span></div>
   </div>
-  <div class="stk" style="top:430px;left:140px;transform:rotate(-4deg)" data-t="23.0">
-    <div class="in" style="padding:30px 60px;border-radius:30px;flex-direction:row;gap:26px">
-      <svg width="90" height="90" viewBox="0 0 90 90"><path d="M8 45 L38 8 H84 V82 H38 Z" fill="#FF66B2" stroke="#111" stroke-width="6" stroke-linejoin="round"/><circle cx="36" cy="45" r="8" fill="#fff" stroke="#111" stroke-width="5"/></svg>
-      <div style="font-weight:900;font-size:170px;line-height:1"><span data-count="0,48,23.1,1.1,0">0</span></div>
-      <div style="font-size:54px;font-weight:900">درهم</div>
-    </div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(1.5deg)" data-t="19.79">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="C" data-ca="19.54" data-cb="24.18" style="display:block;width:782px;height:880px;border-radius:6px"></div>
   </div>
-  <div class="cut" style="top:720px;right:110px;transform:rotate(1.5deg)" data-t="24.6"><div class="paper chip"><span>ربحك الصافي</span><span class="v" style="background:var(--pink)">+12.4</span></div></div>
-  <div class="cut" style="top:860px;left:110px;width:560px;transform:rotate(-1.5deg)" data-t="25.6">
-    <div class="tape p" style="top:-16px;left:200px;transform:rotate(3deg)"></div>
-    <div class="paper" style="padding:16px 34px">
-      <div class="row2"><span>1 قطعة</span><b>48</b></div>
-      <div class="row2"><span>10 قطع</span><b>45.6 <small style="color:#888">−5%</small></b></div>
-      <div class="row2"><span>50 قطعة</span><b>43.2 <small style="color:#888">−10%</small></b></div>
-    </div>
-  </div>
-  <div class="chain"><span class="u" data-t="23.0">التكلفة</span><span class="ar" data-t="24.5">←</span><span class="u" data-t="24.7">الربح</span><span class="ar" data-t="25.4">←</span><span class="u last" data-t="25.6">سعر العميل</span></div>
 </div>
-
 <!-- S6 invoice -->
-<div class="scene" data-a="27.05" data-b="32.5">
-  <div class="cut" style="top:190px;right:80px;transform:rotate(-1.5deg)" data-t="27.15">
+<div class="scene" data-a="24.18" data-b="28.66">
+  <div class="badge" data-t="24.23"><span class="n">04</span><span class="l">الفاتورة</span></div>
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="24.28">
     <div class="tape" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
-    <div class="paper title" style="font-size:96px">بضغطة <span class="hl" data-hl="27.6">واحدة</span></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">بضغطة <span class="hl" data-hl="24.9">وحدة</span></div>
   </div>
-  <div class="cut" style="top:430px;right:90px;width:420px;transform:rotate(-4deg)" data-t="28.6">
-    <div class="paper" style="padding:26px 30px;height:520px">
-      <div style="font-weight:900;font-size:44px;border-bottom:6px solid var(--pink);padding-bottom:6px">عرض سعر</div>
-      <div style="height:16px;background:var(--grid);margin:28px 0 14px;border-radius:4px"></div><div style="height:16px;background:var(--grid);width:70%;margin-bottom:14px;border-radius:4px"></div><div style="height:16px;background:var(--grid);width:85%;border-radius:4px"></div>
-      <div style="position:absolute;bottom:30px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:36px;font-weight:900;border-top:3px solid #111;padding-top:8px"><span>المجموع</span><span>48</span></div>
-    </div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(-1.2deg)" data-t="24.43">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="D" data-ca="24.18" data-cb="28.66" style="display:block;width:782px;height:880px;border-radius:6px"></div>
   </div>
-  <div class="cut" style="top:450px;left:90px;width:420px;transform:rotate(3deg)" data-t="29.7">
-    <div class="paper" style="padding:26px 30px;height:520px">
-      <div style="font-weight:900;font-size:44px;border-bottom:6px solid var(--pink);padding-bottom:6px">فاتورة ضريبية</div>
-      <div style="font-size:26px;color:#666;direction:ltr;text-align:left;margin-top:6px">Tax Invoice · VAT 5%</div>
-      <div style="height:16px;background:var(--grid);margin:22px 0 14px;border-radius:4px"></div><div style="height:16px;background:var(--grid);width:70%;margin-bottom:14px;border-radius:4px"></div>
-      <div style="position:absolute;bottom:30px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:36px;font-weight:900;border-top:3px solid #111;padding-top:8px"><span>الإجمالي</span><span>50.4</span></div>
-    </div>
-  </div>
-  <svg class="draw dash" style="left:440px;top:990px;width:200px;height:120px" viewBox="0 0 200 120" data-draw="30.7" data-dd="0.4">
-    <path d="M100 6 C70 40 130 70 100 104"/><path d="M80 86 L100 110 L122 88" style="stroke-dasharray:none"/>
-  </svg>
-  <div class="chain"><span class="u" data-t="28.7">عرض سعر</span><span class="ar" data-t="29.6">←</span><span class="u" data-t="29.8">فاتورة</span><span class="ar" data-t="31.1">←</span><span class="u last" data-t="31.3">واتساب للعميل ✓</span></div>
 </div>
-
 <!-- S7 brand -->
-<div class="scene" data-a="32.5" data-b="35.6">
-  <div class="badge" data-t="32.55"><span class="n">04</span><span class="l">تخصيص</span></div>
-  <div class="cut" style="top:190px;right:80px;transform:rotate(-1.5deg)" data-t="32.6">
-    <div class="tape p" style="top:-16px;right:70px;transform:rotate(4deg)"></div>
-    <div class="paper title" style="font-size:96px">باسم <span class="hl" data-hl="33.2">شركتك</span></div>
+<div class="scene" data-a="28.66" data-b="31.82">
+  <div class="badge" data-t="28.71"><span class="n">05</span><span class="l">تخصيص</span></div>
+  <div class="cut" style="top:150px;right:70px;transform:rotate(-1.5deg)" data-t="28.76">
+    <div class="tape p" style="top:-16px;right:70px;transform:rotate(-4deg)"></div>
+    <div class="paper title" style="font-size:80px;padding:18px 40px 24px">باسم <span class="hl" data-hl="29.4">شركتك</span></div>
   </div>
-  <div class="cut" style="top:450px;left:120px;right:120px;transform:rotate(1deg)" data-t="32.9">
-    <div class="paper" style="padding:34px 40px;display:grid;gap:26px">
-      <div style="font-size:34px;color:#666">اسم شركتك</div>
-      <div style="border:4px solid #111;border-radius:14px;padding:6px 22px;font-size:58px;font-weight:900;min-height:96px"><span data-type="33.0,0.9">متجري للطباعة</span><span style="color:var(--pink)">|</span></div>
-      <div style="font-size:34px;color:#666" data-t="33.9">الألوان</div>
-      <div style="display:flex;gap:22px" data-t="34.0"><i style="width:80px;height:80px;border-radius:50%;background:var(--pink);border:4px solid #111"></i><i style="width:80px;height:80px;border-radius:50%;background:#111;border:4px solid #111"></i><i style="width:80px;height:80px;border-radius:50%;background:#fff;border:4px solid #111"></i><i style="width:80px;height:80px;border-radius:50%;background:#ffc2e0;border:4px solid #111"></i></div>
-      <div style="display:flex;gap:18px;font-size:40px;font-weight:900" data-t="34.6"><span style="background:var(--pink);padding:4px 22px;border-radius:40px;border:3px solid #111">درهم</span><span style="padding:4px 22px;border-radius:40px;border:3px solid #111">ريال</span><span style="padding:4px 22px;border-radius:40px;border:3px solid #111">دينار</span><span style="padding:4px 22px;border-radius:40px;border:3px solid #111;direction:ltr">$</span></div>
-    </div>
+  <div class="cut" style="top:340px;left:135px;transform:rotate(1.5deg)" data-t="28.91">
+    <div class="tape p" style="top:-18px;left:320px;transform:rotate(3deg)"></div>
+    <div class="paper" style="padding:14px;border-radius:4px"><img class="clip" data-clip="E" data-ca="28.66" data-cb="31.82" style="display:block;width:782px;height:880px;border-radius:6px"></div>
   </div>
 </div>
 
 <!-- S8 price + DM -->
-<div class="scene" data-a="35.6" data-b="99">
-  <div class="cut" style="top:220px;right:50%;transform:translateX(50%) rotate(-2deg)" data-t="35.75">
+<div class="scene" data-a="31.82" data-b="99">
+  <div class="cut" style="top:220px;right:50%;transform:translateX(50%) rotate(-2deg)" data-t="31.97">
     <div class="tape" style="top:-16px;right:120px;transform:rotate(-4deg)"></div>
     <div class="paper title" style="font-size:90px">الحاسبة بـ</div>
   </div>
-  <div class="stk" style="top:420px;left:50%;margin-left:-300px;width:600px;transform:rotate(3deg)" data-t="36.2">
+  <div class="stk" style="top:420px;left:50%;margin-left:-300px;width:600px;transform:rotate(3deg)" data-t="32.42">
     <div class="in" style="background:var(--pink);border:8px solid #fff;outline:5px solid #111;border-radius:40px;padding:10px 0">
       <div style="font-weight:900;font-size:300px;line-height:1.05;direction:ltr;color:#111">$14</div>
     </div>
   </div>
-  <svg class="draw" style="left:90px;top:400px;width:120px;height:120px" viewBox="0 0 120 120" data-draw="36.6" data-dd="0.5"><path class="pk" d="M60 10 L72 46 L110 48 L80 70 L92 106 L60 84 L28 106 L40 70 L10 48 L48 46 Z"/></svg>
-  <svg class="draw" style="left:870px;top:760px;width:90px;height:90px" viewBox="0 0 120 120" data-draw="36.9" data-dd="0.5"><path d="M60 10 L72 46 L110 48 L80 70 L92 106 L60 84 L28 106 L40 70 L10 48 L48 46 Z"/></svg>
-  <div class="ruq" style="position:absolute;top:800px;left:170px;font-size:72px;transform:rotate(-4deg)" data-t="37.2">فقط!</div>
+  <svg class="draw" style="left:90px;top:400px;width:120px;height:120px" viewBox="0 0 120 120" data-draw="32.82" data-dd="0.5"><path class="pk" d="M60 10 L72 46 L110 48 L80 70 L92 106 L60 84 L28 106 L40 70 L10 48 L48 46 Z"/></svg>
+  <svg class="draw" style="left:870px;top:760px;width:90px;height:90px" viewBox="0 0 120 120" data-draw="33.12" data-dd="0.5"><path d="M60 10 L72 46 L110 48 L80 70 L92 106 L60 84 L28 106 L40 70 L10 48 L48 46 Z"/></svg>
+  <div class="ruq" style="position:absolute;top:800px;left:170px;font-size:72px;transform:rotate(-4deg)" data-t="33.42">بس!</div>
   <!-- DM bubble -->
-  <div class="cut" style="top:900px;right:90px;transform:rotate(-1.5deg)" data-t="38.0">
+  <div class="cut" style="top:900px;right:90px;transform:rotate(-1.5deg)" data-t="34.22">
     <div class="paper" style="padding:26px 40px;border-radius:40px 40px 6px 40px;display:flex;align-items:center;gap:26px">
       <svg width="86" height="86" viewBox="0 0 86 86"><path d="M8 40 L78 8 L58 78 L40 50 Z M40 50 L78 8" fill="#FF66B2" stroke="#111" stroke-width="6" stroke-linejoin="round"/></svg>
-      <div style="font-weight:900;font-size:64px;white-space:nowrap">تواصل على <span class="hl" data-hl="39.3">الخاص</span></div>
+      <div style="font-weight:900;font-size:64px;white-space:nowrap">تواصل على <span class="hl" data-hl="35.52">الخاص</span></div>
     </div>
   </div>
-  <div style="position:absolute;top:1100px;left:0;right:0;text-align:center;font-weight:900;font-size:44px;direction:ltr" data-t="38.8"><span style="background:#fff;padding:4px 24px;border-radius:12px;box-shadow:0 5px 12px rgba(0,0,0,.12)">@hx3d.uae</span></div>
+  <div style="position:absolute;top:1100px;left:0;right:0;text-align:center;font-weight:900;font-size:44px;direction:ltr" data-t="35.02"><span style="background:#fff;padding:4px 24px;border-radius:12px;box-shadow:0 5px 12px rgba(0,0,0,.12)">@hx3d.uae</span></div>
 </div>
 
 <div id="cap"><div class="cut" style="position:relative"><div class="paper" id="capt"></div></div></div>
@@ -289,22 +216,21 @@ svg.draw .pk{stroke:var(--pink)}
 </div>
 
 <script>
-var T=43;
-var CAPS=[[0.1,2.2,"هل تعرف كم تكلّفك القطعة فعلاً"],[2.4,3.8,"قبل أن تحدد سعرها؟"],[4.0,6.5,"هذه حاسبة تسعير الطباعة ثلاثية الأبعاد"],[6.5,7.6,"من HX 3D"],
-[8.05,10.1,"أولاً: ترفع ملف المجسم"],[10.4,12.3,"سواءً قبل التقطيع أو بعده"],[12.59,15.0,"فتقرأ الحاسبة الوزن والزمن تلقائياً"],
-[15.38,18.25,"ثانياً: تحسب كل التكاليف: الخيط والكهرباء"],[18.3,20.3,"وإهلاك الطابعة والدعامات والهدر"],[20.6,21.6,"ورسوم التصميم"],
-[22.1,25.6,"ثالثاً: تعطيك السعر النهائي للعميل"],[25.0,26.8,"مع ربحك الصافي وخصومات الكميات"],
-[27.1,28.1,"وبضغطة واحدة"],[28.27,30.4,"تطبع عرض سعر أو فاتورة ضريبية"],[30.4,32.2,"وترسلها للعميل على الواتساب"],
-[32.55,35.4,"وتقدر تغيّر اسم شركتك وألوانك وعملتك بسهولة"],[35.66,37.7,"الحاسبة بأربعة عشر دولاراً فقط"],[37.97,43,"وللمزيد، الرجاء التواصل معنا على الخاص"]];
-// fix overlap: caption 11 starts after 10 ends
-CAPS[10][1]=24.9;
+var T=38.5;var CLIPN={F:150,A:213,B:175,C:163,D:180,E:107};
+var CAPS=[[0.1,2.7,"تبا تعرف كم تكلفك القطعة صدق، قبل لا تحط سعرها؟"],[3.0,6.3,"هذي حاسبة تسعير الطباعة الثلاثية الأبعاد من إتش إكس ثري دي"],
+[6.58,8.5,"أول شي: ترفع ملف المجسم"],[8.8,10.25,"قبل التقطيع أو بعده"],[10.25,12.0,"والحاسبة تقرا الوزن والوقت بروحها"],
+[12.2,14.2,"ثاني شي: تحسب لك كل التكاليف"],[14.5,16.95,"الخيط والكهربا واستهلاك الطابعة"],[17.18,19.2,"والدعامات والهدر ورسوم التصميم"],
+[19.54,21.9,"ثالث شي: تعطيك السعر النهائي للزبون"],[21.9,23.9,"وربحك الصافي وخصومات الكميات"],
+[24.18,26.3,"وبضغطة وحدة تطبع عرض سعر أو فاتورة ضريبية"],[26.3,28.3,"وترسلها للزبون على الواتساب"],
+[28.66,31.5,"وتقدر تغيّر اسم شركتك وألوانك وعملتك بكل سهولة"],[31.82,33.4,"الحاسبة بأربعطعش دولار بس"],[33.7,38.5,"وللمزيد، تواصلوا وياي على الخاص"]];
 // Najm poses: [t, name]
-var POSES=[[0,'wave'],[2.4,'think'],[4.0,'pointUp'],[5.3,'present'],[6.5,'pointUp'],[8.05,'one'],[9.6,'pointR'],[11.2,'present'],[12.6,'pointR'],[14.0,'ok'],
-[15.38,'two'],[16.6,'pointR'],[17.8,'pointUp'],[18.9,'pointR'],[20.0,'pointUp'],[20.8,'ok'],
-[22.1,'one'],[23.0,'pointUp'],[24.5,'muscle'],[25.7,'ok'],
-[27.1,'one'],[28.4,'pointR'],[29.7,'pointUp'],[31.2,'thumb'],
-[32.55,'jump'],[33.6,'pointR'],[34.6,'thumb'],
-[35.66,'thumbs'],[36.6,'celebrate'],[38.0,'pointR'],[39.6,'wave']];
+var POSES=[[0,'wave'],[1.6,'think'],[3.0,'pointUp'],[4.6,'present'],[5.6,'pointUp'],
+[6.58,'one'],[8.0,'pointUp'],[9.6,'pointR'],[10.9,'ok'],
+[12.2,'two'],[13.4,'pointUp'],[14.6,'pointR'],[15.9,'pointUp'],[17.2,'pointR'],[18.4,'ok'],
+[19.54,'one'],[20.6,'pointUp'],[21.9,'muscle'],[23.0,'ok'],
+[24.18,'pointUp'],[25.4,'pointR'],[26.4,'pointUp'],[27.5,'thumb'],
+[28.66,'jump'],[29.8,'pointR'],[30.9,'thumb'],
+[31.82,'thumbs'],[32.6,'celebrate'],[33.7,'pointR'],[35.6,'wave']];
 var P={
  rest:{L:[-62,-15],R:[-62,-15]},
  wave:{L:[-62,-15],R:[55,40],rh:'open',osc:1},
@@ -354,7 +280,7 @@ function hand(h,type){var s='',x=h.hx,y=h.hy,up=-Math.PI/2;
  else if(type==='open'){for(var k=-1.5;k<=1.5;k++)s+=finger(x,y,h.fa+k*.42,24)}
  else if(type==='ok'){s+='<circle cx="'+(x+Math.cos(h.fa)*20)+'" cy="'+(y+Math.sin(h.fa)*20)+'" r="11" fill="none" stroke="#111" stroke-width="13"/><circle cx="'+(x+Math.cos(h.fa)*20)+'" cy="'+(y+Math.sin(h.fa)*20)+'" r="11" fill="none" stroke="#fff" stroke-width="5"/>';s+=finger(x,y,h.fa-1.1,24)}
  return s+'<circle cx="'+x+'" cy="'+y+'" r="17" fill="#fff" stroke="#111" stroke-width="5"/>'}
-function render(t){
+async function render(t){var waits=[];document.querySelectorAll('img.clip').forEach(function(im){var a=+im.dataset.ca,b=+im.dataset.cb,n=CLIPN[im.dataset.clip];if(t<a-0.1||t>b+0.6)return;var rate=Math.min(1.35,Math.max(1,n/((b-a)*30)));var f=Math.max(0,Math.min(n-1,Math.floor((t-a)*30*rate)));var src='clips/'+im.dataset.clip+'/f'+String(f).padStart(4,'0')+'.jpg';if(im.getAttribute('src')!==src){im.setAttribute('src',src);waits.push(im.decode().catch(function(){}))}});
  document.getElementById('prog').style.width=(cl(t/T,0,1)*100)+'%';
  scenes.forEach(function(sc){var a=+sc.dataset.a,b=+sc.dataset.b;
   if(t<a-0.05||t>b+0.5){sc.style.display='none';return}sc.style.display='block';
@@ -381,7 +307,7 @@ function render(t){
   var p=eo((t-cap[0])/0.2);ce.style.opacity=p;ce.style.transform='translateX(-50%) translateY('+(1-p)*12+'px)'}else ce.style.opacity=0;
  // najm
  var pi=0;for(var i=0;i<POSES.length;i++)if(t>=POSES[i][0])pi=i;var pn=POSES[pi][1],ps=P[pn],since=t-POSES[pi][0];
- var fi=Math.min(AMP.length-1,Math.max(0,Math.floor(t*30))),amp=t<40.5?AMP[fi]:0;
+ var fi=Math.min(AMP.length-1,Math.max(0,Math.floor(t*30))),amp=t<35.5?AMP[fi]:0;
  var rise=eo(t/0.9),hop=Math.exp(-since*14)*Math.sin(Math.min(since*14,Math.PI))*-16;
  var jumpY=ps.hop?-Math.abs(Math.sin(since*6))*40:0;
  var jit=Math.sin(t*37)*1.5+Math.cos(t*23)*1;
@@ -389,7 +315,7 @@ function render(t){
  var nb=document.getElementById('nb');nb.setAttribute('transform','translate(0 '+by.toFixed(1)+') translate(210 300) rotate('+rot.toFixed(2)+') scale('+(1/Math.sqrt(sq)).toFixed(4)+' '+sq.toFixed(4)+') translate(-210 -300)');
  var sh=document.getElementById('sh'),lift=cl(-(jumpY+hop)/60,0,1);sh.setAttribute('rx',120*(1-lift*.35));sh.setAttribute('opacity',rise*(1-lift*.4));
  var L=armPath(100,196,-1,ps.L[0],ps.L[1],0,t),R=armPath(320,196,1,ps.R[0],ps.R[1],ps.osc,t);
- document.getElementById('arms').innerHTML='<path d="'+L.d+'" stroke="#111" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="'+R.d+'" stroke="#111" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'+hand(L,ps.lh||'fist')+hand(R,ps.rh||'fist');
+ await Promise.all(waits);document.getElementById('arms').innerHTML='<path d="'+L.d+'" stroke="#111" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="'+R.d+'" stroke="#111" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'+hand(L,ps.lh||'fist')+hand(R,ps.rh||'fist');
 }
 window.ready=Promise.all([document.fonts.load('900 40px Cairo','HX 3D $14 G-code abc 124'),document.fonts.load('700 40px Cairo','abc $ g h'),document.fonts.load('700 40px "Aref Ruqaa"','من HX 3D abc')]).then(function(){return document.fonts.ready}).then(function(){init();render(0);return true});
 </script>
