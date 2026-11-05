@@ -12,13 +12,13 @@
 | المرحلة | البند | الحالة |
 |---|---|---|
 | 1 | صفحة Instagram في HX OS (4 وكلاء) | ✅ |
-| 1 | ربط OOTTO بـ Claude | 👤 |
+| 1 | ربط OOTTO بـ Claude | ✅ `.mcp.json` + Virality skill · 👤 تسجيل الدخول (`HX-OOTTO-BRAIN.md`) |
 | 1 | تعبئة الواتساب، الكتالوج، ودليل الأسعار | 👤 |
 | 2 | Content OS (أفكار يومية، كاروسيل، ريل، رندر) | ✅ |
 | 2 | CRM + Cal.com + المبيعات الشهرية | ✅ (السحب من Cal.com ما تجرب بحساب حقيقي) |
 | 2 | Video Studio (Google Flow / Veo) | 🔜 |
 | 2 | Client Hunter | 🔜 |
-| 2 | Second Brain (embeddings محلية) | 🔜 |
+| 2 | Second Brain | ✅ Obsidian vault في `hx-brain/` + استيراد ChatGPT/Claude (`HX-OOTTO-BRAIN.md`) |
 | 2 | App Builder | 🔜 |
 | 3 | Founder Board (11 دور) | ✅ skill في المشروع |
 | 3 | UI/UX Pro Max / web artifacts builder / interface design | 👤 ❓ |

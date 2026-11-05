@@ -1,1 +1,9 @@
 infra/.env
+# HX Brain: your private files and chat exports stay on your computer
+hx-brain/sources/**
+!hx-brain/sources/**/
+!hx-brain/sources/**/.gitkeep
+!hx-brain/sources/README.md
+hx-brain/.obsidian/workspace*.json
+hx-brain/.obsidian/cache
+hx-brain/wiki/history/
