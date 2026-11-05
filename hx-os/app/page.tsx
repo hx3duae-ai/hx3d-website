@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MODULES } from "@/components/Nav";
 import { PILLARS, type Idea } from "@/lib/content-types";
-import { aed, dateTime, monthName } from "@/lib/format";
+import { dateTime, money, monthName } from "@/lib/format";
 
 type Activity = { id: string; at: string; module: string; text: string };
 
 export default function Home() {
   const [ideas, setIdeas] = useState<Idea[]>([]);
-  const [stats, setStats] = useState<{ current: { month: string; sales: number; orders: number }; pipeline: number; leads: number } | null>(null);
+  const [stats, setStats] = useState<{ current: { month: string; sales: number; orders: number }; pipeline: number; leads: number; restricted?: boolean } | null>(null);
   const [act, setAct] = useState<Activity[]>([]);
   useEffect(() => {
     fetch("/api/content/ideas").then((r) => r.json()).then((r) => setIdeas(r.ideas));
@@ -30,11 +30,11 @@ export default function Home() {
       <div className="grid g4">
         <div className="card stat">
           <div className="label">مبيعات {stats ? monthName(stats.current.month) : ""}</div>
-          <div className="value">{stats ? aed(stats.current.sales) : "…"}</div>
+          <div className="value">{stats ? money(stats.current.sales, stats.restricted) : "…"}</div>
         </div>
         <div className="card stat">
           <div className="label">قيد التنفيذ</div>
-          <div className="value">{stats ? aed(stats.pipeline) : "…"}</div>
+          <div className="value">{stats ? money(stats.pipeline, stats.restricted) : "…"}</div>
         </div>
         <div className="card stat">
           <div className="label">ليدز مفتوحة</div>

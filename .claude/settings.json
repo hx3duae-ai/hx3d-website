@@ -20,5 +20,18 @@
     "enterprise-search@knowledge-work-plugins": true,
     "product-management@knowledge-work-plugins": true,
     "legal@knowledge-work-plugins": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Read|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect_pricing.py\""
+          }
+        ]
+      }
+    ]
   }
 }

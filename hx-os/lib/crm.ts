@@ -159,3 +159,9 @@ export function monthlyStats(rows: Client[], months = 12) {
   const leads = rows.filter((c) => c.status === "lead").length;
   return { months: keys.map((k) => byMonth.get(k)!), current, previous, pipeline, leads };
 }
+
+/** Non-owners never receive prices. */
+export function withoutPrice(c: Client): Omit<Client, "price"> {
+  const { price: _p, ...rest } = c;
+  return rest;
+}

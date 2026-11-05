@@ -7,7 +7,7 @@ description: Content and business ideas for HX 3D UAE from what is happening rig
 
 1. Gather the last 14 days:
    - Gmail: client questions and requests (`newer_than:14d`).
-   - `hx-os/data/clients.json` and `hx-team/pipeline/`: what people are ordering and asking about.
+   - `GET /api/crm/clients` (HX OS, prices hidden) and `hx-team/pipeline/`: what people are ordering and asking about.
    - Instagram: `hx-os/data/metrics.json` / `posts.json`, or the Ootto connector if connected: top and bottom posts.
    - Meeting notes: any transcripts in `hx-brain/sources/` from the last 14 days (Granola, if connected).
    - `hx-brain/wiki/`: recurring concepts, and `wiki/history/` for topics the user kept asking about.

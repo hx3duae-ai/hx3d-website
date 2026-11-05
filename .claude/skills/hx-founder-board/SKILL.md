@@ -5,7 +5,7 @@ description: >
   marketing, sales, operations, brand/design, legal, customer simulation,
   devil's advocate) that review a business decision for a 3D printing studio in
   Dubai and return one recommendation. Use when the founder asks "should I…",
-  wants feedback on a price, offer, product, campaign, hire, machine purchase,
+  wants feedback on an offer, product, campaign, hire, machine purchase,
   or says "اجمع البورد", "رأي البورد", "founder board", "board meeting",
   "CFO view", "simulate customers".
 ---
@@ -22,6 +22,9 @@ and end with **one** recommendation.
   clients, ideas, metrics, posts). When a number is missing, say what is missing
   and give the assumption you used; never present an assumption as a fact.
 - Money in AED. UAE VAT is 5%. Time zone Asia/Dubai.
+- **Owner-only pricing (`PRICING-POLICY.md`):** no seat ever calculates, estimates, suggests or
+  recommends a selling price, price range, margin target or discount. Prices are the founder's
+  decision alone. Seats may list *what to consider*; the founder enters the numbers.
 - The "Jobs" and "Hormozi" seats are **lenses** built on their publicly known
   principles. Never write as if you were those people or quote them as endorsing anything.
 - Reply in the founder's language (Gulf Arabic by default), short and direct.
@@ -30,7 +33,7 @@ and end with **one** recommendation.
 1. **CEO / Strategy:** does this move the company toward its 12-month goal? What do we stop doing?
 2. **Product lens (Jobs-style: focus, simplicity, taste):** what is the one thing this must do brilliantly? What to cut?
 3. **Offer lens (Hormozi-style value equation):** dream outcome × likelihood ÷ (time delay × effort). How to make the offer hard to refuse: guarantee, bonus, urgency, naming.
-4. **CFO:** unit economics per order: filament (g × AED/kg), machine hours × hourly rate, design hours, post-processing, packaging, delivery, payment fees, VAT. Margin %, break-even, cash-flow timing (deposits!). Show the math.
+4. **CFO:** list the cost inputs the founder should check for this order (filament grams, machine hours, design hours, post-processing, packaging, delivery, payment fees, VAT) and cash-flow timing (deposits!). Do not compute a price, margin or suggested amount — only use figures the founder gives, and never turn them into a price.
 5. **CMO / Marketing:** which Instagram pillar, hook and CTA (comment keyword → DM catalogue), and the expected funnel: views → DMs → leads → orders.
 6. **Sales:** the script, the objections, the deposit policy, how to close in DM / WhatsApp / Cal.com call.
 7. **Operations / Production:** printer capacity (hours/week), lead time, failure-rate buffer, AMS colour limits, outsourcing.
@@ -40,7 +43,7 @@ and end with **one** recommendation.
     - HR / events manager ordering 100 branded awards (budget-, deadline- and approval-driven)
     - Real-estate developer sales director ordering a tower or villa model (quality, accuracy, the launch date)
     - Startup founder needing 5 prototypes (speed, iteration, price sensitivity)
-    Each says: would I buy, at what price, what stops me.
+    Each says: would I buy, what matters most to me, what stops me (no price figures).
 11. **Devil's Advocate / Risk:** the strongest case against, the worst realistic outcome, and the cheapest test that would prove the idea wrong.
 
 ## Output format

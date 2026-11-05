@@ -53,7 +53,9 @@ def test_arabic_text_is_shaped_and_extruded():
     latin = textgeo.text_polygons("HX", 10); assert len(polys(latin)) >= 2
 
 
-def test_business_cost_multicolour_adds_purge():
-    one = business.cost({"a": 20.0}, 2.0, 30); two = business.cost({"a": 10.0, "b": 10.0}, 2.0, 30)
-    assert two["purge"]["grams"] > one["purge"]["grams"] == 0 and one["price_ex_vat"] > one["cost_total"]
+def test_business_usage_multicolour_adds_purge_and_never_prices():
+    one = business.usage({"a": 20.0}, 2.0, 30); two = business.usage({"a": 10.0, "b": 10.0}, 2.0, 30)
+    assert two["purge"]["grams"] > one["purge"]["grams"] == 0
+    flat = repr(two).lower()
+    assert not any(k in flat for k in ("price_ex_vat", "margin", "profit", "cost_total", "'cost'"))  # owner-only pricing
     assert business.quote_pdf({"name": "X"}, [{"desc": "a", "qty": 2, "unit": 5}])[:4] == b"%PDF"

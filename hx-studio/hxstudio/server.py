@@ -1,9 +1,9 @@
 """HX 3D AI Studio API server (FastAPI). Run:  uvicorn hxstudio.server:app --port 8420"""
 from __future__ import annotations
-import base64, hashlib, io, json, shutil, threading, time, traceback, uuid, warnings, zipfile
+import base64, hashlib, io, json, os, shutil, threading, time, traceback, uuid, warnings, zipfile
 from pathlib import Path
 import numpy as np, trimesh
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from . import registry, backends, doctor, optimizer, colors as C, business, export as E
@@ -230,19 +230,27 @@ def colors_match(body: dict):
     inv = body.get("inventory") or inv_load(); m = C.match(body["colors"], inv, body.get("material")); return {"matches": m, "ams": C.plan_ams(m)}
 
 
-@app.post("/api/business/cost")
-def biz_cost(body: dict):
+@app.post("/api/business/usage")
+def biz_usage(body: dict):
+    """Filament grams / print hours / colour changes. No prices - the owner prices every order."""
     grams = body.get("grams_by_color")
     if body.get("project_id"):
         a = analysis(body["project_id"], body.get("material", "PLA")); grams = grams or a["per_colour_g"]; hours = body.get("hours") or a["est_print_hours"]
     else: hours = body["hours"]
-    h = body.get("height_mm", 30.0)
-    return business.cost(grams, hours, h, **{k: body[k] for k in business.DEFAULTS if k in body})
+    return business.usage(grams, hours, body.get("height_mm", 30.0), flush_g_per_change=body.get("flush_g_per_change"))
+
+
+@app.post("/api/business/cost")
+def biz_cost_removed(body: dict | None = None):
+    raise HTTPException(410, "Automatic cost/price calculation was removed: only the owner sets prices. Use /api/business/usage for grams and hours.")
 
 
 @app.post("/api/business/quote")
-def biz_quote(body: dict):
-    pdf = business.quote_pdf(body.get("client", {}), body["lines"], body.get("currency", "USD"), body.get("notes", ""))
+def biz_quote(body: dict, x_owner_token: str | None = Header(None)):
+    """OWNER ONLY: render a PDF of the amounts the owner entered."""
+    if not os.environ.get("HX_OWNER_TOKEN"): raise HTTPException(503, "Owner pricing is disabled: set HX_OWNER_TOKEN")
+    if not business.owner_token_ok(x_owner_token): raise HTTPException(403, "Pricing is owner-only")
+    pdf = business.quote_pdf(body.get("client", {}), body["lines"], body.get("currency", "AED"), body.get("notes", ""))
     return Response(pdf, media_type="application/pdf", headers={"Content-Disposition": 'attachment; filename="HX3D_quote.pdf"'})
 
 

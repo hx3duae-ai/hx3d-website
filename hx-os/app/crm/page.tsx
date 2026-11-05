@@ -1,13 +1,13 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CLIENT_STATUS, ORDER_TYPES, type Client, type ClientStatus, type MonthStat, type OrderType } from "@/lib/crm-types";
-import { aed, dateTime, monthName, shortDate } from "@/lib/format";
+import { aed, dateTime, money, monthName, shortDate } from "@/lib/format";
 
-type Stats = { months: MonthStat[]; current: MonthStat; previous: MonthStat; pipeline: number; leads: number };
+type Stats = { months: MonthStat[]; current: MonthStat; previous: MonthStat; pipeline: number; leads: number; restricted?: boolean };
 type Filter = "all" | ClientStatus;
 const SOURCES: Record<Client["source"], string> = { manual: "يدوي", calcom: "📅 Cal.com", instagram: "انستقرام", whatsapp: "واتساب", referral: "توصية" };
 
-const EMPTY: Partial<Client> = { name: "", company: "", phone: "", email: "", orderType: "corporate_gift", price: 0, status: "lead", notes: "" };
+const EMPTY: Partial<Client> = { name: "", company: "", phone: "", email: "", orderType: "corporate_gift", status: "lead", notes: "" };
 
 export default function CRM() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -19,6 +19,7 @@ export default function CRM() {
   const [msg, setMsg] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
   const [origin, setOrigin] = useState("");
+  const [owner, setOwner] = useState(false); // UI hint only — the server enforces owner-only pricing
 
   const load = useCallback(async () => {
     const [c, s] = await Promise.all([fetch("/api/crm/clients").then((r) => r.json()), fetch("/api/crm/stats").then((r) => r.json())]);
@@ -30,14 +31,17 @@ export default function CRM() {
     load();
     fetch("/api/crm/calcom/sync").then((r) => r.json()).then(setCal);
     setOrigin(window.location.origin);
+    fetch("/api/auth/me").then((r) => r.json()).then((me) => setOwner(me.role === "owner"));
   }, [load]);
 
   async function save() {
     if (!form?.name?.trim()) return;
     const isNew = !form.id;
+    const { price, ...rest } = form;
+    const payload = owner ? { ...rest, price: price ?? 0 } : rest; // only the owner sends prices
     const res = await fetch(isNew ? "/api/crm/clients" : `/api/crm/clients/${form.id}`, {
       method: isNew ? "POST" : "PATCH",
-      body: JSON.stringify(form),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) return setMsg((await res.json()).error);
     setForm(null);
@@ -104,7 +108,7 @@ export default function CRM() {
         <div className="grid g4">
           <div className="card stat">
             <div className="label">مبيعات {monthName(stats.current.month)}</div>
-            <div className="value">{aed(stats.current.sales)}</div>
+            <div className="value">{money(stats.current.sales, stats.restricted)}</div>
             <div className="delta muted">
               {stats.current.orders} طلب مسلّم
               {delta !== null && (
@@ -117,12 +121,12 @@ export default function CRM() {
           </div>
           <div className="card stat">
             <div className="label">الشهر الماضي ({monthName(stats.previous.month)})</div>
-            <div className="value">{aed(stats.previous.sales)}</div>
+            <div className="value">{money(stats.previous.sales, stats.restricted)}</div>
             <div className="delta muted">{stats.previous.orders} طلب مسلّم</div>
           </div>
           <div className="card stat">
             <div className="label">قيد التنفيذ (Pipeline)</div>
-            <div className="value">{aed(stats.pipeline)}</div>
+            <div className="value">{money(stats.pipeline, stats.restricted)}</div>
             <div className="delta muted">{count("in_progress")} طلب شغال</div>
           </div>
           <div className="card stat">
@@ -144,7 +148,7 @@ export default function CRM() {
               <div key={m.month} className={`bar ${i === stats.months.length - 1 ? "cur" : ""}`} tabIndex={0}>
                 <div className="fill" style={{ height: `${(m.sales / max) * 100}%` }} />
                 <span className="tip">
-                  {monthName(m.month)} {m.month.slice(0, 4)}: {aed(m.sales)} · {m.orders} طلب
+                  {monthName(m.month)} {m.month.slice(0, 4)}: {money(m.sales, stats?.restricted)} · {m.orders} طلب
                 </span>
               </div>
             ))}
@@ -172,7 +176,7 @@ export default function CRM() {
                     <td>
                       {monthName(m.month)} {m.month.slice(0, 4)}
                     </td>
-                    <td className="num-cell">{aed(m.sales)}</td>
+                    <td className="num-cell">{money(m.sales, stats?.restricted)}</td>
                     <td className="num-cell">{m.orders}</td>
                   </tr>
                 ))}
@@ -312,10 +316,14 @@ export default function CRM() {
                   ))}
                 </select>
               </label>
-              <label className="f">
-                السعر (درهم)
-                <input className="in" type="number" min={0} dir="ltr" value={form.price ?? 0} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} />
-              </label>
+              {owner ? (
+                <label className="f">
+                  السعر (درهم) — المالك فقط
+                  <input className="in" type="number" min={0} dir="ltr" value={form.price ?? 0} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} />
+                </label>
+              ) : (
+                <div className="f muted small">🔒 السعر يحدده المالك فقط</div>
+              )}
               <label className="f">
                 الحالة
                 <select className="in" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as ClientStatus })}>

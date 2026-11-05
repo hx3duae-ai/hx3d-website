@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   DAYS,
   POST_STATUS,
+  PRICING_RULE,
   fill,
   matchRule,
   type IgSettings,
@@ -270,7 +271,6 @@ ${q}`;
 // ---------- 2. Inbox AI ----------
 function Inbox({ s, save }: { s: IgSettings; save: (p: Partial<IgSettings>) => Promise<void> }) {
   const [playbook, setPlaybook] = useState(s.playbook);
-  const [prices, setPrices] = useState(s.priceGuide);
   const [lead, setLead] = useState({ username: "", message: "", phone: "", budget: "" });
   const [msg, setMsg] = useState<string | null>(null);
 
@@ -278,8 +278,7 @@ function Inbox({ s, save }: { s: IgSettings; save: (p: Partial<IgSettings>) => P
 
 ${fill(playbook, s)}
 
-دليل الأسعار (لا تتجاوزه أبداً):
-${prices}
+${PRICING_RULE}
 
 قبل ما تشغّله: اعرض علي 3 أمثلة ردود على رسائل حقيقية من الإنبوكس عشان أوافق عليها.
 وبعد كل محادثة جدية أعطني سطر JSON للـ CRM:
@@ -297,10 +296,9 @@ ${prices}
         <div className="card" style={{ display: "grid", gap: 10 }}>
           <b>سكريبت المبيعات (Playbook)</b>
           <textarea className="in" rows={9} value={playbook} onChange={(e) => setPlaybook(e.target.value)} />
-          <b>دليل الأسعار — الوكيل ما يقول رقم من خارجه</b>
-          <textarea className="in" rows={6} value={prices} onChange={(e) => setPrices(e.target.value)} />
+          <div className="notice">🔒 {PRICING_RULE}</div>
           <div className="row">
-            <button className="btn primary" onClick={() => save({ playbook, priceGuide: prices })}>
+            <button className="btn primary" onClick={() => save({ playbook })}>
               حفظ
             </button>
             <span className="muted small">يستخدم {"{whatsapp} {booking} {catalog}"} من إعدادات «Comment → DM».</span>

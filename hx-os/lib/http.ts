@@ -9,3 +9,20 @@ export async function body(req: Request): Promise<Record<string, unknown>> {
     return {};
   }
 }
+
+/** Run a route body; turn AuthError into a JSON error and audit every denial. */
+export async function guarded(req: Request, fn: () => Promise<Response>): Promise<Response> {
+  const { AuthError, getActor } = await import("./auth");
+  try {
+    return await fn();
+  } catch (e) {
+    if (e instanceof AuthError) {
+      if (e.status === 401 || e.status === 403) {
+        const { audit } = await import("./audit");
+        await audit({ actor: getActor(req), action: "denied", detail: { method: req.method, path: new URL(req.url).pathname, reason: e.message } });
+      }
+      return bad(e.message, e.status);
+    }
+    throw e;
+  }
+}

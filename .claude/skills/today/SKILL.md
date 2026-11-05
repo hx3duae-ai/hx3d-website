@@ -9,7 +9,7 @@ description: Daily plan for the HX 3D UAE founder. Use when the user types /toda
 2. **Email**: with the Gmail connector, search `is:unread newer_than:2d` and `is:important newer_than:2d`. Keep only what needs a reply or action today.
 3. **Pipeline**: read `hx-team/pipeline/*.md` for cards whose `stage` is not `done`, and any follow-up dates that are today or overdue.
 4. **Instagram**: if the Ootto connector is available, pull yesterday's numbers and the DMs or comments waiting for a reply.
-5. **Context**: for each person, company or project above, search `hx-brain/wiki/` (then `hx-brain/wiki/history/`) and `hx-os/data/clients.json`, and add one line of context.
+5. **Context**: for each person, company or project above, search `hx-brain/wiki/` (then `hx-brain/wiki/history/`) and `GET /api/crm/clients` (HX OS, prices hidden), and add one line of context.
 6. **Output**, in Gulf Arabic, short:
 
 ```

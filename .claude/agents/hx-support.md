@@ -31,7 +31,7 @@ When accepted:
 ```
 HANDOFF → hx-finance
 card: hx-team/pipeline/<file>.md
-agreed: <option> | <qty> | <AED amount or TBD> | delivery <date>
+agreed: <option> | <qty> | <owner-approved quotation id, or TBD> | delivery <date>
 ```
 Otherwise:
 ```

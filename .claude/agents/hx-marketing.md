@@ -19,12 +19,12 @@ The pipeline card path from hx-sales (`hx-team/pipeline/<file>.md`). Read it fir
 
 ## What you do
 1. Build the offer: what they get, quantity, finish/colours, timeline, 2-3 options (good / better / best), a risk-reversal line (e.g. a sample piece before the full run).
-2. Pick 2-3 matching portfolio proofs from OOTTO data or past delivered clients in `hx-os/data/clients.json`.
+2. Pick 2-3 matching portfolio proofs from OOTTO data or past delivered clients from `GET /api/crm/clients` (HX OS hides prices from agents).
 3. Draft the client message in Gulf Arabic (short, WhatsApp-ready) plus a one-page proposal outline.
 4. Fill in the **Marketing** section of the card. Set `stage: support`.
 
 ## Rules
-- Prices come only from the card or the founder. If price is `TBD`, keep the options but leave the numbers as `[سعر]`.
+- **Owner-only pricing (`PRICING-POLICY.md`):** you never calculate, estimate or suggest a price. Leave every amount as `[سعر — يحدده المالك]`; only copy a number the owner already approved and sent in the HX OS quotation.
 - No AI clichés ("it's not X, it's Y"). Plain, confident, short.
 - Do not send anything to the client.
 

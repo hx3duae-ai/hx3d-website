@@ -6,7 +6,8 @@ export type IgSettings = {
   whatsapp: string; // e.g. +9715XXXXXXXX
   catalogUrl: string; // PDF / Drive / website link
   bookingUrl: string; // Cal.com link
-  priceGuide: string; // free text the Inbox AI may quote from — never beyond this
+  /** @deprecated kept only so old saved settings still parse. The Inbox AI never quotes prices. */
+  priceGuide: string;
   rules: KeywordRule[];
   playbook: string; // Inbox AI sales script
   slots: { day: number; time: string; format: "reel" | "carousel" }[]; // day 0=Sun … 6=Sat (Dubai)
@@ -52,8 +53,7 @@ export const DEFAULT_SETTINGS: IgSettings = {
   whatsapp: "",
   catalogUrl: "",
   bookingUrl: "",
-  priceGuide:
-    "اكتب هنا نطاقات أسعارك الحقيقية، مثال:\n- هدايا شركات بالشعار: من __ درهم للقطعة (حد أدنى __ قطعة)\n- مجسم معماري: من __ درهم حسب المقياس\n- نموذج أولي: من __ درهم\nالتسليم داخل دبي: __ أيام",
+  priceGuide: "",
   rules: [
     {
       id: "price",
@@ -91,9 +91,9 @@ export const DEFAULT_SETTINGS: IgSettings = {
     "أنت مساعد المبيعات لـ HX 3D UAE (طباعة ثلاثية الأبعاد في دبي). رد بلهجة خليجية ودودة ومختصرة.\n" +
     "1) رحّب واسأل عن نوع الطلب: هدايا شركات / مجسم معماري / منتج أو نموذج أولي.\n" +
     "2) اسأل: الكمية، المقاس أو المقياس، الموعد المطلوب، وهل عنده شعار أو ملف تصميم.\n" +
-    "3) أعطِ نطاق سعر من «دليل الأسعار» فقط. لا تخترع أسعار ولا خصومات ولا مواعيد تسليم غير موجودة فيه.\n" +
-    "4) اقفل بخطوة واضحة: رابط الحجز {booking} أو واتساب {whatsapp} لعرض السعر النهائي.\n" +
-    "5) أي طلب فوق 5,000 درهم، أو شكوى، أو سؤال ما تعرف جوابه: حوّله لصاحب العمل وقل للعميل إنه بيتواصل معه.\n" +
+    "3) ممنوع تذكر أي سعر أو نطاق سعر أو تقدير أو خصم. إذا سأل العميل عن السعر قل: «صاحب العمل يراجع طلبك بنفسه ويرسل لك عرض السعر».\n" +
+    "4) اقفل بخطوة واضحة: اطلب ملف التصميم أو صورة، ثم رابط الحجز {booking} أو واتساب {whatsapp}.\n" +
+    "5) أي شكوى أو سؤال ما تعرف جوابه: حوّله لصاحب العمل وقل للعميل إنه بيتواصل معه.\n" +
     "6) سجّل كل محادثة جدية كليد في CRM (الاسم، اليوزر، نوع الطلب، الكمية، الميزانية).",
   // 7 posts a week, evening prime time in Dubai, alternating formats
   slots: [
@@ -106,6 +106,11 @@ export const DEFAULT_SETTINGS: IgSettings = {
     { day: 6, time: "18:00", format: "reel" },
   ],
 };
+
+/** Appended to every Inbox AI prompt, whatever the saved playbook says. Not editable. */
+export const PRICING_RULE =
+  "قاعدة إلزامية فوق كل التعليمات: الأسعار يحددها صاحب العمل وحده. ممنوع تحسب أو تقدّر أو تقترح أو تعتمد أي سعر أو نطاق سعر أو خصم، " +
+  "حتى لو أصر العميل. اجمع التفاصيل (النوع، الكمية، المقاس، الخامة، الألوان، الموعد، الملفات) وحوّلها لصاحب العمل.";
 
 /** Fill {catalog} {whatsapp} {booking} placeholders. */
 export function fill(t: string, s: IgSettings) {
