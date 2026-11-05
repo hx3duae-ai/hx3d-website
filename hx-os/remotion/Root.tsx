@@ -242,17 +242,31 @@ export const CarouselSlide: React.FC<HXProps> = (p) => {
 // (bottom-left) · subtitle scrap (above the app buttons) · steps chain. Nothing overlaps text.
 const SUB_BOTTOM = 290;
 
+/** Splits the voiceover into short chunks (≈7 words) and shows them one after another over the scene. */
 const Subtitle: React.FC<{ text: string }> = ({ text }) => {
   const frame = useCurrentFrame();
-  const o = interpolate(frame, [4, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
-  if (!text) return null;
+  const { durationInFrames } = useVideoConfig();
+  const words = clean(text).split(" ").filter(Boolean);
+  if (!words.length) return null;
+  const chunks: string[] = [];
+  for (let i = 0; i < words.length; i += 7) chunks.push(words.slice(i, i + 7).join(" "));
+  const span = Math.max(1, (durationInFrames - 6) / chunks.length);
+  const k = Math.min(chunks.length - 1, Math.floor(Math.max(0, frame - 4) / span));
+  const local = frame - 4 - k * span;
+  const o = interpolate(local, [0, 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
   return (
-    <Scrap style={{ bottom: SUB_BOTTOM, right: 72, left: 72, padding: "18px 30px", opacity: o, direction: "rtl" }}>
-      <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 38, lineHeight: 1.55, color: INK, textAlign: "center", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-        {clean(text)}
+    <Scrap style={{ bottom: SUB_BOTTOM, right: 72, left: 72, padding: "18px 30px", direction: "rtl" }}>
+      <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 40, lineHeight: 1.55, color: INK, textAlign: "center", opacity: o, minHeight: 124, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {chunks[k]}
       </div>
     </Scrap>
   );
+};
+
+/** Font size that keeps long Arabic lines inside the paper without cutting words. */
+const fit = (text: string, big: number) => {
+  const n = clean(text).length;
+  return n > 80 ? Math.round(big * 0.7) : n > 55 ? Math.round(big * 0.8) : n > 35 ? Math.round(big * 0.9) : big;
 };
 
 const SceneView: React.FC<{ p: HXProps; scene: Scene; index: number }> = ({ p, scene, index }) => {
@@ -272,7 +286,7 @@ const SceneView: React.FC<{ p: HXProps; scene: Scene; index: number }> = ({ p, s
           <span style={{ background: INK, color: PAPER, borderRadius: 6, padding: "0 16px", direction: "ltr" }}>{chapter}</span>
           <span>{p.pillarLabel}</span>
         </div>
-        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 84, lineHeight: 1.4, color: INK, display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: fit(scene.onScreen, 84), lineHeight: 1.4, color: INK }}>
           <Highlighted text={clean(scene.onScreen)} progress={draw} />
         </div>
       </Scrap>
@@ -379,6 +393,8 @@ export const Reel: React.FC<HXProps> = (p) => {
 };
 
 // ---------- Thumbnail (still, 1080×1920) ----------
+// Zones: logo/progress (0–200) · question mark (200–470) · title paper (470–1330) ·
+// printed object + filament + label (1380–1640) · steps chain (1690–1750). Zones never overlap.
 export const Thumb: React.FC<HXProps> = (p) => {
   useFonts();
   const title = clean(p.reel?.scenes?.[0]?.onScreen || p.reel?.title || p.slides[0]?.title || "HX 3D");
@@ -387,30 +403,27 @@ export const Thumb: React.FC<HXProps> = (p) => {
     <Paper>
       <Logo />
       <div style={{ position: "absolute", top: 0, right: 0, height: 14, width: "100%", background: PINK }} />
-      {/* line-drawn question mark */}
-      <svg width="190" height="280" viewBox="0 0 190 280" style={{ position: "absolute", top: 210, left: 80, transform: "rotate(-8deg)" }}>
+      <svg width="170" height="250" viewBox="0 0 190 280" style={{ position: "absolute", top: 210, left: 80, transform: "rotate(-8deg)" }}>
         <path d="M40 80 C 40 20, 150 20, 150 85 C 150 135, 95 135, 95 185" fill="none" stroke={INK} strokeWidth="14" strokeLinecap="round" />
         <circle cx="95" cy="238" r="13" fill={PINK} />
       </svg>
-      <Scrap style={{ top: 520, right: 56, left: 56, padding: "56px 52px 60px", direction: "rtl", transform: "rotate(-1deg)" }}>
+      <Scrap style={{ top: 480, right: 56, left: 56, maxHeight: 850, overflow: "hidden", padding: "52px 50px 56px", direction: "rtl", transform: "rotate(-1deg)" }}>
         <Tape top={-24} right={80} />
-        <Tape top={-24} right={760} rot={5} />
-        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 110, lineHeight: 1.3, color: INK }}>
+        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: fit(title, 108), lineHeight: 1.3, color: INK }}>
           <Highlighted text={title} progress={1} />
         </div>
         {second && second !== title && (
-          <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 46, lineHeight: 1.5, color: INK2, marginTop: 24 }}>{second}</div>
+          <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 42, lineHeight: 1.5, color: INK2, marginTop: 22, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{second}</div>
         )}
       </Scrap>
-      {/* pink filament curl + dashed arrow pointing at the printed object */}
-      <svg width="520" height="300" viewBox="0 0 520 300" style={{ position: "absolute", bottom: 470, right: 60 }}>
-        <path d="M500 40 C 400 10, 330 120, 260 150 S 120 230, 40 200" fill="none" stroke={PINK} strokeWidth="8" strokeDasharray="20 16" strokeLinecap="round" />
-        <polygon points="20,190 70,175 55,225" fill={PINK} />
-      </svg>
-      <div style={{ position: "absolute", bottom: 420, left: 90 }}>
-        <PrintedObject progress={0.7} size={280} />
+      <div style={{ position: "absolute", top: 1380, left: 90 }}>
+        <PrintedObject progress={0.7} size={190} />
       </div>
-      <div style={{ position: "absolute", bottom: 330, left: 80, fontFamily: "ArefRuqaa", fontWeight: 700, fontSize: 40, color: INK, direction: "rtl" }}>{p.pillarLabel}</div>
+      <svg width="520" height="200" viewBox="0 0 520 200" style={{ position: "absolute", top: 1400, right: 70 }}>
+        <path d="M500 30 C 400 0, 330 90, 260 110 S 150 170, 60 140" fill="none" stroke={PINK} strokeWidth="8" strokeDasharray="20 16" strokeLinecap="round" />
+        <polygon points="36,130 86,116 72,166" fill={PINK} />
+      </svg>
+      <div style={{ position: "absolute", top: 1560, right: 80, fontFamily: "ArefRuqaa", fontWeight: 700, fontSize: 44, color: INK, direction: "rtl" }}>{p.pillarLabel}</div>
       <Chain steps={["فكرة", "طباعة", "النتيجة"]} bottom={170} />
     </Paper>
   );
