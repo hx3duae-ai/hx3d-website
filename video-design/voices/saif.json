@@ -1,0 +1,18 @@
+{
+ "name": "سيف المميز",
+ "provider": "munsit",
+ "primary": {
+  "voice": "Majed",
+  "voice_id": "PCtWbxjoNTpVQ6gIPaVZ2Hqm"
+ },
+ "alternative": {
+  "voice": "Hassan",
+  "voice_id": "EZ1NOlAh6RxcdjoY9FMgYdW3"
+ },
+ "dialect": "emirati",
+ "stability": 0.4,
+ "speed": 1.0,
+ "processing": "none (loudnorm -14 LUFS only)",
+ "script_language": "Emirati colloquial",
+ "reference": "voice-samples/saif/0-original-calculator-voice.mp3"
+}
