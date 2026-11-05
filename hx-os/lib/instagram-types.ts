@@ -63,6 +63,29 @@ export const DEFAULT_SETTINGS: IgSettings = {
         "هلا والله 👋 شكراً لاهتمامك بـ HX 3D UAE!\n\n📘 الكتالوج: {catalog}\n💬 واتساب: {whatsapp}\n📅 احجز استشارة مجانية: {booking}\n\nقول لنا وش تحتاج (هدية شركة / مجسم / منتج) والكمية والموعد، ونرد عليك بعرض سعر 🙌",
       active: true,
     },
+    // Lead-magnet keywords from the video style guide: each video ends with one word → one PDF
+    // (files in video-design/pdfs/). Put each PDF on Google Drive and paste its link below.
+    {
+      id: "pdf-problems",
+      keywords: ["مشاكل"],
+      reply: "أرسلنا لك دليل حلول المشاكل الخمس في الخاص 📩",
+      dm: "هلا 👋 هذا دليل حلول المشاكل الخمس في الطباعة ثلاثية الأبعاد:\n📘 [رابط ملف problems-guide.pdf]\n\nلو تحتاج قطعة مطبوعة جاهزة بجودة عالية، رد علينا هنا أو على الواتساب: {whatsapp}",
+      active: true,
+    },
+    {
+      id: "pdf-filaments",
+      keywords: ["خيوط"],
+      reply: "أرسلنا لك ملف مقارنة PLA و PETG في الخاص 📩",
+      dm: "هلا 👋 هذا ملف المقارنة بين PLA و PETG:\n📘 [رابط ملف pla-vs-petg.pdf]\n\nتبي نطبع لك القطعة بالمادة المناسبة؟ رد علينا هنا أو على الواتساب: {whatsapp}",
+      active: true,
+    },
+    {
+      id: "pdf-printer",
+      keywords: ["طابعة"],
+      reply: "أرسلنا لك قائمة الفحص قبل الشراء في الخاص 📩",
+      dm: "هلا 👋 هذي قائمة الفحص قبل ما تشتري طابعة:\n📘 [رابط ملف printer-checklist.pdf]\n\nتبي تجرب الجودة قبل ما تشتري؟ اطلب عينة مطبوعة منا: {whatsapp}",
+      active: true,
+    },
   ],
   playbook:
     "أنت مساعد المبيعات لـ HX 3D UAE (طباعة ثلاثية الأبعاد في دبي). رد بلهجة خليجية ودودة ومختصرة.\n" +

@@ -267,21 +267,51 @@ function benefitDetail(p: Pillar, i: number) {
   return d[p][i % 3];
 }
 
+// Reel scripts follow the HX 3D style guide: 50–70 s, MSA voiceover in one continuous take,
+// chapter per point, steps chain, final "free gift — write in the comments" scene, no music.
+const FUSHA_BENEFIT: Record<Pillar, string[]> = {
+  gifts: [
+    "نصمّم الهدية حول شعارك وألوانك، فلا تشبه أي هدية جاهزة.",
+    "نطبع من عشر قطع إلى ألف قطعة بالجودة نفسها.",
+    "نطبع بعدة ألوان في قطعة واحدة دون طلاء.",
+    "نكتب اسم كل موظف أو عميل على قطعته.",
+  ],
+  architecture: [
+    "يفهم المشتري المشروع في ثوانٍ، أوضح من أي صورة على الشاشة.",
+    "تصل دقة التفاصيل إلى أجزاء من المليمتر.",
+    "نعدّل التصميم ونعيد الطباعة بسرعة وبتكلفة أقل من الماكيت اليدوي.",
+    "نضيف إضاءة داخلية ومقاطع تكشف الطوابق.",
+  ],
+  products: [
+    "تنتقل من الفكرة إلى قطعة في يدك خلال يومين تقريباً.",
+    "تجرّب السوق بكمية صغيرة قبل أن تصنّع الآلاف.",
+    "تعدّل التصميم دون تكلفة قوالب.",
+    "نصمّم لك من الصفر إذا لم يكن لديك ملف.",
+  ],
+};
+
 export function buildReel(idea: DraftIdea, seed: string): ReelScript {
   const r = rng(`reel#${seed}`);
   const b = BANK[idea.pillar];
-  const [v1, v2, v3] = pickN(r, b.visuals, 3);
-  const [b1, b2] = pickN(r, b.benefits, 2);
+  const [v1, v2, v3, v4] = pickN(r, [...b.visuals, "لقطة قريبة لبكرة الخيط وهي تدور", "الفوهة تتحرك فوق الطبقة الأولى"], 4);
+  const benefits = pickN(r, b.benefits, 3);
+  const fusha = pickN(r, FUSHA_BENEFIT[idea.pillar], 3);
+  const pain = pick(r, b.pains);
+  const hook = idea.hook.replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\uFE0F]/gu, "").trim();
   return {
     title: idea.title,
     scenes: [
-      { seconds: 3, visual: v1, onScreen: idea.hook, voiceover: idea.hook.replace(/[👇❌😮💰⚖️💡👀🇦🇪⏱️]/gu, "").trim() },
-      { seconds: 4, visual: "لقطة سريعة للمشكلة: منتج تقليدي ممل أو رندر على شاشة", onScreen: pick(r, b.pains), voiceover: "أغلب الناس يواجهون نفس المشكلة." },
-      { seconds: 5, visual: v2, onScreen: b1, voiceover: `مع الطباعة ثلاثية الأبعاد: ${b1}.` },
-      { seconds: 5, visual: v3, onScreen: b2, voiceover: `والأحلى؟ ${b2}.` },
-      { seconds: 3, visual: "شعار HX 3D UAE مع رقم الواتساب", onScreen: "HX 3D UAE — دبي", voiceover: "HX 3D… حوّل فكرتك لشي حقيقي." },
+      { seconds: 5, visual: v1, onScreen: hook, voiceover: `${hook} في هذا الفيديو نعرض لك ${idea.title}.` },
+      { seconds: 7, visual: "قصاصة ورق عليها المشكلة مع علامة استفهام مرسومة", onScreen: pain, voiceover: `المشكلة الأولى التي يواجهها كثير من ${idea.audience}: ${pain}.` },
+      { seconds: 8, visual: v2, onScreen: benefits[0], voiceover: `أولاً، ${fusha[0]}` },
+      { seconds: 8, visual: v3, onScreen: benefits[1], voiceover: `ثانياً، ${fusha[1]}` },
+      { seconds: 8, visual: v4, onScreen: benefits[2], voiceover: `ثالثاً، ${fusha[2]}` },
+      { seconds: 9, visual: "سلسلة خطوات: ترسل الفكرة ← نصمّم ← نطبع ← تستلم", onScreen: "فكرتك ← تصميم ← طباعة ← قطعة بيدك", voiceover: "الطريقة سهلة: ترسل فكرتك أو شعارك، نصمّم ونرسل لك المعاينة، ثم نطبع ونسلّمك داخل الإمارات." },
+      { seconds: 10, visual: "فقاعة تعليق تُكتب فيها الكلمة حرفاً حرفاً، وسهم إلى أيقونة ملف", onScreen: "هدية مجانية", voiceover: "هدية مجانية: اكتب كلمة سعر في التعليقات، وسنرسل لك الكتالوج وعرض السعر في الرسائل الخاصة." },
     ],
-    cta: BRAND.cta,
-    music: pick(r, ["إيقاع إلكتروني هادئ 100bpm", "بيانو سينمائي مع بيس خفيف", "Lo-fi تقني"]),
+    cta: "اكتب «سعر» في التعليقات",
+    keyword: "سعر",
+    gift: "الكتالوج + عرض سعر",
+    music: "بدون موسيقى — حفيف انتقال خفيف وصوت قلم عند التمييز",
   };
 }

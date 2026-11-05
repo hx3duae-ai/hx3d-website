@@ -34,7 +34,9 @@ export type ReelScript = {
   title: string;
   scenes: ReelScene[];
   cta: string;
-  music: string;
+  music: string; // kept for old data; HX style = no music (only soft whoosh + pen sound)
+  keyword?: string; // comment keyword shown in the final "free gift" scene (Comment → DM rule)
+  gift?: string; // what the keyword gets you, e.g. "الكتالوج + عرض سعر"
 };
 
 export type RenderJob = {

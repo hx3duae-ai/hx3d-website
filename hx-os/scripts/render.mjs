@@ -74,8 +74,14 @@ try {
         "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", reel];
       const r = spawnSync(ffmpeg, args, { stdio: "ignore" });
       if (r.status !== 0) await fs.copyFile(raw, reel);
-      const thumb = path.join(dir, "thumb.jpg");
-      spawnSync(ffmpeg, ["-y", "-ss", "1.5", "-i", reel, "-frames:v", "1", "-q:v", "3", thumb], { stdio: "ignore" });
+      // Thumbnail: designed 9:16 still (Remotion "Thumb"); falls back to a frame grab.
+      const thumb = path.join(dir, "thumb.png");
+      try {
+        const tc = await selectComposition({ serveUrl, id: "Thumb", inputProps: props, browserExecutable, chromiumOptions });
+        await renderStill({ composition: tc, serveUrl, output: thumb, inputProps: props, browserExecutable, chromiumOptions });
+      } catch {
+        spawnSync(ffmpeg, ["-y", "-ss", "1.5", "-i", reel, "-frames:v", "1", thumb], { stdio: "ignore" });
+      }
       if (existsSync(thumb)) files.push({ kind: "thumb", path: rel(thumb) });
       await fs.rm(raw, { force: true });
     } else {

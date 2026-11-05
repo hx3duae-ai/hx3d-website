@@ -25,7 +25,7 @@ export type HXProps = {
   accent: string; // kept for compatibility; the brand always uses PINK
   pillarLabel: string;
   slides: Slide[];
-  reel: { title: string; scenes: Scene[]; cta: string; music: string } | null;
+  reel: { title: string; scenes: Scene[]; cta: string; music: string; keyword?: string; gift?: string } | null;
   slideIndex?: number;
 };
 
@@ -238,10 +238,26 @@ export const CarouselSlide: React.FC<HXProps> = (p) => {
 };
 
 // ---------- Reel (video, 1080×1920) ----------
-const SceneView: React.FC<{ p: HXProps; scene: Scene; index: number; total: number }> = ({ p, scene, index, total }) => {
+// Layout (top → bottom): progress bar + logo · scene paper (360–~1000) · printed object / Najm slot
+// (bottom-left) · subtitle scrap (above the app buttons) · steps chain. Nothing overlaps text.
+const SUB_BOTTOM = 290;
+
+const Subtitle: React.FC<{ text: string }> = ({ text }) => {
+  const frame = useCurrentFrame();
+  const o = interpolate(frame, [4, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+  if (!text) return null;
+  return (
+    <Scrap style={{ bottom: SUB_BOTTOM, right: 72, left: 72, padding: "18px 30px", opacity: o, direction: "rtl" }}>
+      <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 38, lineHeight: 1.55, color: INK, textAlign: "center", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+        {clean(text)}
+      </div>
+    </Scrap>
+  );
+};
+
+const SceneView: React.FC<{ p: HXProps; scene: Scene; index: number }> = ({ p, scene, index }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-  const isLast = index === total - 1;
   // paper slides up in, then the highlight draws, then leaves upward
   const enter = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
   const exit = interpolate(frame, [durationInFrames - 10, durationInFrames], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
@@ -250,23 +266,76 @@ const SceneView: React.FC<{ p: HXProps; scene: Scene; index: number; total: numb
   const chapter = String(index + 1).padStart(2, "0");
   return (
     <AbsoluteFill style={{ opacity: Math.min(enter, 1 - exit) }}>
-      <Scrap style={{ top: 360, right: 72, left: 72, padding: "64px 56px 70px", direction: "rtl", transform: `translateY(${y}px) rotate(${index % 2 ? 0.6 : -0.6}deg)` }}>
+      <Scrap style={{ top: 360, right: 72, left: 72, padding: "60px 56px 66px", direction: "rtl", transform: `translateY(${y}px) rotate(${index % 2 ? 0.6 : -0.6}deg)` }}>
         <Tape top={-24} right={90} rot={index % 2 ? 3 : -4} />
-        {!isLast && (
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 14, fontFamily: "Cairo", fontWeight: 900, fontSize: 36, marginBottom: 26 }}>
-            <span style={{ background: INK, color: PAPER, borderRadius: 6, padding: "0 16px", direction: "ltr" }}>{chapter}</span>
-            <span>{p.pillarLabel}</span>
-          </div>
-        )}
-        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: isLast ? 104 : 88, lineHeight: 1.4, color: INK }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 14, fontFamily: "Cairo", fontWeight: 900, fontSize: 36, marginBottom: 24 }}>
+          <span style={{ background: INK, color: PAPER, borderRadius: 6, padding: "0 16px", direction: "ltr" }}>{chapter}</span>
+          <span>{p.pillarLabel}</span>
+        </div>
+        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 84, lineHeight: 1.4, color: INK, display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           <Highlighted text={clean(scene.onScreen)} progress={draw} />
         </div>
       </Scrap>
-      {isLast && (
-        <Scrap style={{ top: 1010, right: 140, left: 140, padding: "34px 40px", direction: "rtl", borderRadius: 40, transform: `translateY(${(1 - draw) * 60}px)`, opacity: draw }}>
-          <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 46, color: INK, textAlign: "center" }}>{clean(p.reel?.cta ?? "")}</div>
-        </Scrap>
-      )}
+      <Subtitle text={scene.voiceover} />
+    </AbsoluteFill>
+  );
+};
+
+const FileIcon: React.FC = () => (
+  <svg width="150" height="180" viewBox="0 0 150 180">
+    <path d="M10 8 H100 L140 48 V172 H10 Z" fill={PAPER} stroke={INK} strokeWidth="7" strokeLinejoin="round" />
+    <path d="M100 8 V48 H140" fill={PINK} stroke={INK} strokeWidth="7" strokeLinejoin="round" />
+    <rect x="34" y="78" width="82" height="10" rx="5" fill={INK} />
+    <rect x="34" y="102" width="82" height="10" rx="5" fill={LINE} />
+    <rect x="34" y="126" width="56" height="10" rx="5" fill={LINE} />
+    <text x="75" y="160" textAnchor="middle" fontFamily="Cairo" fontWeight="900" fontSize="26" fill={PINK}>PDF</text>
+  </svg>
+);
+
+/** Final scene: "free gift — write in the comments"; the keyword types itself letter by letter. */
+const CtaScene: React.FC<{ p: HXProps; scene: Scene }> = ({ p, scene }) => {
+  const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
+  const keyword = clean(p.reel?.keyword || "سعر");
+  const letters = Array.from(keyword);
+  const enter = interpolate(frame, [0, 14], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+  const draw = interpolate(frame, [10, 28], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+  const bubbleIn = interpolate(frame, [24, 38], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+  const typed = Math.max(0, Math.min(letters.length, Math.floor((frame - 40) / 7) + 1));
+  const caret = frame > 40 && typed < letters.length ? Math.floor(frame / 8) % 2 === 0 : false;
+  const arrow = interpolate(frame, [40 + letters.length * 7, 40 + letters.length * 7 + 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+  const exit = interpolate(frame, [durationInFrames - 8, durationInFrames], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ opacity: Math.min(enter, exit) }}>
+      <Scrap style={{ top: 330, right: 72, left: 72, padding: "54px 56px 58px", direction: "rtl", transform: `translateY(${(1 - enter) * 100}px) rotate(-0.6deg)` }}>
+        <Tape top={-24} right={90} />
+        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 104, lineHeight: 1.3, color: INK }}>
+          <Highlighted text="هدية مجانية" progress={draw} />
+        </div>
+        <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 46, color: INK2, marginTop: 14 }}>اكتب في التعليقات</div>
+      </Scrap>
+      {/* comment bubble with the keyword typing in */}
+      <div style={{ position: "absolute", top: 860, right: 120, opacity: bubbleIn, transform: `translateY(${(1 - bubbleIn) * 40}px)` }}>
+        <div style={{ position: "relative", background: PAPER, border: `6px solid ${INK}`, borderRadius: 48, padding: "26px 54px", minWidth: 340, direction: "rtl", boxShadow: "0 20px 40px rgba(0,0,0,0.10)" }}>
+          <span style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 92, color: INK, background: typed ? PINK : "transparent", borderRadius: 10, padding: "0 14px" }}>
+            {letters.slice(0, typed).join("")}
+          </span>
+          <span style={{ display: "inline-block", width: 8, height: 86, background: caret ? INK : "transparent", marginInlineStart: 8, verticalAlign: "middle" }} />
+          <div style={{ position: "absolute", bottom: -34, right: 70, width: 0, height: 0, borderLeft: "26px solid transparent", borderRight: "26px solid transparent", borderTop: `34px solid ${INK}` }} />
+        </div>
+      </div>
+      {/* dashed arrow to the PDF */}
+      <svg width="420" height="260" viewBox="0 0 420 260" style={{ position: "absolute", top: 1000, left: 150, opacity: arrow }}>
+        <path d="M400 30 C 300 200, 160 230, 70 150" fill="none" stroke={PINK} strokeWidth="9" strokeDasharray="22 18" strokeLinecap="round" />
+        <polygon points="40,120 100,140 62,184" fill={PINK} />
+      </svg>
+      <div style={{ position: "absolute", top: 1110, left: 86, opacity: arrow, transform: `scale(${0.8 + 0.2 * arrow})` }}>
+        <FileIcon />
+        {p.reel?.gift && (
+          <div style={{ fontFamily: "ArefRuqaa", fontWeight: 700, fontSize: 40, color: INK, textAlign: "center", marginTop: 8, direction: "rtl", width: 300, marginInlineStart: -75 }}>{clean(p.reel.gift)}</div>
+        )}
+      </div>
+      <Subtitle text={scene.voiceover} />
     </AbsoluteFill>
   );
 };
@@ -278,19 +347,23 @@ export const Reel: React.FC<HXProps> = (p) => {
   const scenes = p.reel?.scenes ?? [];
   const progress = frame / durationInFrames;
   const zoom = interpolate(frame, [0, durationInFrames], [1, 1.04]); // slow, calm push-in
+  const lastStart = scenes.slice(0, -1).reduce((a, s) => a + Math.max(1, Math.round(s.seconds * FPS)), 0);
+  const objectOut = interpolate(frame, [lastStart - 10, lastStart], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   let from = 0;
   return (
     <AbsoluteFill style={{ background: GRID }}>
       <AbsoluteFill style={{ transform: `scale(${zoom})` }}>
         <Paper />
-        <div style={{ position: "absolute", bottom: 300, left: 90 }}>
-          <PrintedObject progress={Math.min(1, progress * 1.2)} size={330} />
+        {/* printed object sits where Najm will go (bottom-left), hidden during the CTA scene */}
+        <div style={{ position: "absolute", bottom: 470, left: 90, opacity: objectOut }}>
+          <PrintedObject progress={Math.min(1, progress * 1.2)} size={240} />
         </div>
         {scenes.map((s, i) => {
           const len = Math.max(1, Math.round(s.seconds * FPS));
+          const isLast = i === scenes.length - 1 && scenes.length > 1;
           const el = (
             <Sequence key={i} from={from} durationInFrames={len}>
-              <SceneView p={p} scene={s} index={i} total={scenes.length} />
+              {isLast ? <CtaScene p={p} scene={s} /> : <SceneView p={p} scene={s} index={i} />}
             </Sequence>
           );
           from += len;
@@ -302,6 +375,44 @@ export const Reel: React.FC<HXProps> = (p) => {
       <Logo />
       <Chain steps={["فكرة", "طباعة", "النتيجة"]} bottom={170} />
     </AbsoluteFill>
+  );
+};
+
+// ---------- Thumbnail (still, 1080×1920) ----------
+export const Thumb: React.FC<HXProps> = (p) => {
+  useFonts();
+  const title = clean(p.reel?.scenes?.[0]?.onScreen || p.reel?.title || p.slides[0]?.title || "HX 3D");
+  const second = clean(p.reel?.title || "");
+  return (
+    <Paper>
+      <Logo />
+      <div style={{ position: "absolute", top: 0, right: 0, height: 14, width: "100%", background: PINK }} />
+      {/* line-drawn question mark */}
+      <svg width="190" height="280" viewBox="0 0 190 280" style={{ position: "absolute", top: 210, left: 80, transform: "rotate(-8deg)" }}>
+        <path d="M40 80 C 40 20, 150 20, 150 85 C 150 135, 95 135, 95 185" fill="none" stroke={INK} strokeWidth="14" strokeLinecap="round" />
+        <circle cx="95" cy="238" r="13" fill={PINK} />
+      </svg>
+      <Scrap style={{ top: 520, right: 56, left: 56, padding: "56px 52px 60px", direction: "rtl", transform: "rotate(-1deg)" }}>
+        <Tape top={-24} right={80} />
+        <Tape top={-24} right={760} rot={5} />
+        <div style={{ fontFamily: "Cairo", fontWeight: 900, fontSize: 110, lineHeight: 1.3, color: INK }}>
+          <Highlighted text={title} progress={1} />
+        </div>
+        {second && second !== title && (
+          <div style={{ fontFamily: "Cairo", fontWeight: 700, fontSize: 46, lineHeight: 1.5, color: INK2, marginTop: 24 }}>{second}</div>
+        )}
+      </Scrap>
+      {/* pink filament curl + dashed arrow pointing at the printed object */}
+      <svg width="520" height="300" viewBox="0 0 520 300" style={{ position: "absolute", bottom: 470, right: 60 }}>
+        <path d="M500 40 C 400 10, 330 120, 260 150 S 120 230, 40 200" fill="none" stroke={PINK} strokeWidth="8" strokeDasharray="20 16" strokeLinecap="round" />
+        <polygon points="20,190 70,175 55,225" fill={PINK} />
+      </svg>
+      <div style={{ position: "absolute", bottom: 420, left: 90 }}>
+        <PrintedObject progress={0.7} size={280} />
+      </div>
+      <div style={{ position: "absolute", bottom: 330, left: 80, fontFamily: "ArefRuqaa", fontWeight: 700, fontSize: 40, color: INK, direction: "rtl" }}>{p.pillarLabel}</div>
+      <Chain steps={["فكرة", "طباعة", "النتيجة"]} bottom={170} />
+    </Paper>
   );
 };
 
@@ -320,5 +431,6 @@ export const RemotionRoot: React.FC = () => (
       })}
     />
     <Still id="Slide" component={CarouselSlide} width={1080} height={1350} defaultProps={{ ...demo, slideIndex: 0 }} />
+    <Still id="Thumb" component={Thumb} width={1080} height={1920} defaultProps={demo} />
   </>
 );

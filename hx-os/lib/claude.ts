@@ -49,11 +49,13 @@ const SCHEMA = {
           reel: {
             type: "object",
             additionalProperties: false,
-            required: ["title", "scenes", "cta", "music"],
+            required: ["title", "scenes", "cta", "music", "keyword", "gift"],
             properties: {
               title: str,
               cta: str,
               music: str,
+              keyword: str,
+              gift: str,
               scenes: {
                 type: "array",
                 items: {
@@ -86,7 +88,10 @@ export async function generateWithClaude(opts: {
 Create exactly 3 Instagram content ideas: one per pillar — gifts (هدايا الشركات), architecture (مجسمات معمارية), products (منتجات ونماذج).
 For each: a scroll-stopping hook, the angle (e.g. behind the scenes, comparison, pricing transparency), target audience,
 occasion (empty string if none), a 6-slide carousel (slide 1 = hook, last slide = CTA "${BRAND.cta}" with ${BRAND.handle}),
-an Instagram caption with emojis, 8-12 hashtags, and a 15-25 second reel script of 4-6 scenes with what to film, on-screen text and voiceover.
+an Instagram caption with emojis, 8-12 hashtags, and a 50-70 second reel script of 6-8 scenes: chapter-style points ("أولاً/ثانياً/ثالثاً"),
+on-screen text in Gulf-friendly Arabic without emoji, voiceover in correct Modern Standard Arabic written as one continuous narration,
+what to film (no faces or people), and a final scene "هدية مجانية — اكتب في التعليقات" with a one-word comment keyword (keyword) and what it gets (gift).
+Set music to "بدون موسيقى" (the brand forbids music).
 Do not repeat these recent titles: ${opts.avoidTitles.slice(0, 30).join(" | ") || "none"}.`;
 
   const res = await client.beta.messages.create({
