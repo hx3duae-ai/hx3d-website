@@ -1,12 +1,4 @@
 {
-  "extraKnownMarketplaces": {
-    "knowledge-work-plugins": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/knowledge-work-plugins"
-      }
-    }
-  },
   "enabledPlugins": {
     "cc-plugin-you-should-know@builtin": true,
     "sales@knowledge-work-plugins": true,
@@ -19,6 +11,64 @@
     "data@knowledge-work-plugins": true,
     "enterprise-search@knowledge-work-plugins": true,
     "product-management@knowledge-work-plugins": true,
-    "legal@knowledge-work-plugins": true
+    "legal@knowledge-work-plugins": true,
+    "open-seo-mcp-skills@ryze": true,
+    "geo-optimizer@geoready": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "composio@composio": true,
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "headroom-skill@headroom-marketplace": true,
+    "posthog@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "knowledge-work-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/knowledge-work-plugins"
+      }
+    },
+    "ryze": {
+      "source": {
+        "source": "github",
+        "repo": "Ryze-AI-Adgent/open-seo-mcp-skills"
+      }
+    },
+    "geoready": {
+      "source": {
+        "source": "github",
+        "repo": "Auriti-Labs/geo-optimizer-skill"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
+    "headroom-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "headroomlabs-ai/headroom"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "composio": {
+      "source": {
+        "source": "github",
+        "repo": "ComposioHQ/composio-plugin-cc"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "multica-ai/andrej-karpathy-skills"
+      }
+    }
   }
 }
