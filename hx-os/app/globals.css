@@ -144,3 +144,20 @@ select.status-select:hover { border-color: var(--line); }
   .g3, .g4, .g21 { grid-template-columns: 1fr; }
   .scene { grid-template-columns: 40px 1fr; }
 }
+
+/* ---- Motion (GSAP + Lenis) ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.split-word { display: inline-block; will-change: transform, opacity; }
+.hero { position: relative; isolation: isolate; overflow: clip; }
+.hero-glow {
+  position: absolute; inset-inline-start: 0; top: 0; z-index: -1; pointer-events: none;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 68%); opacity: .16;
+}
+@media (max-width: 900px) {
+  .hero-glow { width: 160px; height: 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow { display: none; }
+}
