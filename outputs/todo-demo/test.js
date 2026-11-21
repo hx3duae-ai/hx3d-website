@@ -48,6 +48,9 @@ test('addTask', 'throws TypeError for non-string input', function () {
 test('addTask', 'truncates text longer than 200 to exactly 200', function () {
   const s = addTask(createState(), 'a'.repeat(250));
   assert.strictEqual(s.tasks[0].text.length, 200);
+  // Cut point lands on a space: the stored text must still be trimmed.
+  const t = addTask(createState(), 'a'.repeat(199) + ' b');
+  assert.strictEqual(t.tasks[0].text, 'a'.repeat(199));
 });
 
 test('addTask', 'increments nextId by one per successful add', function () {

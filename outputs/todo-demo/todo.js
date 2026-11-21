@@ -17,8 +17,10 @@ function addTask(state, text) {
   if (trimmed === '') {
     return state;
   }
+  // Truncation can leave a trailing space at the cut point, so trim again to
+  // keep the Task.text invariant (trimmed, non-empty, max 200).
   const value = trimmed.length > MAX_TEXT_LENGTH
-    ? trimmed.slice(0, MAX_TEXT_LENGTH)
+    ? trimmed.slice(0, MAX_TEXT_LENGTH).trim()
     : trimmed;
   const task = { id: state.nextId, text: value, done: false };
   return {
